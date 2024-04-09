@@ -11,8 +11,7 @@ from .models import User, Post
 def index(request):
     all_posts = Post.objects.all()
     return render(request, "network/index.html", {
-        "posts": all_posts,
-        "current_user": request.user
+        "posts": all_posts
     })
 
 
@@ -77,3 +76,8 @@ def create_post(request):
         post.save()
 
         return HttpResponseRedirect(reverse("index"))
+    
+
+@login_required 
+def profile(request, user_id):
+    return render(request, "network/profile.html")

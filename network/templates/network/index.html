@@ -34,7 +34,7 @@
                         </svg>
                         <div class="card-text">{{ post.likes.count }} <span class="small-grey-text">people/bots liked this post</span></div>
                     </div>
-                    {% if current_user == post.user %}
+                    {% if user == post.user %}
                         <a id="edit-post-link" href="#">Edit</a>
                     {% endif %}
                 </div>
