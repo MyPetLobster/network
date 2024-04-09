@@ -81,6 +81,5 @@ def create_post(request):
 @login_required 
 def profile(request, user_id):
     return render(request, "network/profile.html", {
-        "current_user": request.user,
         "profile_user": User.objects.get(id=user_id)
     })
