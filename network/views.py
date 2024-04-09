@@ -85,3 +85,11 @@ def profile(request, user_id):
         "profile_user": profile_user,
         "user_posts": Post.objects.filter(user=profile_user)
     })
+
+
+@login_required
+def following(request):
+    followed_posts = Post.objects.filter(user__in=request.user.following.all())
+    return render(request, "network/following.html", {
+        "followed_posts": followed_posts
+    })
