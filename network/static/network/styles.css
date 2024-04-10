@@ -2,7 +2,9 @@
 
 
 
-
+.hidden {
+    display: none !important;
+}
 
 
 .small-grey-text {

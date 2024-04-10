@@ -17,13 +17,19 @@
     
     <div class="all-posts">
         {% for post in posts %}
+            <form class="edit-post-form hidden">
+                {% csrf_token %}
+                <textarea name="post-content" class="form-control edit-post-content">{{ post.content }}</textarea>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="cancel-edit btn btn-secondary">Cancel</button>
+            </form>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'profile' post.user.id %}">{{ post.user }}</a></h5>
                     <p class="card-text">{{ post.content }}</p>
                     <p class="card-text">{{ post.timestamp }}</p>
                     <div class="likes-div">
-                        <svg id="likes-icon" version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                        <svg class="likes-icon" version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                             width="25px" height="25px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
                             <g>
                                 <path fill="#394240" d="M48,5c-4.418,0-8.418,1.793-11.312,4.688L32,14.344l-4.688-4.656C24.418,6.793,20.418,5,16,5
@@ -39,13 +45,12 @@
                         <div class="card-text">{{ post.likes.count }} <span class="small-grey-text">people/bots liked this post</span></div>
                     </div>
                     {% if user == post.user %}
-                        <a id="edit-post-link" href="#">Edit</a>
+                        <a class="edit-post-link" href="#">Edit</a>
                     {% endif %}
                 </div>
             </div>
             <br>
         {% endfor %}
-        </div>
 
         <nav aria-label="Page navigation">
             <ul class="pagination">
@@ -72,5 +77,20 @@
                 {% endif %}
             </ul>
         </nav>
-   
+        
+        <script>
+            const editPostLinks = document.querySelectorAll('.edit-post-link');
+            editPostLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const editPostForm = link.parentElement.parentElement.previousElementSibling;
+                    editPostForm.classList.toggle('hidden');
+
+                    editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
+                        editPostForm.classList.add('hidden');
+                    });
+                });
+            });
+
+
+        </script>
 {% endblock %}
