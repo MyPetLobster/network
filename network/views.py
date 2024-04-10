@@ -11,11 +11,12 @@ from .models import User, Post
 
 def index(request):
     post_list = Post.objects.all()
-    p = Paginator(post_list, 1)
+    p = Paginator(post_list, 5)
     page_number = request.GET.get('page')
     posts = p.get_page(page_number)
     return render(request, "network/index.html", {
-        "posts": posts
+        "posts": posts,
+        "page_number": page_number
     })
 
 

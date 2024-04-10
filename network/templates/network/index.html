@@ -1,5 +1,7 @@
 {% extends "network/layout.html" %}
 
+{% load custom_filters %}
+
 {% block body %}
     <h1>All Posts</h1>
     
@@ -43,18 +45,32 @@
             </div>
             <br>
         {% endfor %}
-        
-        
-        {% if posts.has_previous %}
-            <a href="?page=1">&laquo; First</a>
-            <a href="?page={{ posts.previous_page_number }}">Previous</a>
-        {% endif %}
+        </div>
 
-        Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if posts.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
+                    </li>
+                {% endif %}
+                
+                {% for page in posts.number|get_range:posts.paginator.num_pages %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                {% endfor %}
 
-        {% if posts.has_next %}
-            <a href="?page={{ posts.next_page_number }}">Next</a>
-            <a href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a>
-        {% endif %}
-    </div>
+                {% if posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+   
 {% endblock %}
