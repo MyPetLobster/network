@@ -8,10 +8,11 @@ from django.urls import reverse
 
 from .models import User, Post
 
+PAGINATOR_RANGE = 5
 
 def index(request):
     post_list = Post.objects.all()
-    p = Paginator(post_list, 5)
+    p = Paginator(post_list, PAGINATOR_RANGE)
     page_number = request.GET.get('page')
     posts = p.get_page(page_number)
     return render(request, "network/index.html", {
@@ -85,16 +86,24 @@ def create_post(request):
 
 @login_required 
 def profile(request, user_id):
-    profile_user = User.objects.get(id=user_id)
+    profile_user = User.objects.get(pk=user_id)
+    p = Paginator(Post.objects.filter(user=profile_user), PAGINATOR_RANGE)
+    page_number = request.GET.get('page')
+    posts = p.get_page(page_number)
     return render(request, "network/profile.html", {
         "profile_user": profile_user,
-        "user_posts": Post.objects.filter(user=profile_user)
+        "user_posts": posts,
+        "page_number": page_number
     })
 
 
 @login_required
 def following(request):
     followed_posts = Post.objects.filter(user__in=request.user.following.all())
+    p = Paginator(followed_posts, PAGINATOR_RANGE)
+    page_number = request.GET.get('page')
+    followed_posts = p.get_page(page_number)
     return render(request, "network/following.html", {
-        "followed_posts": followed_posts
+        "followed_posts": followed_posts,
+        "page_number": page_number
     })

@@ -1,5 +1,7 @@
 {% extends "network/layout.html" %}
 
+{% load custom_filters %}
+
 {% block body %}
 
 <h1>{{ profile_user.username }}'s Profile</h1>
@@ -45,6 +47,31 @@
             </div>
         </div>
         <br>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if user_posts.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ user_posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
+                    </li>
+                {% endif %}
+                
+                {% for page in user_posts.number|get_range:user_posts.paginator.num_pages %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                {% endfor %}
+
+                {% if user_posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ user_posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ user_posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
     {% endfor %}
 </div>
 
