@@ -1,8 +1,10 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -107,3 +109,14 @@ def following(request):
         "followed_posts": followed_posts,
         "page_number": page_number
     })
+
+
+@login_required
+def edit_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        post.content = data["content"]
+        post.save()
+        return JsonResponse({'content': post.content})
+    

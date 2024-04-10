@@ -19,15 +19,16 @@
         {% for post in posts %}
             <form class="edit-post-form hidden">
                 {% csrf_token %}
-                <textarea name="post-content" class="form-control edit-post-content">{{ post.content }}</textarea>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="post-id hidden">{{ post.id }}</div>
+                <textarea name="edit-post-content" class="form-control edit-post-content">{{ post.content }}</textarea>
+                <button type="submit" class="btn btn-primary">Save</button>
                 <button type="button" class="cancel-edit btn btn-secondary">Cancel</button>
             </form>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'profile' post.user.id %}">{{ post.user }}</a></h5>
-                    <p class="card-text">{{ post.content }}</p>
-                    <p class="card-text">{{ post.timestamp }}</p>
+                    <p class="card-text post-content" id="post-content-{{ post.id }}">{{ post.content }}</p>
+                    <p class="card-text post-timestamp">{{ post.timestamp }}</p>
                     <div class="likes-div">
                         <svg class="likes-icon" version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                             width="25px" height="25px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
@@ -77,20 +78,46 @@
                 {% endif %}
             </ul>
         </nav>
+    </div>
         
-        <script>
-            const editPostLinks = document.querySelectorAll('.edit-post-link');
-            editPostLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    const editPostForm = link.parentElement.parentElement.previousElementSibling;
-                    editPostForm.classList.toggle('hidden');
+    <script>
+        const editPostLinks = document.querySelectorAll('.edit-post-link');
+        editPostLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const editPostForm = link.parentElement.parentElement.previousElementSibling;
+                editPostForm.classList.toggle('hidden');
+                editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
+                    editPostForm.classList.add('hidden');
+                });
 
-                    editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
+                editPostContent = editPostForm.querySelector('.edit-post-content');
+                editPostContent.focus();
+                editPostForm.onsubmit = (event) => {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const formData = new FormData();
+                    formData.append('content', editPostContent.value);
+                    console.log('Submitting edit post form...');
+                    fetch(`edit_post/${editPostForm.querySelector('.post-id').textContent}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            content: editPostContent.value
+                        }),
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        const postId = editPostForm.querySelector('.post-id').textContent;
+                        const postContentElement = document.querySelector(`#post-content-${postId}`);
+                        postContentElement.textContent = result.content;
                         editPostForm.classList.add('hidden');
                     });
-                });
+                };
             });
+        });
+    </script>
 
-
-        </script>
 {% endblock %}
