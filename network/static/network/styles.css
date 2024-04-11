@@ -33,7 +33,13 @@ h1 {
 
 
 
-
+.navbar-brand {
+    position: relative;
+    top: 4px;
+    font-size: 1.5em;
+    font-family: "M PLUS 1 Code", monospace;
+    color: rgb(52,136,161) !important;
+}
 
 .btn-box {
     display: flex;
@@ -67,7 +73,24 @@ h1 {
 
 
 /* LANDING PAGE */
-
+#landing-heading-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+#landing-title {
+    position: relative;
+    top: 10px;
+    font-size: 3em;
+    font-family: "M PLUS 1 Code", monospace;
+    color: rgb(52,136,161);
+}
+#landing-subtitle {
+    font-size: 0.7em;
+    color: rgb(215,153,87);
+}
 .landing-content {
     position: absolute;
     top: 50%;
@@ -78,10 +101,10 @@ h1 {
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 .landing-3 {
-    grid-template-rows: 1fr 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr 1fr 1fr !important;
 }
 .section-div {
     display: flex;

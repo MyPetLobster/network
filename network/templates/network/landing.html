@@ -14,6 +14,13 @@
     <body>
         {% if user.is_authenticated %}
             <div class="landing-content">
+                <div id="landing-heading-div" class="section-div">
+                    <div>
+                        <img id="landing-logo" src="../../static/network/images/echo-logo.png" height="60px" width="60px">
+                        <span id="landing-title">Echo</span>
+                    </div>  
+                    <span id="landing-subtitle">enter the chamber...</span>
+                </div>
                 <div class="section-div">
                     <a id="section-all-posts" class="landing-link" href="{% url 'all_posts' %}">everything</a>
                 </div>
