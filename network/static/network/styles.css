@@ -9,6 +9,30 @@ a:hover {
     text-decoration: none;
 }
 
+
+#expand-top-pagination,
+#collapse-top-pagination {
+    cursor: pointer;
+}
+#expand-top-pagination:hover .tp-bar {
+    transition-duration: 300ms;
+    stroke:rgb(161,180,46);
+}
+#expand-top-pagination:hover .tp-arrow {
+    transition-duration: 300ms;
+    stroke:rgb(16, 55, 74)
+}
+#collapse-top-pagination {
+    position: relative;
+    bottom: 16px;
+    margin-top: 0;
+    padding-top: 0;
+}
+#collapse-top-pagination:hover path {
+    fill:rgb(16, 55, 74)
+}
+
+
 .pagination{
     border-radius: 12px !important;
 }

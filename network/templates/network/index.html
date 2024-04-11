@@ -14,8 +14,42 @@
             <button type="button" class="cancel-btn btn btn-secondary">Cancel</button>
         </form>
     {% endif %}
-</div>
+    <br>
+    <svg id="expand-top-pagination" width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="tp-bar" d="M21 7V17" stroke="rgb(220,220,220)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="tp-bar" d="M3 7V17" stroke="rgb(220,220,220)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="tp-arrow" d="M7 12H17M7 12L9.5 9.5M7 12L9.5 14.5M17 12L14.5 9.5M17 12L14.5 14.5" stroke="rgb(220,220,220)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>   
+    <nav id="top-pagination" class="hidden" aria-label="Page navigation">
+        <ul class="pagination">
+            <div id="current_page" class="hidden">{{ posts.number }}</div>
+            {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
+                </li>
+            {% endif %}
+            
+            {% for page in posts.number|get_range:posts.paginator.num_pages %}
+                <li class="page-item"><a class="page-link page-link-{{ page }}" href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
 
+            {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <svg id="collapse-top-pagination" class="hidden" width="24px" height="24px" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgb(220,220,220)" d="M13.7,6.3C13.5,6.1,13.3,6,13,6H5C4.7,6,4.5,6.1,4.3,6.3c-0.4,0.4-0.4,1,0,1.4l4,4C8.5,11.9,8.7,12,9,12 s0.5-0.1,0.7-0.3l4-4C14.1,7.3,14.1,6.7,13.7,6.3L13.7,6.3z"/>
+    </svg>
+</div>
 
 
 <br>
@@ -96,7 +130,7 @@
             {% endif %}
             
             {% for page in posts.number|get_range:posts.paginator.num_pages %}
-                <li class="page-item"><a id="page-link-{{ page }}" class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                <li class="page-item"><a class="page-link page-link-{{ page }}" href="?page={{ page }}">{{ page }}</a></li>
             {% endfor %}
 
             {% if posts.has_next %}
@@ -113,9 +147,47 @@
 </div>
 
 <script>
+    const expandTopPagination = document.getElementById('expand-top-pagination');
+    const topPagination = document.getElementById('top-pagination');
+    const collapseTopPagination = document.getElementById('collapse-top-pagination');
+
+    if (sessionStorage.getItem('topPagination') === 'expanded') {
+        expandTopPagination.classList.add('hidden');
+        topPagination.classList.remove('hidden');
+        collapseTopPagination.classList.remove('hidden');
+        collapseTopPagination.addEventListener('click', () => {
+            sessionStorage.setItem('topPagination', 'collapsed')
+            expandTopPagination.classList.remove('hidden');
+            topPagination.classList.add('hidden');
+            collapseTopPagination.classList.add('hidden');
+        });
+    } else {
+        expandTopPagination.classList.remove('hidden');
+        topPagination.classList.add('hidden');
+        collapseTopPagination.classList.add('hidden');
+    }
+
+    expandTopPagination.addEventListener('click', () => {
+        sessionStorage.setItem('topPagination', 'expanded')
+        expandTopPagination.classList.add('hidden');
+        topPagination.classList.remove('hidden');
+        collapseTopPagination.classList.remove('hidden');
+        collapseTopPagination.addEventListener('click', () => {
+            sessionStorage.setItem('topPagination', 'collapsed')
+            expandTopPagination.classList.remove('hidden');
+            topPagination.classList.add('hidden');
+            collapseTopPagination.classList.add('hidden');
+        });
+    });
+
+
+
     let currentPageNumber = document.getElementById('current_page').textContent;
-    let currentPageLink = document.getElementById(`page-link-${currentPageNumber}`);
-    currentPageLink.classList.add('active-page-link');
+    let currentPageLinks = document.querySelectorAll('.page-link-' + currentPageNumber);
+    currentPageLinks.forEach(link => {
+        link.classList.add('active-page-link');
+    });
+
 
     const newPostButton = document.getElementById('new-post-button');
     const newPostForm = document.getElementById('new-post-form');
