@@ -4,31 +4,30 @@
 
 {% block body %} 
     <h1>Following</h1>
-    <div class="all-posts">
-        {% for post in followed_posts %}
-            <div class="card">
-                <form class="hidden">
-                    {% csrf_token %}
-                    <div class="post-id hidden">{{ post.id }}</div>
-                </form>
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'profile' post.user.id %}">{{ post.user }}</a></h5>
-                    <p class="card-text">{{ post.content }}</p>
-                    <p class="card-text">{{ post.timestamp }}</p>
-                    <div class="likes-div">
-                        {% if user.is_authenticated %}
-                            {% if user in post.likes.all %}
-                                <svg id="red-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="red-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#F94056"/>
-                                    <path d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            {% else %}
-                                <svg id="empty-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="empty-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#ffffff"/>
-                                    <path class="outline" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            {% endif %}
+<div class="all-posts">
+    {% for post in followed_posts %}
+        <div class="card">
+            <div class="card-body">
+                <div class="card-top-div">
+                    <h5 class="card-title">{{ post.user }}</h5>
+                    <span class="card-text post-timestamp">{{ post.timestamp }}</span>
+                </div>
+                <p class="card-text post-content" id="post-content-{{ post.id }}">{{ post.content }}</p>
+                <div class="likes-div">
+                    {% if user.is_authenticated %}
+                        {% if user in post.likes.all %}
+                            <svg id="red-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="red-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#F94056"/>
+                                <path d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {% else %}
+                            <svg id="empty-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="empty-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#ffffff"/>
+                                <path class="outline" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         {% endif %}
+                    {% endif %}
+                    <div class="card-bottom-div">
                         <div class="card-text">
                             {{ post.likes.count }} 
                             {% if post.likes.count == 1 %}
@@ -37,38 +36,50 @@
                                 <span class="small-grey-text">people/bots liked this post</span>
                             {% endif %}
                         </div>
+                        <div>
+                        {% if user == post.user %}
+                            <a class="edit-post-link" href="#">Edit</a>
+                            <form class="edit-post-form hidden">
+                                {% csrf_token %}
+                                <div class="post-id hidden">{{ post.id }}</div>
+                                <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
+                                <div class="btn-box">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
+                                </div>
+                            </form>
+                        {% endif %}
+                        </div>
                     </div>
-                    {% if user == post.user %}
-                        <a id="edit-post-link" href="#">Edit</a>
-                    {% endif %}
                 </div>
             </div>
-            <br>
-        {% endfor %}
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                {% if followed_posts.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ followed_posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
-                    </li>
-                {% endif %}
-                
-                {% for page in followed_posts.number|get_range:followed_posts.paginator.num_pages %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
-                {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if followed_posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ followed_posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
+                </li>
+            {% endif %}
+            
+            {% for page in followed_posts.number|get_range:followed_posts.paginator.num_pages %}
+                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
 
-                {% if followed_posts.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ followed_posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ followed_posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+            {% if followed_posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ followed_posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ followed_posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
 {% endblock %}

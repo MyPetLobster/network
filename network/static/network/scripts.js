@@ -3,10 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const editPostLinks = document.querySelectorAll('.edit-post-link');
     editPostLinks.forEach(link => {
         link.addEventListener('click', () => {
-            const editPostForm = link.parentElement.parentElement.previousElementSibling;
+            const fadedBackground = document.querySelector("#faded-background")
+            fadedBackground.classList.toggle('hidden');
+            const editPostForm = link.nextElementSibling;
             editPostForm.classList.toggle('hidden');
             editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
                 editPostForm.classList.add('hidden');
+                fadedBackground.classList.toggle('hidden');
             });
 
             editPostContent = editPostForm.querySelector('.edit-post-content');
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const postContentElement = document.querySelector(`#post-content-${postId}`);
                     postContentElement.textContent = result.content;
                     editPostForm.classList.add('hidden');
+                    fadedBackground.classList.toggle('hidden');
                 });
             };
         });

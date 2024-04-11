@@ -7,12 +7,22 @@
 }
 
 body {
+    width: 100%;
     font-family: 'Cultive Mono', monospace;
 }
+
 
 .navbar {
     display: flex;
     justify-content: space-between;
+}
+
+.top-content-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -72,6 +82,9 @@ body {
 
 
 /* POSTS */
+.card {
+    border-radius: 16px;
+}
 .all-posts {
     width: 100%; 
     display: flex;
@@ -95,11 +108,31 @@ body {
 }
 
 .post-timestamp {
+    width: 100%;
+    text-align: right;
     font-size: 0.7em;
     color: rgb(119, 112, 112);
 }
 
+.card-bottom-div,
+.card-top-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.card-top-div {
+    margin-bottom: 10px;
+}
 
+.edit-textarea {
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+.edit-textarea:active,
+.edit-textarea:focus {
+    outline: 1px solid white!important;
+    border: 2px solid rgb(99, 157, 174)!important;
+}
 
 
 #faded-background {
@@ -113,14 +146,35 @@ body {
 
 }
 
-#edit-profile-form {
+
+
+
+/* PROFILE */
+.follow-div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+#hey-thats-you-div {
+    color: rgb(68, 66, 66);
+    margin-bottom: 48px;
+}
+#hey-thats-you {
+    font-size: 1em;
+}
+
+#edit-profile {
+    font-size: 0.8em;
+}
+#edit-profile-form, 
+.edit-post-form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999;
-
-    width: 400px;
+    min-width: 600px;
 }
 #edit-profile-form .form-group {
     width: 100%;
@@ -129,8 +183,9 @@ body {
     gap: 15px;
     color: rgb(209, 202, 202)
 }
-#edit-prof-save-btn,
-#edit-prof-cancel-btn {
+.btn,
+.cancel-btn {
+    font-size: 12px;
     width: 100px;
     padding: 5px;
     border-radius: 5px;
@@ -141,11 +196,11 @@ body {
     cursor: pointer;
     transition-duration: 250ms;
 }
-#edit-prof-save-btn:hover {
+.btn:hover {
     background-color: rgb(99, 157, 174);
     color: white;
 }
-#edit-prof-cancel-btn:hover {
+.cancel-btn:hover {
     background-color: rgb(178, 67, 44);
     color: white;
 }
