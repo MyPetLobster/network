@@ -3,15 +3,20 @@
 {% load custom_filters %}
 
 {% block body %}
-<h1>All Posts</h1>
+<div class="top-content-div">
+    <h1>All Posts</h1>
+    {% if user.is_authenticated %}
+        <button id="new-post-button" class="btn btn-primary">New Post</button>
+        <form id="new-post-form" class="hidden" action="{% url 'create_post' %}" method="post">
+            {% csrf_token %}
+            <textarea name="post-content" class="form-control" placeholder="New Post" id="post-content"></textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="cancel-btn btn btn-secondary">Cancel</button>
+        </form>
+    {% endif %}
+</div>
 
-{% if user.is_authenticated %}
-    <form action="{% url 'create_post' %}" method="post">
-        {% csrf_token %}
-        <textarea name="post-content" class="form-control" placeholder="New Post" id="post-content"></textarea>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-{% endif %}
+
 
 <br>
 
@@ -102,5 +107,25 @@
         </ul>
     </nav>
 </div>
+
+<script>
+    const newPostButton = document.getElementById('new-post-button');
+    const newPostForm = document.getElementById('new-post-form');
+    const fadedBackground = document.getElementById('faded-background');
+
+    newPostButton.addEventListener('click', () => {
+        newPostForm.classList.toggle('hidden');
+        fadedBackground.classList.toggle('hidden');
+        newPostForm.querySelector('textarea').focus();  
+        newPostForm.querySelector('.cancel-btn').addEventListener('click', () => {
+            newPostForm.classList.add('hidden');
+            fadedBackground.classList.add('hidden');
+        });
+        fadedBackground.addEventListener('click', () => {
+            newPostForm.classList.add('hidden');
+            fadedBackground.classList.add('hidden');
+        });
+    });
+</script>
 
 {% endblock %}

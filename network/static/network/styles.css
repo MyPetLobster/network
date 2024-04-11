@@ -97,6 +97,23 @@ h1 {
 
 
 
+
+
+/* Index */ 
+#new-post-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
 /* POSTS */
 .card {
     border-radius: 16px;
@@ -145,8 +162,8 @@ h1 {
     font-size: 0.8em;
     margin-bottom: 10px;
 }
-.edit-textarea:active,
-.edit-textarea:focus {
+textarea:active,
+textarea:focus {
     outline: 1px solid white!important;
     border: 2px solid rgb(99, 157, 174)!important;
 }
