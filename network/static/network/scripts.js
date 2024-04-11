@@ -84,4 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    
+
+
+
+    const followButtons = document.querySelectorAll(".follow-button");
+
+    followButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const profileId = button.dataset.profileId;
+            fetch(`/profile/${profileId}`, {
+                method: "PUT",
+                headers: {
+                    "X-CSRFToken": document.querySelector("input[name='csrfmiddlewaretoken']").value
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.followed) {
+                    button.classList.add("hidden");
+                    document.querySelector("#unfollow-button").classList.remove("hidden");
+                    document.querySelector("#followers-count").textContent = result.followers;
+                } else {
+                    button.classList.add("hidden");
+                    document.querySelector("#follow-button").classList.remove("hidden");
+                    document.querySelector("#followers-count").textContent = result.followers;
+                }
+            });
+        });
+    });
+
 });

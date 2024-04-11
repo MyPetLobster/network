@@ -89,6 +89,18 @@ def create_post(request):
 @login_required 
 def profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
+    if request.method == "PUT":
+        user = request.user
+        if user in profile_user.followers.all():
+            profile_user.followers.remove(user)
+        else:
+            profile_user.followers.add(user)
+        profile_user.save()
+        return JsonResponse({
+            'followers': profile_user.followers.count(),
+            'followed': user in profile_user.followers.all()
+            })
+    
     p = Paginator(Post.objects.filter(user=profile_user), PAGINATOR_RANGE)
     page_number = request.GET.get('page')
     posts = p.get_page(page_number)
@@ -97,6 +109,7 @@ def profile(request, user_id):
         "user_posts": posts,
         "page_number": page_number
     })
+
 
 
 @login_required
@@ -134,3 +147,5 @@ def like_post(request, post_id):
         'likes': post.likes.count(),
         'liked': user in post.likes.all()
         })
+
+

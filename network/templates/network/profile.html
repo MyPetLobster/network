@@ -7,14 +7,18 @@
 <h1>{{ profile_user.username }}'s Profile</h1>
 
 <div class="floating-content-div">
-    {% if profile_user != user %}
-        {% if profile_user in user.following.all %} 
-            <button id="unfollow-button" class="btn btn-primary">Unfollow</button>
-        {% else %}
-            <button id="follow-button" class="btn btn-primary">Follow</button>
+    <div class="follow-div">
+        {% if profile_user != user %}
+            {% if profile_user in user.following.all %} 
+                <button id="unfollow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Unfollow</button>
+                <button id="follow-button" class="follow-button btn btn-primary hidden" data-profile-id="{{ profile_user.id }}">Follow</button>
+            {% else %}
+                <button id="unfollow-button" class="follow-button btn btn-primary hidden" data-profile-id="{{ profile_user.id }}">Unfollow</button>
+                <button id="follow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Follow</button>               
+            {% endif %}
         {% endif %}
-    {% endif %}
-    <p class="info-text">Followers: {{ profile_user.followers.count }}</p>
+    </div>
+    <p class="info-text">Followers: <span id="followers-count">{{ profile_user.followers.count }}</span></p>
     <p class="info-text">Following: {{ profile_user.following.count }}</p>
 </div>
 
