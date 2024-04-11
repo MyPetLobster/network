@@ -9,6 +9,37 @@ a:hover {
     text-decoration: none;
 }
 
+.pagination{
+    border-radius: 12px !important;
+}
+.page-item:first-of-type .page-link {
+    border-top-left-radius: 12px !important;
+    border-bottom-left-radius: 12px !important;
+}
+.page-item:last-of-type .page-link {
+    border-top-right-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+}
+.page-link {
+    font-size: 0.7em;
+    color: rgb(150, 158, 162);
+    transition-duration: 250ms;
+}
+.page-link:hover {
+    color: rgb(150, 158, 162);
+    background-color: rgb(237, 236, 236);
+    font-weight: bold;
+    text-decoration: none;
+}
+.active-page-link {
+    background-color: rgb(161,180,46) !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+
+
+
 
 
 .hidden {

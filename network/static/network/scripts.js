@@ -116,59 +116,63 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+
     const editProfileLink = document.querySelector("#edit-profile");
     const editProfileForm = document.querySelector("#edit-profile-form");
 
-    editProfileLink.addEventListener("click", () => {
-        editProfileForm.classList.toggle("hidden");
-        fadedBackground.classList.toggle("hidden");
-        if (!fadedBackground.classList.contains("hidden")) {
-            fadedBackground.addEventListener("click", () => {
+    if (editProfileLink) {
+        editProfileLink.addEventListener("click", () => {
+            editProfileForm.classList.toggle("hidden");
+            fadedBackground.classList.toggle("hidden");
+            if (!fadedBackground.classList.contains("hidden")) {
+                fadedBackground.addEventListener("click", () => {
+                    editProfileForm.classList.add("hidden");
+                    fadedBackground.classList.add("hidden");
+                });
+            }
+            editProfileForm.querySelector("#edit-prof-cancel-btn").addEventListener("click", () => {
                 editProfileForm.classList.add("hidden");
                 fadedBackground.classList.add("hidden");
             });
-        }
-        editProfileForm.querySelector("#edit-prof-cancel-btn").addEventListener("click", () => {
-            editProfileForm.classList.add("hidden");
-            fadedBackground.classList.add("hidden");
         });
-    });
 
 
-    editProfileForm.addEventListener("submit", (event) => {
-        console.log("Submitting form...");
-        event.preventDefault();
-        const userId = document.querySelector("#profile-id").textContent;
-        console.log(userId);
-        const formData = new FormData(editProfileForm);
-        console.log(formData);
-        fetch(`/edit_profile/${userId}`, {
-            method: "POST",
-            body: formData,
-            headers: {
-                "X-CSRFToken": document.querySelector("input[name='csrfmiddlewaretoken']").value
-            }
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-            document.querySelector("#profile-name").textContent = `Name: ${result.first_name} ${result.last_name}`;
-            document.querySelector("#profile-email").textContent = `Email: ${result.email}`;
-            document.querySelector("#profile-username").textContent =`Username: ${result.username}`;
-            document.querySelector("#h1-name").textContent = `${result.username}'s Profile`;
-            if (result.first_name === "" && result.last_name === "") {
-                document.querySelectorAll(".card-username").forEach(name => {
-                    name.textContent = `${result.username}`;
-                });
-            } else {
-                document.querySelectorAll(".card-full-name").forEach(name => {
-                    name.textContent = `${result.first_name}.${result.last_name} →`;
-                });
-            }
-            editProfileForm.classList.add("hidden");
-            fadedBackground.classList.add("hidden");
+        editProfileForm.addEventListener("submit", (event) => {
+            console.log("Submitting form...");
+            event.preventDefault();
+            const userId = document.querySelector("#profile-id").textContent;
+            console.log(userId);
+            const formData = new FormData(editProfileForm);
+            console.log(formData);
+            fetch(`/edit_profile/${userId}`, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": document.querySelector("input[name='csrfmiddlewaretoken']").value
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                document.querySelector("#profile-name").textContent = `Name: ${result.first_name} ${result.last_name}`;
+                document.querySelector("#profile-email").textContent = `Email: ${result.email}`;
+                document.querySelector("#profile-username").textContent =`Username: ${result.username}`;
+                document.querySelector("#h1-name").textContent = `${result.username}'s Profile`;
+                if (result.first_name === "" && result.last_name === "") {
+                    document.querySelectorAll(".card-username").forEach(name => {
+                        name.textContent = `${result.username}`;
+                    });
+                } else {
+                    document.querySelectorAll(".card-full-name").forEach(name => {
+                        name.textContent = `${result.first_name}.${result.last_name} →`;
+                    });
+                }
+                editProfileForm.classList.add("hidden");
+                fadedBackground.classList.add("hidden");
+            });
         });
-    });
+    }
 });
 
 

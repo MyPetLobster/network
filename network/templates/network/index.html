@@ -83,6 +83,7 @@
     {% endfor %}
     <nav aria-label="Page navigation">
         <ul class="pagination">
+            <div id="current_page" class="hidden">{{ posts.number }}</div>
             {% if posts.has_previous %}
                 <li class="page-item">
                     <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
@@ -93,7 +94,7 @@
             {% endif %}
             
             {% for page in posts.number|get_range:posts.paginator.num_pages %}
-                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                <li class="page-item"><a id="page-link-{{ page }}" class="page-link" href="?page={{ page }}">{{ page }}</a></li>
             {% endfor %}
 
             {% if posts.has_next %}
@@ -109,6 +110,10 @@
 </div>
 
 <script>
+    let currentPageNumber = document.getElementById('current_page').textContent;
+    let currentPageLink = document.getElementById(`page-link-${currentPageNumber}`);
+    currentPageLink.classList.add('active-page-link');
+
     const newPostButton = document.getElementById('new-post-button');
     const newPostForm = document.getElementById('new-post-form');
     const fadedBackground = document.getElementById('faded-background');
