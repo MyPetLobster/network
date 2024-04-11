@@ -18,3 +18,13 @@
     flex-direction: row;
     gap: 8px;
 }
+
+
+.heart-icon {
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+
+.heart-icon:hover {
+    transform: scale(1.2);
+}

@@ -119,4 +119,18 @@ def edit_post(request, post_id):
         post.content = data["content"]
         post.save()
         return JsonResponse({'content': post.content})
-    
+  
+
+@login_required
+def like_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    user = request.user
+    if user in post.likes.all():
+        post.likes.remove(user)
+    else:
+        post.likes.add(user)
+    post.save()
+    return JsonResponse({
+        'likes': post.likes.count(),
+        'liked': user in post.likes.all()
+        })
