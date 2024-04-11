@@ -28,8 +28,8 @@
         <p id="profile-email" class="info-text">Email: {{ user.email }}</p>
         <p id="profile-username" class="info-text">Username: {{ user.username }}</p>
     </div>
-        <p class="info-text">Followers → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
-        <p class="info-text">{{ profile_user.following.count }} ← Following</p>
+        <p class="info-text follow-count-text"><a href="#">Followers</a> → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
+        <p class="info-text follow-count-text">{{ profile_user.following.count }} ← <a href="#">Following</a></p>
     
 </div>
 
