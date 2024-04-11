@@ -7,7 +7,7 @@
 
 
 <div class="top-content-div">
-    <h1 id="h1-name">{{ profile_user.username }}'s Profile</h1>
+    <h1 id="h1-name">@{{ profile_user.username }}</h1>
     <div class="follow-div">
         {% if profile_user != user %}
             {% if profile_user in user.following.all %} 

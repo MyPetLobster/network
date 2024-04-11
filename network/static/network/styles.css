@@ -251,8 +251,9 @@ h1 {
 }
 textarea:active,
 textarea:focus {
-    outline: 1px solid white!important;
-    border: 2px solid rgb(99, 157, 174)!important;
+    outline: 1px solid white !important;
+    border: 1px solid rgb(16, 55, 74) !important;
+    box-shadow: none !important;
 }
 
 
@@ -309,34 +310,43 @@ textarea:focus {
     color: rgb(209, 202, 202)
 }
 .btn,
-.btn:after,
-.btn:focus,
 .cancel-btn {
     font-size: 12px;
     width: 100px;
     padding: 5px;
     border-radius: 5px;
-    background-color: rgb(222, 222, 222);
-    color: black;
+    background-color: rgb(255, 255, 255);
+    color: rgb(16, 55, 74);
     border: none !important;
     outline: none !important;
     box-shadow: none;
     cursor: pointer;
     transition-duration: 300ms;
 }
+
+.btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: rgb(255, 255, 255);
+    color: rgb(16, 55, 74);
+}
 .btn:hover {
-    background-color: rgb(36,94,122);
-    color: white;
-    box-shadow: 0 0 8px rgba(33, 38, 4, 0.559);
+    color: rgb(229, 229, 229);
+    background-color: rgb(161,180,46);
+    border: none !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.559);
 }
 .btn:active {
+    color: white;
     background-color: rgb(16, 55, 74) !important;
     transform: scale(0.95) !important;
-    box-shadow: 0 0 4px rgba(33, 38, 4, 0.559) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.713) !important;
     outline: none !important;
     border: none !important;
 }
 .cancel-btn:hover {
+    border: 1px solid rgb(178, 67, 44) !important;
     background-color: rgb(178, 67, 44);
     color: white;
 }
@@ -346,6 +356,30 @@ textarea:focus {
     box-shadow: 0 0 4px rgba(33, 38, 4, 0.559) !important;
     outline: none !important;
     border: none !important;
+}
+#new-post-button {
+    color: rgb(193, 193, 193) !important;
+    border: 1px solid rgb(222, 222, 222) !important;
+    transition-duration: 300ms;
+}
+#new-post-button:hover {
+    color: white !important;
+    border: none !important;
+    background-color: rgb(161,180,46);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.349);
+    transition-duration: 300ms;
+}
+#new-post-button:active {
+    color: white !important;
+    background-color: rgb(97, 137, 12) !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.684);
+}
+#new-post-button:focus {
+    outline: none !important;
+    border: 1px solid rgb(222, 222, 222) !important;
+    box-shadow: none !important;
 }
 
 #profile-info-div {

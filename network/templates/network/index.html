@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="top-content-div">
-    <h1>All Posts</h1>
+    <h1>#allposts</h1>
     {% if user.is_authenticated %}
         <button id="new-post-button" class="btn btn-primary">New Post</button>
         <form id="new-post-form" class="hidden" action="{% url 'create_post' %}" method="post">
