@@ -43,8 +43,14 @@
                                 </svg>
                             {% endif %}
                         {% endif %}
-
-                        <div class="card-text">{{ post.likes.count }} <span class="small-grey-text">people/bots liked this post</span></div>
+                        <div class="card-text">
+                            {{ post.likes.count }} 
+                            {% if post.likes.count == 1 %}
+                                <span class="small-grey-text">person/bot liked this post</span>
+                            {% else %}
+                                <span class="small-grey-text">people/bots liked this post</span>
+                            {% endif %}
+                        </div>
                     </div>
                     {% if user == post.user %}
                         <a class="edit-post-link" href="#">Edit</a>
