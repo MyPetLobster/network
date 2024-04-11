@@ -6,6 +6,14 @@
     display: none !important;
 }
 
+body {
+    font-family: 'Cultive Mono', monospace;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
 
 .small-grey-text {
     font-size: 0.8em;
