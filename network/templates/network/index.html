@@ -27,7 +27,7 @@
                 <div class="card-top-div">
                     <h5 class="card-title">
                         {% if post.user.first_name %}
-                            {{ post.user.first_name }} {{ post.user.last_name }}&nbsp;→&nbsp;
+                            {{ post.user.first_name }}.{{ post.user.last_name }}&nbsp;→&nbsp;
                         {% else %}
                             {{ post.user.username }}&nbsp;→&nbsp;
                         {% endif %}

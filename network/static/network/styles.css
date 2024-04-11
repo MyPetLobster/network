@@ -1,4 +1,13 @@
+a {
+    color: rgb(150, 158, 162);
+    text-decoration: none;
+    transition-duration: 250ms;
 
+}
+a:hover {
+    color: rgb(161,180,46);
+    text-decoration: none;
+}
 
 
 
@@ -7,6 +16,7 @@
 }
 
 body {
+    color: rgb(78, 80, 82);
     width: 100%;
     font-family: 'Cultive Mono', monospace;
 }
@@ -31,14 +41,45 @@ h1 {
 
 
 
+.navbar {
+    padding: 0 16px;
+    background-color: rgb(255, 255, 255) !important;
+    transition-duration: 500ms;
+}
+.navbar:hover {
+    background-color: rgb(220, 216, 216) !important;
+}
+.nav-link {
+    font-size: 0.9em;
+    color: white !important;
+    transition-duration: 500ms;
+}
+#profile-link {
+    margin-left: 36px;
+}
+.navbar:hover .nav-link:hover {
+    color: rgb(36,94,122) !important;
+    transition-duration: 250ms !important;
+}
+.navbar:hover .nav-link:active {
+    color: rgb(16, 55, 74) !important;
+    font-weight: bold;
+    transition-duration: 150ms !important;
+}
 
 
+.hero-div {
+    position: relative;
+    bottom: 3px;
+}
 .navbar-brand {
+    padding: 0;
     position: relative;
     top: 4px;
     font-size: 1.5em;
+    font-weight: bold;
     font-family: "M PLUS 1 Code", monospace;
-    color: rgb(52,136,161) !important;
+    color: rgb(36,94,122) !important;
 }
 
 .btn-box {
@@ -85,11 +126,11 @@ h1 {
     top: 10px;
     font-size: 3em;
     font-family: "M PLUS 1 Code", monospace;
-    color: rgb(52,136,161);
+    color: rgb(36,94,122);
 }
 #landing-subtitle {
     font-size: 0.7em;
-    color: rgb(215,153,87);
+    color: rgb(161,180,46);
 }
 .landing-content {
     position: absolute;
@@ -134,7 +175,14 @@ h1 {
 /* POSTS */
 .card {
     border-radius: 16px;
+    transition-duration: 500ms;
 }
+.card:hover {
+    background-color: rgb(241, 239, 239);
+    border: 1px solid rgb(161,180,46);
+    box-shadow: 0 0 10px rgba(33, 38, 4, 0.559);
+}
+
 .all-posts {
     width: 100%; 
     display: flex;
@@ -246,6 +294,8 @@ textarea:focus {
     color: rgb(209, 202, 202)
 }
 .btn,
+.btn:after,
+.btn:focus,
 .cancel-btn {
     font-size: 12px;
     width: 100px;
@@ -255,16 +305,32 @@ textarea:focus {
     color: black;
     border: none !important;
     outline: none !important;
+    box-shadow: none;
     cursor: pointer;
-    transition-duration: 250ms;
+    transition-duration: 300ms;
 }
 .btn:hover {
-    background-color: rgb(99, 157, 174);
+    background-color: rgb(36,94,122);
     color: white;
+    box-shadow: 0 0 8px rgba(33, 38, 4, 0.559);
+}
+.btn:active {
+    background-color: rgb(16, 55, 74) !important;
+    transform: scale(0.95) !important;
+    box-shadow: 0 0 4px rgba(33, 38, 4, 0.559) !important;
+    outline: none !important;
+    border: none !important;
 }
 .cancel-btn:hover {
     background-color: rgb(178, 67, 44);
     color: white;
+}
+.cancel-btn:active {
+    background-color: rgb(127, 41, 24) !important;
+    transform: scale(0.95) !important;
+    box-shadow: 0 0 4px rgba(33, 38, 4, 0.559) !important;
+    outline: none !important;
+    border: none !important;
 }
 
 #profile-info-div {
