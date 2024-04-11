@@ -126,8 +126,11 @@
         </div>
         <br>
     {% endfor %}
+    {% if user_posts.paginator.num_pages <= 1 %}
+    {% else %}
     <nav aria-label="Page navigation">
         <ul class="pagination">
+            <div id="current_page" class="hidden">{{ user_posts.number }}</div>
             {% if user_posts.has_previous %}
                 <li class="page-item">
                     <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
@@ -138,7 +141,7 @@
             {% endif %}
             
             {% for page in user_posts.number|get_range:user_posts.paginator.num_pages %}
-                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                <li class="page-item"><a id="page-link-{{ page }}" class="page-link" href="?page={{ page }}">{{ page }}</a></li>
             {% endfor %}
 
             {% if user_posts.has_next %}
@@ -151,6 +154,8 @@
             {% endif %}
         </ul>
     </nav>
+    {% endif %}
+</div>
 </div>
 
 
