@@ -12,6 +12,9 @@ from .models import User, Post
 
 PAGINATOR_RANGE = 5
 
+def landing(request):
+    return render(request, "network/landing.html")
+
 def index(request):
     post_list = Post.objects.all()
     p = Paginator(post_list, PAGINATOR_RANGE)
@@ -34,7 +37,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("landing"))
         else:
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
@@ -45,7 +48,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("all_posts"))
 
 
 def register(request):

@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
+        <script src="{% static 'network/scripts.js' %}" defer></script>
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+            <div class="landing-content">
+                <div class="section-div">
+                    <a id="section-all-posts" href="{% url 'all_posts' %}">everything</a>
+                </div>
+                <div class="section-div">
+                    <a id="section-following" href="{% url 'following' %}">things you like</a>
+                </div>
+                <div class="section-div">
+                    <a id="section-recommended" href="#">things you might like</a>
+                </div>   
+                <div class="section-div">
+                    <a id="section-profile" href="{% url 'profile' user.id %}">you</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="landing-content landing-3">
+                <div class="section-div">
+                    <a id="section-login" href="{% url 'login' %}"">login</a>
+                </div>
+                <div class="section-div">
+                    <a id="section-register" href="{% url 'register' %}"">register</a>
+                </div>
+                <div class="section-div">
+                    <a id="section-all_posts" href="{% url 'all_posts' %}"">just visiting</a>
+                </div>   
+            </div>
+        {% endif %}
+    </body>
+</html>
