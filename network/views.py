@@ -86,7 +86,7 @@ def create_post(request):
         post = Post(user=user, content=content)
         post.save()
 
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("all_posts"))
     
 
 @login_required 

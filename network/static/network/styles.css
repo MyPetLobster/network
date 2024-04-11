@@ -29,15 +29,8 @@ h1 {
 }
 
 
-.card-title {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-.handle-link {
-    font-size: 0.8em;
-}
+
+
 
 
 
@@ -132,8 +125,15 @@ h1 {
 }
 
 .card-title {
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: bold;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.handle-link {
+    font-size: 0.8em;
 }
 .post-content,
 .post-likes,
@@ -171,11 +171,11 @@ textarea:focus {
 
 
 #faded-background {
-    position: absolute;
+    height: 100%;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
     background-color: rgba(16, 43, 51, 0.846);
     z-index: 999;
 }
@@ -205,12 +205,15 @@ textarea:focus {
 }
 #edit-profile-form, 
 .edit-post-form {
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 50vh;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     z-index: 9999;
     min-width: 600px;
+}
+#edit-profile-form {
+    transform: translate(-50%, -50%);
 }
 #edit-profile-form .form-group {
     width: 100%;
