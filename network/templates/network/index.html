@@ -80,52 +80,5 @@
             </ul>
         </nav>
     </div>
-    
-    <script>
-
-        heartIcons = document.querySelectorAll('.heart-icon');
-        heartIcons.forEach(icon => {
-            icon.addEventListener('click', () => {
-                const postId = icon.id.split('-')[2];
-                const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-                fetch(`like_post/${postId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'X-CSRFToken': csrf_token,
-                    }
-                })
-                .then(response => response.json())
-                .then(result => {
-                    console.log(result);
-                    const likesDiv = icon.parentElement;
-                    const likesCount = likesDiv.querySelector('.card-text');
-                    likesCount.textContent = `${result.likes} people/bots liked this post`;
-                    if (result.liked) {
-                        console.log('liked');
-                        const emptyHeart = document.querySelector(`#empty-heart-path-${postId}`)
-                        const redHeart = document.querySelector(`#red-heart-path-${postId}`)
-                        if (emptyHeart) {
-                            emptyHeart.style.fill = '#F94056';
-                        } else {
-                            redHeart.style.fill = '#F94056';
-                        }
-                    } else {
-                        console.log('unliked');
-                        const redHeart = document.querySelector(`#red-heart-path-${postId}`)
-                        const emptyHeart = document.querySelector(`#empty-heart-path-${postId}`)
-                        if (redHeart) {
-                            redHeart.style.fill = '#ffffff';
-                        } else {
-                            emptyHeart.style.fill = '#ffffff';
-                        }
-                        
-                    }
-                });
-            });
-        });
-
-        
-
-    </script>
 
 {% endblock %}
