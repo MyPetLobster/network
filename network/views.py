@@ -114,6 +114,24 @@ def profile(request, user_id):
     })
 
 
+@login_required
+def edit_profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if request.method == "POST":
+        user.first_name = request.POST.get("edit-first-name", "")
+        user.last_name = request.POST.get("edit-last-name", "")
+        user.email = request.POST.get("edit-email", "")
+        user.username = request.POST.get("edit-username", "")
+        user.save()
+
+        return JsonResponse({
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'username': user.username
+        })
+        
+
 
 @login_required
 def following(request):

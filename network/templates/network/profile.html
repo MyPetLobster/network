@@ -7,7 +7,7 @@
 
 
 <div class="top-content-div">
-    <h1>{{ profile_user.username }}'s Profile</h1>
+    <h1 id="h1-name">{{ profile_user.username }}'s Profile</h1>
     <div class="follow-div">
         {% if profile_user != user %}
             {% if profile_user in user.following.all %} 
@@ -24,15 +24,16 @@
         {% endif %}
     </div>
     <div id="profile-info-div">
-        <p class="info-text">Name: {{ user.first_name }} {{ user.last_name }}</p>
-        <p class="info-text">Email: {{ user.email }}</p>
-        <p class="info-text">Username: {{ user.username }}</p>
+        <p id="profile-name" class="info-text">Name: {{ user.first_name }} {{ user.last_name }}</p>
+        <p id="profile-email" class="info-text">Email: {{ user.email }}</p>
+        <p id="profile-username" class="info-text">Username: {{ user.username }}</p>
     </div>
         <p class="info-text">Followers → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
         <p class="info-text">{{ profile_user.following.count }} ← Following</p>
     
 </div>
 
+<div id="profile-id" class="hidden">{{ user.id }}</div>
 <form id="edit-profile-form" class="hidden">
     {% csrf_token %}
     <div class="form-group">
@@ -67,11 +68,15 @@
                 <div class="card-top-div">
                     <h5 class="card-title">
                         {% if post.user.first_name %}
-                            {{ post.user.first_name }} {{ post.user.last_name }}&nbsp;→&nbsp;
+                            <div class="card-full-name">
+                                {{ post.user.first_name }}.{{ post.user.last_name }}&nbsp;→
+                            </div>
                         {% else %}
-                            {{ post.user.username }}&nbsp;→&nbsp;
+                            <div class="card-username">
+                                {{ post.user.username }}&nbsp;→&nbsp;
+                            </div>
                         {% endif %}
-                        <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
+                        <a class="handle-link" href="{% url 'profile' post.user.id %}">&nbsp;@{{ post.user }}</a>
                     </h5>
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                 </div>
@@ -147,27 +152,6 @@
         </ul>
     </nav>
 </div>
-
-<script>
-    const editProfileLink = document.querySelector("#edit-profile");
-    const editProfileForm = document.querySelector("#edit-profile-form");
-    const fadedBackground = document.querySelector("#faded-background");
-
-    editProfileLink.addEventListener("click", () => {
-        editProfileForm.classList.toggle("hidden");
-        fadedBackground.classList.toggle("hidden");
-        if (!fadedBackground.classList.contains("hidden")) {
-            fadedBackground.addEventListener("click", () => {
-                editProfileForm.classList.add("hidden");
-                fadedBackground.classList.add("hidden");
-            });
-        }
-        editProfileForm.querySelector("#edit-prof-cancel-btn").addEventListener("click", () => {
-            editProfileForm.classList.add("hidden");
-            fadedBackground.classList.add("hidden");
-        });
-    });
-</script>
 
 
 {% endblock %}
