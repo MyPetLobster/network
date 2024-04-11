@@ -17,13 +17,13 @@ body {
 
 .small-grey-text {
     font-size: 0.8em;
-    color: rgb(119, 112, 112);
+    color: rgb(68, 66, 66);
 }
 
 
 .likes-div {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     gap: 8px;
 }
 
@@ -60,3 +60,23 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+
+
+/* POSTS */
+
+.card-title {
+    font-size: 1em;
+    font-weight: bold;
+}
+.post-content,
+.post-likes,
+.edit-post-link {
+    font-size: 0.8em;
+}
+
+.post-timestamp {
+    font-size: 0.7em;
+    color: rgb(119, 112, 112);
+}
+
