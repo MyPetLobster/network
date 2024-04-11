@@ -15,6 +15,14 @@ body {
     justify-content: space-between;
 }
 
+
+
+.btn-box {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+}
 .small-grey-text {
     font-size: 0.8em;
     color: rgb(68, 66, 66);
@@ -64,6 +72,17 @@ body {
 
 
 /* POSTS */
+.all-posts {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.card-body {
+    width: 600px;
+}
 
 .card-title {
     font-size: 1em;
@@ -80,3 +99,53 @@ body {
     color: rgb(119, 112, 112);
 }
 
+
+
+
+#faded-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(16, 43, 51, 0.846);
+    z-index: 999;
+
+}
+
+#edit-profile-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    width: 400px;
+}
+#edit-profile-form .form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: rgb(209, 202, 202)
+}
+#edit-prof-save-btn,
+#edit-prof-cancel-btn {
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(209, 202, 202);
+    color: black;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+#edit-prof-save-btn:hover {
+    background-color: rgb(99, 157, 174);
+    color: white;
+}
+#edit-prof-cancel-btn:hover {
+    background-color: rgb(178, 67, 44);
+    color: white;
+}

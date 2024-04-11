@@ -20,7 +20,35 @@
     </div>
     <p class="info-text">Followers: <span id="followers-count">{{ profile_user.followers.count }}</span></p>
     <p class="info-text">Following: {{ profile_user.following.count }}</p>
+    <a id="edit-profile" href="#">Edit Your Info</a>
 </div>
+<div id="faded-background" class="hidden"></div>
+<form id="edit-profile-form" class="hidden">
+    {% csrf_token %}
+    <div class="form-group">
+        <div>
+            <label for="edit-first-name">First Name</label>
+            <input type="text" class="form-control" id="edit-first-name" name="edit-first-name" value="{{ profile_user.first_name }}">
+        </div>
+        <div>
+            <label for="edit-last-name">Last Name</label>
+            <input type="text" class="form-control" id="edit-last-name" name="edit-last-name" value="{{ profile_user.last_name }}">
+        </div>
+        <div>
+            <label for="edit-email">Email</label>
+            <input type="email" class="form-control" id="edit-email" name="edit-email" value="{{ profile_user.email }}">
+        </div>
+        <div>
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="edit-username" name="edit-username" value="{{ profile_user.username }}">
+        </div>
+    </div>
+    <div class="btn-box">
+        <button id="edit-prof-save-btn" type="submit" class="btn btn-primary">Save</button>
+        <button id="edit-prof-cancel-btn" type="button" class="cancel-edit btn btn-secondary">Cancel</button>
+    </div>
+
+</form>
 
 <div class="all-posts">
     {% for post in user_posts %}
@@ -93,7 +121,27 @@
         </nav>
 </div>
 
+<script>
+    const editProfileLink = document.querySelector("#edit-profile");
+    const editProfileForm = document.querySelector("#edit-profile-form");
+    const fadedBackground = document.querySelector("#faded-background");
 
+    editProfileLink.addEventListener("click", () => {
+        editProfileForm.classList.toggle("hidden");
+        fadedBackground.classList.toggle("hidden");
+        if (!fadedBackground.classList.contains("hidden")) {
+            fadedBackground.addEventListener("click", () => {
+                editProfileForm.classList.add("hidden");
+                fadedBackground.classList.add("hidden");
+            });
+        }
+
+        editProfileForm.querySelector(".cancel-edit").addEventListener("click", () => {
+            editProfileForm.classList.add("hidden");
+            fadedBackground.classList.add("hidden");
+        });
+    });
+</script>
 
 
 {% endblock %}
