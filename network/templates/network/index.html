@@ -3,95 +3,104 @@
 {% load custom_filters %}
 
 {% block body %}
-    <h1>All Posts</h1>
-    
-    {% if user.is_authenticated %}
-        <form action="{% url 'create_post' %}" method="post">
-            {% csrf_token %}
-            <textarea name="post-content" class="form-control" placeholder="New Post" id="post-content"></textarea>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    {% endif %}
+<h1>All Posts</h1>
 
-    <br>
-    
-    <div class="all-posts">
-        {% for post in posts %}
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-top-div">
-                        <h5 class="card-title">{{ post.user }}</h5>
-                        <span class="card-text post-timestamp">{{ post.timestamp }}</span>
-                    </div>
-                    <p class="card-text post-content" id="post-content-{{ post.id }}">{{ post.content }}</p>
-                    <div class="likes-div">
-                        {% if user.is_authenticated %}
-                            {% if user in post.likes.all %}
-                                <svg id="red-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="red-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#F94056"/>
-                                    <path d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            {% else %}
-                                <svg id="empty-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="empty-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#ffffff"/>
-                                    <path class="outline" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            {% endif %}
+{% if user.is_authenticated %}
+    <form action="{% url 'create_post' %}" method="post">
+        {% csrf_token %}
+        <textarea name="post-content" class="form-control" placeholder="New Post" id="post-content"></textarea>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endif %}
+
+<br>
+
+<div class="all-posts">
+    {% for post in posts %}
+        <div class="card">
+            <div class="card-body">
+                <div class="card-top-div">
+                    <h5 class="card-title">
+                        {% if post.user.first_name %}
+                            {{ post.user.first_name }} {{ post.user.last_name }}&nbsp;→&nbsp;
+                        {% else %}
+                            {{ post.user.username }}&nbsp;→&nbsp;
                         {% endif %}
-                        <div class="card-bottom-div">
-                            <div class="card-text">
-                                {{ post.likes.count }} 
-                                {% if post.likes.count == 1 %}
-                                    <span class="small-grey-text">person/bot liked this post</span>
-                                {% else %}
-                                    <span class="small-grey-text">people/bots liked this post</span>
-                                {% endif %}
-                            </div>
-                            <div>
-                            {% if user == post.user %}
-                                <a class="edit-post-link" href="#">Edit</a>
-                                <form class="edit-post-form hidden">
-                                    {% csrf_token %}
-                                    <div class="post-id hidden">{{ post.id }}</div>
-                                    <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
-                                    <div class="btn-box">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                        <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
-                                    </div>
-                                </form>
+                        <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
+                    </h5>
+                    <span class="card-text post-timestamp">{{ post.timestamp }}</span>
+                </div>
+                <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ post.content }}</p>
+                <div class="likes-div">
+                    {% if user.is_authenticated %}
+                        {% if user in post.likes.all %}
+                            <svg id="red-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="red-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#F94056"/>
+                                <path d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {% else %}
+                            <svg id="empty-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="empty-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#ffffff"/>
+                                <path class="outline" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {% endif %}
+                    {% endif %}
+                    <div class="card-bottom-div">
+                        <div class="card-text small-grey-text">
+                            {{ post.likes.count }} 
+                            {% if post.likes.count == 1 %}
+                                person/bot liked this post
+                            {% else %}
+                                people/bots liked this post
                             {% endif %}
-                            </div>
+                        </div>
+                        <div>
+                        {% if user == post.user %}
+                            <a class="edit-post-link" href="#">Edit</a>
+                            <form class="edit-post-form hidden">
+                                {% csrf_token %}
+                                <div class="post-id hidden">{{ post.id }}</div>
+                                <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
+                                <div class="btn-box">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
+                                </div>
+                            </form>
+                        {% else %}
+                            <a class="report-post-link" href="#">Report</a>
+                        {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            <br>
-        {% endfor %}
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                {% if posts.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
-                    </li>
-                {% endif %}
-                
-                {% for page in posts.number|get_range:posts.paginator.num_pages %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
-                {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
+                </li>
+            {% endif %}
+            
+            {% for page in posts.number|get_range:posts.paginator.num_pages %}
+                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
 
-                {% if posts.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+            {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">&rsaquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
 
 {% endblock %}

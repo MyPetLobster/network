@@ -10,7 +10,9 @@ body {
     width: 100%;
     font-family: 'Cultive Mono', monospace;
 }
-
+h1 {
+    margin: 24px 0;
+}
 
 .navbar {
     display: flex;
@@ -23,7 +25,19 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 24px;
 }
+
+
+.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.handle-link {
+    font-size: 0.8em;
+}
+
 
 
 
@@ -34,8 +48,10 @@ body {
     justify-content: center;
 }
 .small-grey-text {
-    font-size: 0.8em;
-    color: rgb(68, 66, 66);
+    position: relative;
+    top: 4px;
+    font-size: 0.7em;
+    color: rgb(113, 111, 111);
 }
 
 
@@ -103,7 +119,8 @@ body {
 }
 .post-content,
 .post-likes,
-.edit-post-link {
+.edit-post-link,
+.report-post-link {
     font-size: 0.8em;
 }
 
@@ -143,10 +160,11 @@ body {
     height: 100vh;
     background-color: rgba(16, 43, 51, 0.846);
     z-index: 999;
-
 }
 
-
+.tab-fwd {
+    font-size: 1.3em;
+}
 
 
 /* PROFILE */
@@ -203,4 +221,11 @@ body {
 .cancel-btn:hover {
     background-color: rgb(178, 67, 44);
     color: white;
+}
+
+#profile-info-div {
+    margin-bottom: 16px;    
+}
+.info-text {
+    font-size: 0.9em;
 }

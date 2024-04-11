@@ -23,8 +23,14 @@
             
         {% endif %}
     </div>
-    <p class="info-text">Followers → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
-    <p class="info-text">{{ profile_user.following.count }} ← Following</p>
+    <div id="profile-info-div">
+        <p class="info-text">Name: {{ user.first_name }} {{ user.last_name }}</p>
+        <p class="info-text">Email: {{ user.email }}</p>
+        <p class="info-text">Username: {{ user.username }}</p>
+    </div>
+        <p class="info-text">Followers → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
+        <p class="info-text">{{ profile_user.following.count }} ← Following</p>
+    
 </div>
 
 <form id="edit-profile-form" class="hidden">
@@ -59,10 +65,17 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-top-div">
-                    <h5 class="card-title">{{ post.user }}</h5>
+                    <h5 class="card-title">
+                        {% if post.user.first_name %}
+                            {{ post.user.first_name }} {{ post.user.last_name }}&nbsp;→&nbsp;
+                        {% else %}
+                            {{ post.user.username }}&nbsp;→&nbsp;
+                        {% endif %}
+                        <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
+                    </h5>
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                 </div>
-                <p class="card-text post-content" id="post-content-{{ post.id }}">{{ post.content }}</p>
+                <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ post.content }}</p>
                 <div class="likes-div">
                     {% if user.is_authenticated %}
                         {% if user in post.likes.all %}
@@ -78,12 +91,12 @@
                         {% endif %}
                     {% endif %}
                     <div class="card-bottom-div">
-                        <div class="card-text">
+                        <div class="card-text small-grey-text">
                             {{ post.likes.count }} 
                             {% if post.likes.count == 1 %}
-                                <span class="small-grey-text">person/bot liked this post</span>
+                                person/bot liked this post
                             {% else %}
-                                <span class="small-grey-text">people/bots liked this post</span>
+                                people/bots liked this post
                             {% endif %}
                         </div>
                         <div>
@@ -98,6 +111,8 @@
                                     <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
                                 </div>
                             </form>
+                        {% else %}
+                            <a class="report-post-link" href="#">Report</a>
                         {% endif %}
                         </div>
                     </div>

@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 likesCount.textContent = `${result.likes}`;
                 const textSpan = document.createElement('span');
                 textSpan.textContent = result.likes === 1 ? ' person/bot liked this post' : ' people/bots liked this post';
-                textSpan.classList.add('small-grey-text');
                 likesCount.appendChild(textSpan);
                 if (result.liked) {
                     console.log('liked');
