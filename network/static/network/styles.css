@@ -16,7 +16,7 @@ a:hover {
 }
 
 body {
-    color: rgb(78, 80, 82);
+    color: rgb(87, 94, 98);
     width: 100%;
     font-family: 'Cultive Mono', monospace;
 }
@@ -42,41 +42,56 @@ h1 {
 
 
 .navbar {
-    padding: 6px 16px;
+    padding: 0px 16px;
     background-color: rgb(255, 255, 255) !important;
-    transition-duration: 500ms;
+    transition-duration: 600ms;
+    height: 54px;
 }
+
+.navbar-nav {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+
 .navbar:hover {
-    background-color: rgb(220, 216, 216) !important;
+    background-color: rgb(222, 222, 222) !important;
+    height: 54px;
 }
 .nav-link {
     font-size: 0.9em;
     color: white !important;
-    transition-duration: 500ms;
+    transition-duration: 600ms;
 }
 #profile-link {
     margin-left: 36px;
 }
 .navbar:hover .nav-link:hover {
     color: rgb(36,94,122) !important;
-    transition-duration: 250ms !important;
 }
 .navbar:hover .nav-link:active {
     color: rgb(16, 55, 74) !important;
     font-weight: bold;
-    transition-duration: 150ms !important;
 }
-
-
 .hero-div {
-    position: relative;
-    bottom: 3px;
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition-duration: 600ms;
+}
+.navbar:hover .hero-div {
+    top: 0px;
+    left: 16px;
+    transform: none;
 }
 .navbar-brand {
     padding: 0;
     position: relative;
-    top: 4px;
-    font-size: 1.5em;
+    top: 6px;
+    right: 8px;
+    font-size: 1.8em;
     font-weight: bold;
     font-family: "M PLUS 1 Code", monospace;
     color: rgb(36,94,122) !important;
@@ -178,7 +193,7 @@ h1 {
     transition-duration: 500ms;
 }
 .card:hover {
-    background-color: rgb(241, 239, 239);
+    background-color: rgb(243, 243, 243);;
     border: 1px solid rgb(161,180,46);
     box-shadow: 0 0 10px rgba(33, 38, 4, 0.559);
 }
@@ -264,7 +279,7 @@ textarea:focus {
     margin-bottom: 24px;
 }
 #hey-thats-you-div {
-    color: rgb(68, 66, 66);
+    color: rgb(36,94,122);
     margin-bottom: 48px;
 }
 #hey-thats-you {
@@ -301,7 +316,7 @@ textarea:focus {
     width: 100px;
     padding: 5px;
     border-radius: 5px;
-    background-color: rgb(209, 202, 202);
+    background-color: rgb(222, 222, 222);
     color: black;
     border: none !important;
     outline: none !important;
@@ -338,4 +353,17 @@ textarea:focus {
 }
 .info-text {
     font-size: 0.9em;
+}
+
+
+
+/* FOLLOW PAGES */
+
+.follow-page-div {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
 }

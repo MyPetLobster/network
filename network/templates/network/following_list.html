@@ -1,0 +1,17 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div class="follow-page-div">
+        <h2>Following</h2>
+        <div class="follow-list">
+            {% if following.count == 0 %}
+                <p>go one...get out there, make some friends!</p>
+            {% else %}
+                {% for follower in following %}
+                    <div class="follow-item">
+                        <a href="{% url 'profile' follower.id %}">@{{ follower }}</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+    </div>
+{% endblock %}

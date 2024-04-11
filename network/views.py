@@ -170,3 +170,19 @@ def like_post(request, post_id):
         })
 
 
+@login_required
+def follower_list(request, user_id):
+    user = User.objects.get(pk=user_id)
+    followers = user.followers.all()
+    return render(request, "network/follower_list.html", {
+        "followers": followers
+    })
+
+
+@login_required
+def following_list(request, user_id):
+    user = User.objects.get(pk=user_id)
+    following = user.following.all()
+    return render(request, "network/following_list.html", {
+        "following": following
+    })
