@@ -218,8 +218,14 @@ h1 {
     color: rgb(36,94,122);
 }
 #landing-subtitle {
-    font-size: 0.7em;
-    color: rgb(161,180,46);
+    font-size: 0.8em;
+    background: -webkit-linear-gradient(left, rgb(161,180,46) , rgb(36,94,122));
+    background: -o-linear-gradient(right, rgb(161,180,46), rgb(36,94,122));
+    background: -moz-linear-gradient(right, rgb(161,180,46), rgb(36,94,122));
+    background: linear-gradient(to right, rgb(161,180,46) , rgb(36,94,122)); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .landing-content {
     position: absolute;
