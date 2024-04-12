@@ -5,8 +5,13 @@ a {
 
 }
 a:hover {
+    font-size: 1em;
     color: rgb(161,180,46);
     text-decoration: none;
+}
+
+.follow-count-text:hover {
+    font-weight: bold;
 }
 
 
@@ -328,6 +333,16 @@ textarea:focus {
 
 
 /* PROFILE */
+#unfollow-button:hover {
+    background-color: rgb(178, 67, 44) !important;
+}
+#unfollow-button:active {
+    background-color: rgb(127, 41, 24) !important;
+    transform: scale(0.95) !important;
+    box-shadow: 0 0 4px rgba(33, 38, 4, 0.559) !important;
+    outline: none !important;
+    border: none !important;
+}
 .follow-div {
     display: flex;
     gap: 10px;
@@ -344,6 +359,9 @@ textarea:focus {
 
 #edit-profile {
     font-size: 0.8em;
+}
+#edit-profile:hover {
+    font-size: 0.9em;
 }
 #edit-profile-form, 
 .edit-post-form {

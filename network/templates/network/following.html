@@ -6,6 +6,9 @@
 <div class="top-content-div">
     <h1>#following</h1>
 </div>
+<form class="hidden">
+    {% csrf_token %}
+</form>
 <div class="all-posts">
     {% for post in followed_posts %}
         <div class="card">
