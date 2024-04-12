@@ -15,6 +15,12 @@ a:hover {
 }
 
 
+.top-12 {
+    margin-top: 12px;
+}
+
+
+
 #expand-top-pagination,
 #collapse-top-pagination {
     cursor: pointer;

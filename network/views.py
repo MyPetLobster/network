@@ -190,3 +190,14 @@ def following_list(request, user_id):
         "user": user,
         "current_user": request.user,
     })
+
+
+@login_required
+def post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if request.method == "DELETE":
+        post.delete()
+        return JsonResponse({"message": "Post deleted."})
+    return render(request, "network/post.html", {
+        "post": post
+    })

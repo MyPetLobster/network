@@ -9,11 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
             editPostForm.classList.toggle('hidden');
             editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
                 editPostForm.classList.add('hidden');
-                fadedBackground.classList.toggle('hidden');
+                fadedBackground.classList.add('hidden');
             });
 
             editPostContent = editPostForm.querySelector('.edit-post-content');
             editPostContent.focus();
+
+            // if user clicks anywhere outside of form, hide form and fadedBG
+            fadedBackground.addEventListener('click', () => {
+                editPostForm.classList.add('hidden');
+                fadedBackground.classList.add('hidden');
+            });
+
             editPostForm.onsubmit = (event) => {
                 event.preventDefault(); 
                 // Retrieve the CSRF token from Django hidden input field
@@ -40,6 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     fadedBackground.classList.toggle('hidden');
                 });
             };
+        });
+    });
+
+    const deletePostButtons = document.querySelectorAll('.delete-post-btn');
+    deletePostButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const postId = button.parentElement.parentElement.querySelector('.post-id').textContent;
+            const post = button.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+            const response = await fetch(`/post/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            });
+            if (response.ok) {
+                post.remove();
+                fadedBackground.classList.add('hidden');
+            }
         });
     });
 
@@ -178,50 +203,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const topPagination = document.getElementById('top-pagination');
     const collapseTopPagination = document.getElementById('collapse-top-pagination');
 
-    collapseTopPagination.addEventListener('mouseover', () => {
-        topPagination.style.transitionDuration = '3s';
-        topPagination.style.transform = 'scale(0.25)';
-    });
-    collapseTopPagination.addEventListener('mouseout', () => {
-        topPagination.style.transform = 'scale(1)';
-    });
+    if (topPagination) {
+        collapseTopPagination.addEventListener('mouseover', () => {
+            topPagination.style.transitionDuration = '3s';
+            topPagination.style.transform = 'scale(0.25)';
+        });
+        collapseTopPagination.addEventListener('mouseout', () => {
+            topPagination.style.transform = 'scale(1)';
+        });
 
-    expandTopPagination.addEventListener('mouseover', () => {
-        expandTopPagination.style.transitionDuration = '4s';
-        expandTopPagination.style.width = '64px';
-    });
-    expandTopPagination.addEventListener('mouseout', () => {
-        expandTopPagination.style.width = '32px';
-    });
+        expandTopPagination.addEventListener('mouseover', () => {
+            expandTopPagination.style.transitionDuration = '4s';
+            expandTopPagination.style.width = '64px';
+        });
+        expandTopPagination.addEventListener('mouseout', () => {
+            expandTopPagination.style.width = '32px';
+        });
 
-    if (sessionStorage.getItem('topPagination') === 'expanded') {
-        expandTopPagination.classList.add('hidden');
-        topPagination.classList.remove('hidden');
-        collapseTopPagination.classList.remove('hidden');
-        collapseTopPagination.addEventListener('click', () => {
-            sessionStorage.setItem('topPagination', 'collapsed')
+        if (sessionStorage.getItem('topPagination') === 'expanded') {
+            expandTopPagination.classList.add('hidden');
+            topPagination.classList.remove('hidden');
+            collapseTopPagination.classList.remove('hidden');
+            collapseTopPagination.addEventListener('click', () => {
+                sessionStorage.setItem('topPagination', 'collapsed')
+                expandTopPagination.classList.remove('hidden');
+                topPagination.classList.add('hidden');
+                collapseTopPagination.classList.add('hidden');
+            });
+        } else {
             expandTopPagination.classList.remove('hidden');
             topPagination.classList.add('hidden');
             collapseTopPagination.classList.add('hidden');
+        }
+
+        expandTopPagination.addEventListener('click', () => {
+            sessionStorage.setItem('topPagination', 'expanded')
+            expandTopPagination.classList.add('hidden');
+            topPagination.classList.remove('hidden');
+            collapseTopPagination.classList.remove('hidden');
+            collapseTopPagination.addEventListener('click', () => {
+                sessionStorage.setItem('topPagination', 'collapsed')
+                expandTopPagination.classList.remove('hidden');
+                topPagination.classList.add('hidden');
+                collapseTopPagination.classList.add('hidden');
+            });
         });
-    } else {
-        expandTopPagination.classList.remove('hidden');
-        topPagination.classList.add('hidden');
-        collapseTopPagination.classList.add('hidden');
     }
-
-    expandTopPagination.addEventListener('click', () => {
-        sessionStorage.setItem('topPagination', 'expanded')
-        expandTopPagination.classList.add('hidden');
-        topPagination.classList.remove('hidden');
-        collapseTopPagination.classList.remove('hidden');
-        collapseTopPagination.addEventListener('click', () => {
-            sessionStorage.setItem('topPagination', 'collapsed')
-            expandTopPagination.classList.remove('hidden');
-            topPagination.classList.add('hidden');
-            collapseTopPagination.classList.add('hidden');
-        });
-    });
 
     const handleLinks = document.querySelectorAll('.handle-link');
     handleLinks.forEach(link => {
