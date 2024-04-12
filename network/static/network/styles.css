@@ -301,7 +301,7 @@ h1 {
 .handle-link {
     font-size: 0.7em;
 }
-.post-content,
+
 .post-likes,
 .edit-post-link,
 .report-post-link {
@@ -325,7 +325,9 @@ h1 {
     margin-bottom: 10px;
 }
 
+#post-content,
 .edit-textarea {
+    min-height: 100px;
     font-size: 0.8em;
     margin-bottom: 10px;
 }
