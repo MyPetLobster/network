@@ -60,7 +60,9 @@
     {% for post in posts %}
         <div class="card">
             <div class="card-body">
+                <div class="post-id-div hidden">{{ post.id }}</div>
                 <div class="card-top-div">
+                    <div class="northwest-arrow">&#8689;</div>
                     <h5 class="card-title">
                         <span>
                         {% if post.user.first_name %}
@@ -73,7 +75,16 @@
                     </h5>
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                 </div>
-                <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ post.content }}</p>
+                <p class="card-text post-content" id="post-content-{{ post.id }}">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    {% if post.reply_to %}
+                    <span class="tab-fwd">&#8618; <a href="{% url 'profile' post.reply_to.user.id %}"class="reply-to-link">@{{ post.reply_to.user.username }}</a></span>
+                    {{ post.content }}
+                    {% else %}
+                    <span class="tab-fwd">&#8674;</span>
+                    {{ post.content }}
+                    {% endif %} 
+                </p>
                 <div class="likes-div">
                     {% if user.is_authenticated %}
                         {% if user in post.likes.all %}
@@ -178,6 +189,10 @@
             fadedBackground.classList.add('hidden');
         });
     });
+
+
+
+    
 </script>
 
 {% endblock %}

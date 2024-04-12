@@ -262,6 +262,19 @@ document.addEventListener('DOMContentLoaded', () => {
             link.previousElementSibling.style.fontSize = '1em';
         })
     })
+
+
+    const cardBodies = document.querySelectorAll('.card-body');
+    // if user clicks on card body, open corresponding post page "post/<int:post_id>"
+    cardBodies.forEach(cardBody => {
+        const northwestArrow = cardBody.querySelector('.northwest-arrow');
+        if (northwestArrow) {
+            northwestArrow.addEventListener('click', () => {
+                const postId = cardBody.querySelector('.post-id-div').textContent;
+                window.location.href = `/post/${postId}`;
+            });
+        }
+    });
 });
 
 

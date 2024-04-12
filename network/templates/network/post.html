@@ -7,6 +7,9 @@
     <form class="hidden">
         {% csrf_token %}
     </form>
+    <div id="post-page-back-div">
+        <span id="back-arrow">&#8678; </span>
+    </div>
     <div id="main-post" class="card">
         <div class="card-body">
             <div class="card-top-div">
@@ -179,8 +182,10 @@
     }
     // Set the height of the post-replies-div to the height of the first reply card
     let firstReply = document.querySelector("#post-replies-div .card");
-    let firstReplyHeight = firstReply.offsetHeight;
-    document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+    if (firstReply) {
+        let firstReplyHeight = firstReply.offsetHeight;
+        document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+    }
 
     // Set the height of the main-post div to the height of the main post card
     let mainPost = document.querySelector("#main-post");
@@ -207,7 +212,12 @@
     });
 
 
-    
+    const backArrow = document.querySelector("#back-arrow");
+
+
+    backArrow.addEventListener("click", () => {
+        window.history.back();
+    });
 
 </script>
 

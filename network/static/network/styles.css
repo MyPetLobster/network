@@ -587,3 +587,44 @@ textarea:focus {
     position: fixed;
     z-index: 9999;
 }
+
+
+
+.reply-to-link {
+    font-size: 0.7em;
+    color: rgb(150, 158, 162);
+    transition-duration: 250ms;
+    cursor: pointer;
+}
+.reply-to-link:hover {
+    font-size: 0.8em;
+    color: rgb(161,180,46) !important;
+}
+
+
+.northwest-arrow {
+    font-size: 1.2em;
+    position: relative;
+    color: rgb(193, 193, 193);
+    bottom: 22px;
+    right: 12px;
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+.northwest-arrow:hover {
+    font-size: 1.3em;
+    color: rgb(16, 55, 74);
+}
+
+
+#back-arrow {
+    color: rgb(193, 193, 193);
+    font-size: 3.5em;
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+#back-arrow:hover {
+    color: rgb(16, 55, 74);
+    font-size: 3.8em;
+    transition-duration: 250ms;
+}

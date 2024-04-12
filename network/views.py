@@ -22,7 +22,6 @@ def index(request):
     posts = p.get_page(page_number)
     return render(request, "network/index.html", {
         "posts": posts,
-        "page_number": page_number
     })
 
 
@@ -201,6 +200,13 @@ def post(request, post_id):
     
     post_replies = Post.objects.filter(reply_to=post)
     post_reply_count = post_replies.count()
+
+    if post.reply_to:
+        return render(request, "network/post.html", {
+            "og_post": post.reply_to,
+            "post_replies": Post.objects.filter(reply_to=post.reply_to),
+            "post_reply_count": Post.objects.filter(reply_to=post.reply_to).count()
+        })
 
     return render(request, "network/post.html", {
         "og_post": post,
