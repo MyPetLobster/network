@@ -367,6 +367,16 @@ textarea:focus {
     background-color: rgba(16, 43, 51, 0.846);
     z-index: 999;
 }
+#faded-background-light {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: rgba(7, 7, 7, 0.579);
+    z-index: 999;
+
+}
 
 .tab-fwd {
     font-size: 1.3em;
@@ -536,4 +546,44 @@ textarea:focus {
 #follow-back-icon:hover path {
     transition-duration: 250ms;
     fill: rgb(161,180,46);
+}
+
+
+
+/* POST PAGE */
+.post-page-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding-top: 72px;
+}
+
+#post-replies-div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+
+}
+
+#main-post {
+    z-index: 999;
+}
+
+.card-short .card-body {
+    height: 120px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.7em;
+}
+
+.card-full {
+    width: 700px;
+    border: 1px solid rgb(161,180,46);
+    position: fixed;
+    z-index: 9999;
 }

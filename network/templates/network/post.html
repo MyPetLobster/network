@@ -1,0 +1,215 @@
+{% extends "network/layout.html" %}
+
+
+
+{% block body %}
+<div class="post-page-div">
+    <form class="hidden">
+        {% csrf_token %}
+    </form>
+    <div id="main-post" class="card">
+        <div class="card-body">
+            <div class="card-top-div">
+                <h5 class="card-title">
+                    <span>
+                    {% if og_post.user.first_name %}
+                        {{ og_post.user.first_name }}.{{ og_post.user.last_name }}
+                    {% else %}
+                        {{ og_post.user.username }}
+                    {% endif %}
+                    </span>&nbsp;→&nbsp;
+                    <a class="handle-link" href="{% url 'profile' og_post.user.id %}">@{{ og_post.user }}</a>
+                </h5>
+                <span class="card-text post-timestamp">{{ og_post.timestamp }}</span>
+            </div>
+            <p class="card-text post-content" id="post-content-{{ og_post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ og_post.content }}</p>
+            <div class="likes-div">
+                {% if user.is_authenticated %}
+                    {% if user in og_post.likes.all %}
+                        <svg id="red-heart-{{ og_post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="red-heart-path-{{ og_post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#F94056"/>
+                            <path d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="rgb(87, 94, 98)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {% else %}
+                        <svg id="empty-heart-{{ og_post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="empty-heart-path-{{ og_post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#ffffff"/>
+                            <path class="outline" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="rgb(87, 94, 98)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {% endif %}
+                {% endif %}
+                <div class="card-bottom-div">
+                    <div class="card-text small-grey-text">
+                        {{ og_post.likes.count }} 
+                        {% if og_post.likes.count == 1 %}
+                            person/bot liked this post
+                        {% else %}
+                            people/bots liked this post
+                        {% endif %}
+                    </div>
+                    <div>
+                    {% if user == og_post.user %}
+                        <a class="edit-post-link" href="#">Edit</a>
+                        <form class="edit-post-form hidden">
+                            {% csrf_token %}
+                            <div class="post-id hidden">{{ og_post.id }}</div>
+                            <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ og_post.content }}</textarea>
+                            <div class="btn-box">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
+                            </div>
+                            <div class="top-12 btn-box">
+                                <button type="button" class="delete-post-btn cancel-btn btn btn-danger">Delete</button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <a class="report-post-link" href="#">Report</a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% if post_reply_count > 0 %}
+        <div id="post-replies-div">
+            {% for post in post_replies %}
+                <div class="card-short card">
+                    <div class="reply-id hidden">{{ post.id }}</div>
+                    <div class="card-body">
+                        <span>@{{ post.user.username }}</span>
+                        <span>{{ post.timestamp }}</span>
+                    </div>
+                </div>
+                <div id="card-{{ post.id }}" class="card card-full hidden">
+                    <div class="card-body">
+                        <div class="card-top-div">
+                            <h5 class="card-title">
+                                <span>
+                                {% if post.user.first_name %}
+                                    {{ post.user.first_name }}.{{ post.user.last_name }}
+                                {% else %}
+                                    {{ post.user.username }}
+                                {% endif %}
+                                </span>&nbsp;→&nbsp;
+                                <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a> 
+                            </h5>
+                            <span class="card-text post-timestamp">{{ post.timestamp }}</span>
+                        </div>
+                        <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ post.content }}</p>
+                        <div class="likes-div">
+                            {% if user.is_authenticated %}
+                                {% if user in post.likes.all %}
+                                    <svg id="red-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="red-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#F94056"/>
+                                        <path d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="rgb(87, 94, 98)" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    </svg>
+                                {% else %}
+                                    <svg id="empty-heart-{{ post.id }}" class="heart-icon" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="empty-heart-path-{{ post.id }}" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" fill="#ffffff"/>
+                                        <path class="outline" d="M4.3314 12.0474L12 20L19.6686 12.0474C20.5211 11.1633 21 9.96429 21 8.71405C21 6.11055 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12 6.66667L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5.03517 4 3 6.11055 3 8.71405C3 9.96429 3.47892 11.1633 4.3314 12.0474Z" stroke="rgb(87, 94, 98)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                {% endif %}
+                            {% endif %}
+                            <div class="card-bottom-div">
+                                <div class="card-text small-grey-text">
+                                    {{ post.likes.count }} 
+                                    {% if post.likes.count == 1 %}
+                                        person/bot liked this post
+                                    {% else %}
+                                        people/bots liked this post
+                                    {% endif %}
+                                </div>
+                                <div>
+                                {% if user == post.user %}
+                                    <a class="edit-post-link" href="#">Edit</a>
+                                    <form class="edit-post-form hidden">
+                                        {% csrf_token %}
+                                        <div class="post-id hidden">{{ post.id }}</div>
+                                        <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
+                                        <div class="btn-box">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
+                                        </div>
+                                        <div class="top-12 btn
+                                        <button type="button" class="delete-post-btn cancel-btn btn btn-danger">Delete</button>
+                                    </form>
+                                {% else %}
+                                    <a class="report-post-link" href="#">Report</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+<div id="faded-background-light" class="hidden"></div>
+<div id="reply-count" class="hidden">{{ post_reply_count }}</div>
+
+<script>
+    // Move each reply card up by 100 pixels and set each reply's z-index 1 less than the previous reply, starting with z-index=1 for the first reply
+    let replies = document.querySelectorAll("#post-replies-div .card-short");
+    let z = 1;
+    let zPosition = 1;
+    let cardWidth = 575;
+    let replyCount = document.querySelector("#reply-count").textContent;
+    let incrementStep = 25
+
+    if (replyCount < 10) {
+        incrementStep = 25;
+    } else if (replyCount < 20) {
+        incrementStep = 20;
+    } else {
+        incrementStep = 10;
+    }
+
+    for (let reply of replies) {
+        reply.style.top = `-${zPosition * 100}px`;
+        reply.style.zIndex = z;
+        const replyBody = reply.querySelector(".card-body");
+        replyBody.style.width = `${cardWidth}px`;
+
+        cardWidth -= incrementStep;
+        z--;
+        zPosition++;
+    }
+    // Set the height of the post-replies-div to the height of the first reply card
+    let firstReply = document.querySelector("#post-replies-div .card");
+    let firstReplyHeight = firstReply.offsetHeight;
+    document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+
+    // Set the height of the main-post div to the height of the main post card
+    let mainPost = document.querySelector("#main-post");
+    let mainPostHeight = mainPost.offsetHeight;
+    document.querySelector("#main-post").style.height = `${mainPostHeight}px`;
+
+    const fadedBackgroundLight = document.querySelector("#faded-background-light");
+
+    // If user clicks a short-reply card, hide that and display the full reply card
+    replies.forEach((reply) => {
+        reply.addEventListener("click", () => {
+            let replyId = reply.querySelector(".reply-id").textContent;
+            let fullReply = document.querySelector(`#card-${replyId}`);
+            fullReply.classList.remove("hidden");
+            fadedBackgroundLight.classList.remove("hidden");
+            document.querySelector("#post-replies-div").style.height = `${fullReply.offsetHeight}px`;
+            // if user clicks outside of fullReply, hide fullReply and display short-reply
+            fadedBackgroundLight.addEventListener("click", () => {
+                fullReply.classList.add("hidden");
+                fadedBackgroundLight.classList.add("hidden");
+                document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+            });
+        });
+    });
+
+
+    
+
+</script>
+
+
+{% endblock %}

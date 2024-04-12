@@ -14,6 +14,7 @@ class Post(models.Model):
     content = models.TextField()
     likes = models.ManyToManyField("User", related_name="liked_posts")
     timestamp = models.DateTimeField(auto_now_add=True)
+    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="replies")
 
     class Meta:
         ordering = ['-timestamp']

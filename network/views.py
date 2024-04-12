@@ -159,6 +159,9 @@ def edit_post(request, post_id):
 def like_post(request, post_id):
     post = Post.objects.get(pk=post_id)
     user = request.user
+    print("****************************")
+    print(f'User: {user}')
+    print(f'Post: {post}')
     if user in post.likes.all():
         post.likes.remove(user)
     else:
@@ -198,6 +201,12 @@ def post(request, post_id):
     if request.method == "DELETE":
         post.delete()
         return JsonResponse({"message": "Post deleted."})
+    
+    post_replies = Post.objects.filter(reply_to=post)
+    post_reply_count = post_replies.count()
+
     return render(request, "network/post.html", {
-        "post": post
+        "og_post": post,
+        "post_replies": post_replies,
+        "post_reply_count": post_reply_count
     })
