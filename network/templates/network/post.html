@@ -25,7 +25,7 @@
                 </h5>
                 <span class="card-text post-timestamp">{{ og_post.timestamp }}</span>
             </div>
-            <p class="card-text post-content" id="post-content-{{ og_post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ og_post.content }}</p>
+            <p class="card-text post-content" id="post-content-{{ og_post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#8674;</span> {{ og_post.content }}</p>
             <div class="likes-div">
                 {% if user.is_authenticated %}
                     {% if user in og_post.likes.all %}
@@ -86,8 +86,8 @@
                 <div id="card-{{ post.id }}" class="card card-full hidden">
                     <div class="card-body">
                         <div class="post-id-div hidden">{{ post.id }}</div>
-                        <div class="post-icon-div" style="height:16px">
-                            <div class="northwest-arrow">&#8689;</div>
+                        <div class="post-icon-div" style="height:12px">
+                            <div class="northwest-arrow">&nbsp;</div>
                             <div class="close-x">&#10005;</div><div class="close-id hidden">{{ post.id }}</div>
                         </div>
                         <div class="card-top-div">
@@ -103,7 +103,7 @@
                             </h5>
                             <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                         </div>
-                        <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#10511;</span> {{ post.content }}</p>
+                        <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#8618;</span> {{ post.content }}</p>
                         <div class="likes-div">
                             {% if user.is_authenticated %}
                                 {% if user in post.likes.all %}
