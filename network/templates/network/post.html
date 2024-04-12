@@ -85,6 +85,11 @@
                 </div>
                 <div id="card-{{ post.id }}" class="card card-full hidden">
                     <div class="card-body">
+                        <div class="post-id-div hidden">{{ post.id }}</div>
+                        <div class="post-icon-div">
+                            <div class="northwest-arrow">&#8689;</div>
+                            <div class="close-x">&#10005;</div><div class="close-id hidden">{{ post.id }}</div>
+                        </div>
                         <div class="card-top-div">
                             <h5 class="card-title">
                                 <span>
@@ -211,10 +216,18 @@
         });
     });
 
+    const closeXs = document.querySelectorAll(".close-x");
+    closeXs.forEach((closeX) => {
+        closeX.addEventListener("click", () => {
+            let closeId = closeX.nextElementSibling.textContent;
+            let fullReply = document.querySelector(`#card-${closeId}`);
+            fullReply.classList.add("hidden");
+            fadedBackgroundLight.classList.add("hidden");
+            document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+        });
+    });
 
     const backArrow = document.querySelector("#back-arrow");
-
-
     backArrow.addEventListener("click", () => {
         window.history.back();
     });

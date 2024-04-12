@@ -270,7 +270,7 @@ h1 {
 
 /* Index */ 
 #new-post-form {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -281,6 +281,9 @@ h1 {
     gap: 16px;
     justify-content: center;
     align-items: center;
+}
+#new-post-form textarea {
+    min-height: 200px;
 }
 
 /* POSTS */
@@ -416,12 +419,25 @@ textarea:focus {
 }
 #edit-profile-form, 
 .edit-post-form {
+    border: 1px solid rgb(222, 222, 222);
+    border-radius: 12px;
+    background-color: rgba(201, 228, 51, 0.626);
+    padding: 12px;
     position: fixed;
     top: 50vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 9999;
     min-width: 600px;
+}
+.edit-post-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+form label {
+    color: rgb(238, 238, 238);
 }
 #edit-profile-form {
     transform: translate(-50%, -50%);
@@ -580,12 +596,23 @@ textarea:focus {
     align-items: flex-end;
     font-size: 0.7em;
 }
+.card-short {
+    cursor: pointer;
+}
 
 .card-full {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 700px;
     border: 1px solid rgb(161,180,46);
     position: fixed;
     z-index: 9999;
+}
+.card-full .card-body {
+    width: 100%;
 }
 
 
@@ -615,6 +642,19 @@ textarea:focus {
     font-size: 1.3em;
     color: rgb(16, 55, 74);
 }
+.close-x {
+    color: rgb(193, 193, 193);
+    position: relative;
+    bottom: 22px;
+    left: 11px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+.close-x:hover {
+    color: rgb(16, 55, 74);
+    font-size: 1.3em;
+}
 
 
 #back-arrow {
@@ -627,4 +667,12 @@ textarea:focus {
     color: rgb(16, 55, 74);
     font-size: 3.8em;
     transition-duration: 250ms;
+}
+
+
+.post-icon-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
 }
