@@ -19,6 +19,10 @@ a:hover {
 #collapse-top-pagination {
     cursor: pointer;
 }
+#expand-top-pagination {
+    width: 32px;
+    height: 64px;
+}
 #expand-top-pagination:hover .tp-bar {
     transition-duration: 300ms;
     stroke:rgb(161,180,46);
@@ -134,7 +138,7 @@ h1 {
 #profile-link {
     position: relative;
     bottom: 6px;
-    margin-left: 156px;
+    margin-left: 256px;
 }
 .navbar:hover .nav-link:hover {
     color: rgb(36,94,122) !important;
@@ -149,6 +153,7 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
     transition-duration: 600ms;
+    z-index: 998;
 }
 .navbar:hover .hero-div {
     top: 0px;
