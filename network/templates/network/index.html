@@ -60,11 +60,13 @@
             <div class="card-body">
                 <div class="card-top-div">
                     <h5 class="card-title">
+                        <span>
                         {% if post.user.first_name %}
                             {{ post.user.first_name }}.{{ post.user.last_name }}&nbsp;→&nbsp;
                         {% else %}
                             {{ post.user.username }}&nbsp;→&nbsp;
                         {% endif %}
+                        </span>
                         <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
                     </h5>
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
@@ -147,41 +149,6 @@
 </div>
 
 <script>
-    const expandTopPagination = document.getElementById('expand-top-pagination');
-    const topPagination = document.getElementById('top-pagination');
-    const collapseTopPagination = document.getElementById('collapse-top-pagination');
-
-    if (sessionStorage.getItem('topPagination') === 'expanded') {
-        expandTopPagination.classList.add('hidden');
-        topPagination.classList.remove('hidden');
-        collapseTopPagination.classList.remove('hidden');
-        collapseTopPagination.addEventListener('click', () => {
-            sessionStorage.setItem('topPagination', 'collapsed')
-            expandTopPagination.classList.remove('hidden');
-            topPagination.classList.add('hidden');
-            collapseTopPagination.classList.add('hidden');
-        });
-    } else {
-        expandTopPagination.classList.remove('hidden');
-        topPagination.classList.add('hidden');
-        collapseTopPagination.classList.add('hidden');
-    }
-
-    expandTopPagination.addEventListener('click', () => {
-        sessionStorage.setItem('topPagination', 'expanded')
-        expandTopPagination.classList.add('hidden');
-        topPagination.classList.remove('hidden');
-        collapseTopPagination.classList.remove('hidden');
-        collapseTopPagination.addEventListener('click', () => {
-            sessionStorage.setItem('topPagination', 'collapsed')
-            expandTopPagination.classList.remove('hidden');
-            topPagination.classList.add('hidden');
-            collapseTopPagination.classList.add('hidden');
-        });
-    });
-
-
-
     let currentPageNumber = document.getElementById('current_page').textContent;
     let currentPageLinks = document.querySelectorAll('.page-link-' + currentPageNumber);
     currentPageLinks.forEach(link => {

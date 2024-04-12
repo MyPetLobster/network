@@ -175,7 +175,9 @@ def follower_list(request, user_id):
     user = User.objects.get(pk=user_id)
     followers = user.followers.all()
     return render(request, "network/follower_list.html", {
-        "followers": followers
+        "followers": followers,
+        "user": user,
+        "current_user": request.user,
     })
 
 
@@ -184,5 +186,7 @@ def following_list(request, user_id):
     user = User.objects.get(pk=user_id)
     following = user.following.all()
     return render(request, "network/following_list.html", {
-        "following": following
+        "following": following,
+        "user": user,
+        "current_user": request.user,
     })

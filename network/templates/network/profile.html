@@ -24,9 +24,9 @@
         {% endif %}
     </div>
     <div id="profile-info-div">
-        <p id="profile-name" class="info-text">Name: {{ user.first_name }} {{ user.last_name }}</p>
-        <p id="profile-email" class="info-text">Email: {{ user.email }}</p>
-        <p id="profile-username" class="info-text">Username: {{ user.username }}</p>
+        <p id="profile-name" class="info-text">Name: {{ profile_user.first_name }} {{ profile_user.last_name }}</p>
+        <p id="profile-email" class="info-text">Email: {{ profile_user.email }}</p>
+        <p id="profile-username" class="info-text">Username: {{ profile_user.username }}</p>
     </div>
         <p class="info-text follow-count-text"><a href="{% url 'follower_list' profile_user.id %}">Followers</a> → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
         <p class="info-text follow-count-text">{{ profile_user.following.count }} ← <a href="{% url 'following_list' profile_user.id %}">Following</a></p>

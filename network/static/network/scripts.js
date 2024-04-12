@@ -173,6 +173,52 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    const expandTopPagination = document.getElementById('expand-top-pagination');
+    const topPagination = document.getElementById('top-pagination');
+    const collapseTopPagination = document.getElementById('collapse-top-pagination');
+
+    if (sessionStorage.getItem('topPagination') === 'expanded') {
+        expandTopPagination.classList.add('hidden');
+        topPagination.classList.remove('hidden');
+        collapseTopPagination.classList.remove('hidden');
+        collapseTopPagination.addEventListener('click', () => {
+            sessionStorage.setItem('topPagination', 'collapsed')
+            expandTopPagination.classList.remove('hidden');
+            topPagination.classList.add('hidden');
+            collapseTopPagination.classList.add('hidden');
+        });
+    } else {
+        expandTopPagination.classList.remove('hidden');
+        topPagination.classList.add('hidden');
+        collapseTopPagination.classList.add('hidden');
+    }
+
+    expandTopPagination.addEventListener('click', () => {
+        sessionStorage.setItem('topPagination', 'expanded')
+        expandTopPagination.classList.add('hidden');
+        topPagination.classList.remove('hidden');
+        collapseTopPagination.classList.remove('hidden');
+        collapseTopPagination.addEventListener('click', () => {
+            sessionStorage.setItem('topPagination', 'collapsed')
+            expandTopPagination.classList.remove('hidden');
+            topPagination.classList.add('hidden');
+            collapseTopPagination.classList.add('hidden');
+        });
+    });
+
+    const handleLinks = document.querySelectorAll('.handle-link');
+    handleLinks.forEach(link => {
+        link.addEventListener('mouseover', () => {
+            link.previousElementSibling.style.transitionDuration = '0.25s';
+            link.previousElementSibling.style.fontSize = '0.7em';
+        })
+    })
+    handleLinks.forEach(link => {
+        link.addEventListener('mouseout', () => {
+            link.previousElementSibling.style.fontSize = '1em';
+        })
+    })
 });
 
 
