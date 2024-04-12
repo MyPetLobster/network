@@ -10,9 +10,11 @@
         <form id="new-post-form" class="hidden" action="{% url 'create_post' %}" method="post">
             {% csrf_token %}
             <textarea name="post-content" class="form-control" placeholder="New Post" id="post-content"></textarea>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="cancel-btn btn btn-secondary">Cancel</button>
-        </form>
+            <div class="btn-box">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="cancel-btn btn btn-secondary">Cancel</button>
+            </div>
+        </form> 
     {% endif %}
     <br>
     <svg id="expand-top-pagination" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
