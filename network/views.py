@@ -10,7 +10,7 @@ from django.urls import reverse
 
 from .models import User, Post
 
-PAGINATOR_RANGE = 5
+PAGINATOR_RANGE = 10
 
 def landing(request):
     return render(request, "network/landing.html")
@@ -73,7 +73,7 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("landing"))
     else:
         return render(request, "network/register.html")
 
