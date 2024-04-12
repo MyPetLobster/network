@@ -24,21 +24,21 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'all_posts' %}">All Posts</a>
-                </li>
+                </li><span class="dot-space">&nbsp;|&nbsp;</span>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'following' %}">Following</a>
-                    </li>
+                    </li><span class="dot-space">&nbsp;|&nbsp;</span>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
+                    </li><span class="dot-space">
                     <li class="nav-item">
                         <a id="profile-link" class="nav-link" href="{% url 'profile' user.id %}"><strong>{{ user.username }}</strong></a>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
+                    </li><span class="dot-space">&nbsp;|&nbsp;</span>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>

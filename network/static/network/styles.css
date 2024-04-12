@@ -81,6 +81,7 @@ body {
     color: rgb(87, 94, 98);
     width: 100%;
     font-family: 'Cultive Mono', monospace;
+    padding-bottom: 64px;
 }
 h1 {
     margin: 24px 0;
@@ -102,7 +103,11 @@ h1 {
 
 
 
-
+.dot-space {
+    color: white;
+    position: relative;
+    top: 6px;
+}
 .navbar {
     padding: 0px 16px;
     background-color: rgb(255, 255, 255) !important;
@@ -127,6 +132,8 @@ h1 {
     transition-duration: 600ms;
 }
 #profile-link {
+    position: relative;
+    bottom: 6px;
     margin-left: 156px;
 }
 .navbar:hover .nav-link:hover {
@@ -439,7 +446,7 @@ textarea:focus {
 }
 #new-post-button:hover {
     color: white !important;
-    border: none !important;
+    border: 1px solid rgb(161,180,46) !important;
     background-color: rgb(161,180,46);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.349);
     transition-duration: 300ms;
