@@ -72,7 +72,11 @@
                                 </div>
                             </form>
                         {% else %}
-                            <a class="reply-post-link" href="#">Reply</a>
+                            {% if post.reply_to %}
+                                <div></div>
+                            {% else %}
+                                <a class="reply-post-link" href="#">Reply</a><div class="reply-id hidden">{{ post.id }}</div>
+                            {% endif %}
                         {% endif %}
                         </div>
                     </div>

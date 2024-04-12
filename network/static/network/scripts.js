@@ -275,6 +275,45 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
+    const replyLinks = document.querySelectorAll('.reply-post-link');
+    const replyForm = document.querySelector('#reply-form');
+    const fadedBackgroundLayout = document.querySelector('#faded-background-layout');
+    replyLinks.forEach(link => {
+        const replyToId = link.nextElementSibling.textContent; 
+        link.addEventListener('click', () => {
+            replyForm.classList.remove('hidden');
+            fadedBackgroundLayout.classList.remove('hidden');
+            replyForm.querySelector('#reply-to-id').textContent = replyToId;
+            replyForm.querySelector('#reply-to-id').value = replyToId;
+            replyForm.querySelector('#reply-content').focus();
+            fadedBackgroundLayout.addEventListener('click', () => {
+                replyForm.classList.add('hidden');
+                fadedBackgroundLayout.classList.add('hidden');
+            });
+            replyForm.querySelector('.cancel-reply').addEventListener('click', () => {
+                replyForm.classList.add('hidden');
+                fadedBackgroundLayout.classList.add('hidden');
+            });
+        });
+    });
+
+    replyForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const postId = replyForm.querySelector('#reply-to-id').textContent;
+        const content = replyForm.querySelector('#reply-content').value;
+        const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        fetch(`reply_post/${postId}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                content: content
+            }),
+            headers: {
+                'X-CSRFToken': csrf_token,
+            }
+        })
+        window.location.href = `/post/${postId}`;
+    });
 });
 
 

@@ -52,6 +52,19 @@
           </nav>
         
         <div class="body">
+            <form id="reply-form" class="hidden">
+                {% csrf_token %}
+                <div class="form-group" id="reply-form-group">
+                    <label for="reply-content">Reply:</label>
+                    <input type="hidden" id="reply-to-id" name="reply-to-id" value="">
+                    <textarea class="form-control" id="reply-content"></textarea>
+                    <div class="btn-box">
+                        <button type="submit" class="btn btn-primary">Reply</button>
+                        <button id="cancel-reply-button" type="button" class="cancel-reply cancel-btn btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </form>
+            <div id="faded-background-layout" class="hidden"></div>
             {% block body %}
             {% endblock %}
         </div>

@@ -360,7 +360,7 @@ textarea:focus {
     box-shadow: none !important;
 }
 
-
+#faded-background-layout,
 #faded-background {
     height: 100%;
     position: fixed;
@@ -368,7 +368,7 @@ textarea:focus {
     left: 0;
     width: 100vw;
     background-color: rgba(16, 43, 51, 0.846);
-    z-index: 999;
+    z-index: 8888;
 }
 #faded-background-light {
     height: 100%;
@@ -417,6 +417,7 @@ textarea:focus {
 #edit-profile:hover {
     font-size: 0.9em;
 }
+#reply-form,
 #edit-profile-form, 
 .edit-post-form {
     border: 1px solid rgb(222, 222, 222);
@@ -429,6 +430,12 @@ textarea:focus {
     transform: translate(-50%, 0);
     z-index: 9999;
     min-width: 600px;
+}
+#reply-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .edit-post-form {
     position: fixed;
