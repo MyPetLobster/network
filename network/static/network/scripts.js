@@ -179,20 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const collapseTopPagination = document.getElementById('collapse-top-pagination');
 
     collapseTopPagination.addEventListener('mouseover', () => {
-        topPagination.style.transitionDuration = '5s';
-        topPagination.style.transform = 'scale(0.01)';
-        // start timer to collapse topPagination
-        setTimeout(() => {
-            sessionStorage.setItem('topPagination', 'collapsed')
-            expandTopPagination.classList.remove('hidden');
-            topPagination.classList.add('hidden');
-            collapseTopPagination.classList.add('hidden');
-        }, 5000);
-        collapseTopPagination.addEventListener('mouseout', () => {
-            topPagination.style.transform = 'scale(1)';
-            // stop timer
-            clearTimeout();
-        });
+        topPagination.style.transitionDuration = '3s';
+        topPagination.style.transform = 'scale(0.25)';
+    });
+    collapseTopPagination.addEventListener('mouseout', () => {
+        topPagination.style.transform = 'scale(1)';
     });
 
     expandTopPagination.addEventListener('mouseover', () => {

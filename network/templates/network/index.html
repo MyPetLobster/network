@@ -62,11 +62,11 @@
                     <h5 class="card-title">
                         <span>
                         {% if post.user.first_name %}
-                            {{ post.user.first_name }}.{{ post.user.last_name }}&nbsp;→&nbsp;
+                            {{ post.user.first_name }}.{{ post.user.last_name }}
                         {% else %}
-                            {{ post.user.username }}&nbsp;→&nbsp;
+                            {{ post.user.username }}
                         {% endif %}
-                        </span>
+                        </span>&nbsp;→&nbsp;
                         <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
                     </h5>
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
