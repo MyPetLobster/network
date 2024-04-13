@@ -368,7 +368,7 @@ textarea:focus {
     left: 0;
     width: 100vw;
     background-color: rgba(16, 43, 51, 0.846);
-    z-index: 8888;
+    z-index: 9998;
 }
 #faded-background-light {
     height: 100%;
@@ -376,7 +376,7 @@ textarea:focus {
     top: 0;
     left: 0;
     width: 100vw;
-    background-color: rgba(7, 7, 7, 0.579);
+    background-color: rgba(26, 71, 85, 0.601);
     z-index: 999;
 
 }
@@ -580,7 +580,7 @@ form label {
     justify-content: center;
     align-items: center;
     gap: 16px;
-    padding-top: 72px;
+    padding-top: 16px;
 }
 
 #post-replies-div {
@@ -597,7 +597,7 @@ form label {
 }
 
 .card-short .card-body {
-    height: 120px !important;
+    height: 100px !important;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -616,7 +616,7 @@ form label {
     width: 700px;
     border: 1px solid rgb(161,180,46);
     position: fixed;
-    z-index: 9999;
+    z-index: 9997;
 }
 .card-full .card-body {
     width: 100%;

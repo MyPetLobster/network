@@ -131,17 +131,6 @@
                                 <div>
                                 {% if user == post.user %}
                                     <a class="edit-post-link" href="#">Edit</a>
-                                    <form class="edit-post-form hidden">
-                                        {% csrf_token %}
-                                        <div class="post-id hidden">{{ post.id }}</div>
-                                        <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
-                                        <div class="btn-box">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                            <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
-                                        </div>
-                                        <div class="top-12 btn
-                                        <button type="button" class="delete-post-btn cancel-btn btn btn-danger">Delete</button>
-                                    </form>
                                 {% else %}
                                     <a class="reply-post-link" href="#">Reply</a><div class="reply-id hidden">{{ post.id }}</div>
                                 {% endif %}
@@ -150,6 +139,20 @@
                         </div>
                     </div>
                 </div>
+                <form class="edit-post-form hidden">
+                    {% csrf_token %}
+                    <div class="post-id hidden">{{ post.id }}</div>
+                    <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
+                    <div class="btn-box">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="cancel-edit cancel-btn btn btn-secondary">Cancel</button>
+                    </div>
+                    <div class="top-12"></div>
+                    <div class="btn-box">
+                        <button type="button" class="delete-post-btn cancel-btn btn btn-danger">Delete</button>
+                    </div>
+                </form>
+
                 <br>
             {% endfor %}
         </div>
@@ -161,11 +164,12 @@
 <script>
     // Move each reply card up by 100 pixels and set each reply's z-index 1 less than the previous reply, starting with z-index=1 for the first reply
     let replies = document.querySelectorAll("#post-replies-div .card-short");
-    let z = 1;
+    let z = 998;
     let zPosition = 1;
     let cardWidth = 575;
     let replyCount = document.querySelector("#reply-count").textContent;
-    let incrementStep = 25
+    let incrementStep = 25;
+
 
     if (replyCount < 10) {
         incrementStep = 25;
@@ -188,14 +192,8 @@
     // Set the height of the post-replies-div to the height of the first reply card
     let firstReply = document.querySelector("#post-replies-div .card");
     if (firstReply) {
-        let firstReplyHeight = firstReply.offsetHeight;
-        document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+        document.querySelector("#post-replies-div").style.height = "100px";
     }
-
-    // Set the height of the main-post div to the height of the main post card
-    let mainPost = document.querySelector("#main-post");
-    let mainPostHeight = mainPost.offsetHeight;
-    document.querySelector("#main-post").style.height = `${mainPostHeight}px`;
 
     const fadedBackgroundLight = document.querySelector("#faded-background-light");
 
@@ -223,7 +221,7 @@
             let fullReply = document.querySelector(`#card-${closeId}`);
             fullReply.classList.add("hidden");
             fadedBackgroundLight.classList.add("hidden");
-            document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
+            document.querySelector("#post-replies-div").style.height = `100px`;
         });
     });
 
@@ -231,6 +229,11 @@
     backArrow.addEventListener("click", () => {
         window.history.back();
     });
+
+    // take whatever the entire page window height is and add 100px to it
+    let windowHeight = window.innerHeight + 100;
+    const body = document.querySelector("body");
+    body.style.height = `${windowHeight}px`;
 
 </script>
 

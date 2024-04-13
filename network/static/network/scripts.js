@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     editPostLinks.forEach(link => {
         link.addEventListener('click', () => {
             fadedBackground.classList.toggle('hidden');
-            const editPostForm = link.nextElementSibling;
+            const editPostForm = link.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
             editPostForm.classList.toggle('hidden');
             editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
                 editPostForm.classList.add('hidden');
@@ -302,7 +302,12 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const postId = replyForm.querySelector('#reply-to-id').textContent;
         const content = replyForm.querySelector('#reply-content').value;
+
         const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+        replyForm.classList.add('hidden');
+        fadedBackgroundLayout.classList.add('hidden');
+        
         fetch(`reply_post/${postId}`, {
             method: 'POST',
             body: JSON.stringify({
@@ -312,7 +317,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 'X-CSRFToken': csrf_token,
             }
         })
-        window.location.href = `/post/${postId}`;
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            window.location.href = `/post/${postId}`;
+        })
     });
 });
 

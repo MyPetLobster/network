@@ -193,7 +193,12 @@ def following_list(request, user_id):
 
 @login_required
 def post(request, post_id):
+
     post = Post.objects.get(pk=post_id)
+
+    if post.reply_to:
+        post = Post.objects.get(pk=post.reply_to.id)
+
     if request.method == "DELETE":
         post.delete()
         return JsonResponse({"message": "Post deleted."})
@@ -201,15 +206,26 @@ def post(request, post_id):
     post_replies = Post.objects.filter(reply_to=post)
     post_reply_count = post_replies.count()
 
-    if post.reply_to:
-        return render(request, "network/post.html", {
-            "og_post": post.reply_to,
-            "post_replies": Post.objects.filter(reply_to=post.reply_to),
-            "post_reply_count": Post.objects.filter(reply_to=post.reply_to).count()
-        })
-
     return render(request, "network/post.html", {
         "og_post": post,
         "post_replies": post_replies,
         "post_reply_count": post_reply_count
     })
+
+
+@login_required
+def reply_post(request, post_id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        content = data["content"]
+        user = request.user
+        reply_to = Post.objects.get(pk=post_id)
+        post = Post(user=user, content=content, reply_to=reply_to)
+        post.save()
+
+        return JsonResponse({
+            'user': user.username,
+            'content': post.content,
+            'timestamp': post.timestamp,
+            'post_id': post.id
+        })
