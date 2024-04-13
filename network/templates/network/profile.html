@@ -68,7 +68,9 @@
             <div class="card-body">
                 <div class="post-id-div hidden">{{ post.id }}</div>
                 <div class="card-top-div">
-                    <div class="northwest-arrow">&#8689;</div>
+                    {% if post.replies.count > 0 %}
+                        <div class="northwest-arrow">&#8689;</div>
+                    {% endif %}
                     <h5 class="card-title">
                         {% if post.user.first_name %}
                             <div class="card-full-name">
