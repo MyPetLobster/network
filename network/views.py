@@ -88,7 +88,6 @@ def create_post(request):
         return HttpResponseRedirect(reverse("all_posts"))
     
 
-@login_required 
 def profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
     if request.method == "PUT":
@@ -169,7 +168,6 @@ def like_post(request, post_id):
         })
 
 
-@login_required
 def follower_list(request, user_id):
     user = User.objects.get(pk=user_id)
     followers = user.followers.all()
@@ -180,7 +178,6 @@ def follower_list(request, user_id):
     })
 
 
-@login_required
 def following_list(request, user_id):
     user = User.objects.get(pk=user_id)
     following = user.following.all()
@@ -191,7 +188,6 @@ def following_list(request, user_id):
     })
 
 
-@login_required
 def post(request, post_id):
 
     post = Post.objects.get(pk=post_id)

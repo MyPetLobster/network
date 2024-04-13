@@ -9,18 +9,19 @@
 <div class="top-content-div">
     <h1 id="h1-name">@{{ profile_user.username }}</h1>
     <div class="follow-div">
-        {% if profile_user != user %}
-            {% if profile_user in user.following.all %} 
-                <button id="unfollow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Unfollow</button>
-                <button id="follow-button" class="follow-button btn btn-primary hidden" data-profile-id="{{ profile_user.id }}">Follow</button>
+        {% if user.is_authenticated %}
+            {% if profile_user != user %}
+                {% if profile_user in user.following.all %} 
+                    <button id="unfollow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Unfollow</button>
+                    <button id="follow-button" class="follow-button btn btn-primary hidden" data-profile-id="{{ profile_user.id }}">Follow</button>
+                {% else %}
+                    <button id="unfollow-button" class="follow-button btn btn-primary hidden" data-profile-id="{{ profile_user.id }}">Unfollow</button>
+                    <button id="follow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Follow</button>               
+                {% endif %}
             {% else %}
-                <button id="unfollow-button" class="follow-button btn btn-primary hidden" data-profile-id="{{ profile_user.id }}">Unfollow</button>
-                <button id="follow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Follow</button>               
+                <div id="hey-thats-you-div">↑ <span id="hey-thats-you">Hey, that's you!</span> ↑</div>
+                <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
             {% endif %}
-        {% else %}
-            <div id="hey-thats-you-div">↑ <span id="hey-thats-you">Hey, that's you!</span> ↑</div>
-            <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
-            
         {% endif %}
     </div>
     <div id="profile-info-div">
@@ -138,7 +139,9 @@
                             {% if post.reply_to %}
                                 <div></div>
                             {% else %}
-                                <a class="reply-post-link" href="#">Reply</a><div class="reply-id hidden">{{ post.id }}</div>
+                                {% if user.is_authenticated %}
+                                    <a class="reply-post-link" href="#">Reply</a><div class="reply-id hidden">{{ post.id }}</div>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                         </div>
