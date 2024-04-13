@@ -707,3 +707,30 @@ form label {
     justify-content: space-between;
 
 }
+
+
+/* AUTHENTICATION PAGES */
+.auth-content-div {
+    width: 100vw;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+.auth-form {
+    width: 300px;
+}
+.auth-subtext {
+    font-size: 0.7em;
+}
+
+.auth-btn {
+    border: 1px solid rgb(222, 222, 222) !important;
+}
+.auth-btn:hover {
+    border: 1px solid rgb(161,180,46) !important;
+    background-color: rgb(161,180,46);
+    color: white;
+}
