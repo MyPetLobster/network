@@ -12,8 +12,8 @@ class User(AbstractUser):
 class Post(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="posts")
     content = models.TextField()
-    likes = models.ManyToManyField("User", related_name="liked_posts")
-    timestamp = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField("User", related_name="liked_posts", null=True, blank=True)
+    timestamp = models.DateTimeField()
     reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="replies")
 
     class Meta:

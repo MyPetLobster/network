@@ -82,9 +82,13 @@
             {% for post in post_replies %}
                 <div class="card-short card">
                     <div class="reply-id hidden">{{ post.id }}</div>
-                    <div class="card-body">
-                        <span>@{{ post.user.username }}</span>
-                        <span>{{ post.timestamp }}</span>
+                    
+                    <div class="short-card-body card-body">
+                        <div class="short-card-content">{{ post.content }}</div> 
+                        <div class="short-card-name-timestamp-div">
+                            <span>@{{ post.user.username }}</span>
+                            <span>{{ post.timestamp }}</span>
+                        </div>
                     </div>
                 </div>
                 <div id="card-{{ post.id }}" class="card card-full hidden">
@@ -213,6 +217,14 @@
                 fadedBackgroundLight.classList.add("hidden");
                 document.querySelector("#post-replies-div").style.height = `${firstReplyHeight}px`;
             });
+        });
+        
+        const currentZIndex = reply.style.zIndex;
+        reply.addEventListener("mouseover", () => {
+            reply.style.zIndex = "999";
+        });
+        reply.addEventListener("mouseout", () => {
+            reply.style.zIndex = currentZIndex;
         });
     });
 

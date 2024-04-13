@@ -728,6 +728,9 @@ textarea:focus {
 .card-short {
     cursor: pointer;
 }
+.card-short:hover .short-card-body {
+    padding: 12px;
+}
 .card-full {
     display: flex;
     position: fixed;
@@ -746,6 +749,24 @@ textarea:focus {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+.short-card-body {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.short-card-name-timestamp-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.short-card-content {
+    width: 100%;
+    text-align: left;
 }
 
 
