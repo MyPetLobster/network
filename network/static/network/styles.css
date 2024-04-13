@@ -151,10 +151,11 @@ form label {
 .cancel-btn {
     font-size: 12px;
     width: 100px;
+    height: auto;
     padding: 5px;
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
-    color: rgb(16, 55, 74);
+    color: rgb(104, 112, 117);
     border: none !important;
     outline: none !important;
     box-shadow: none;
@@ -163,22 +164,24 @@ form label {
 }
 .btn:focus {
     outline: none !important;
-    border: none !important;
+    border:  none !important;
     box-shadow: none !important;
     background-color: rgb(255, 255, 255);
-    color: rgb(16, 55, 74);
+    color: rgb(36,94,122);
 }
 .btn:hover {
+    font-size: 13px;
+    width: 108px;
     color: rgb(229, 229, 229);
-    background-color: var(--primary-green);
-    border: none !important;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.559);
+    background-color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.454);
 }
 .btn:active {
     color: white;
-    background-color: rgb(16, 55, 74) !important;
-    transform: scale(0.95) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.713) !important;
+    background-color: rgb(27, 73, 96) !important;
+    transform: scale(0.90) !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.863) !important;
     outline: none !important;
     border: none !important;
 }
@@ -189,13 +192,31 @@ form label {
 }
 .cancel-btn:active {
     background-color: rgb(127, 41, 24) !important;
-    transform: scale(0.95) !important;
+    transform: scale(0.90) !important;
     box-shadow: 0 0 4px rgba(33, 38, 4, 0.559) !important;
     outline: none !important;
     border: none !important;
 }
 
 /* Targeted Button Styles */
+#new-post-button {
+    color: rgb(202, 200, 200);
+    border: 1px solid rgb(200, 200, 200) !important;
+}
+#new-post-button:hover {
+    color: white;
+    background-color: var(--primary-green) !important;
+    border: 1px solid var(--primary-green) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.454);
+}
+#new-post-button:active {
+    color: white;
+    background-color: rgb(36,94,122) !important;
+    transform: scale(0.90) !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.863) !important;
+    outline: none !important;
+    border: none !important;
+}
 #unfollow-button:hover {
     background-color: rgb(178, 67, 44) !important;
 }
@@ -206,30 +227,7 @@ form label {
     outline: none !important;
     border: none !important;
 }
-#new-post-button {
-    color: rgb(193, 193, 193) !important;
-    border: 1px solid rgb(222, 222, 222) !important;
-    transition-duration: 300ms;
-}
-#new-post-button:hover {
-    color: white !important;
-    border: 1px solid var(--primary-green) !important;
-    background-color: var(--primary-green);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.349);
-    transition-duration: 300ms;
-}
-#new-post-button:active {
-    color: white !important;
-    background-color: rgb(97, 137, 12) !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.684);
-}
-#new-post-button:focus {
-    outline: none !important;
-    border: 1px solid rgb(222, 222, 222) !important;
-    box-shadow: none !important;
-}
+
 
 
 
