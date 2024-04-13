@@ -219,12 +219,15 @@ h1 {
 
 
 /* LANDING PAGE */
+
+
 #landing-heading-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 16px;
+    margin-bottom: 24px;
 }
 #landing-title {
     position: relative;
@@ -253,10 +256,11 @@ h1 {
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+    padding: 24px
 }
 .landing-3 {
-    grid-template-rows: 1fr 1fr 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr !important;
 }
 .section-div {
     display: flex;
@@ -265,6 +269,79 @@ h1 {
 }
 
 
+.landing-link {
+    font-size: 1em;
+    transition-duration: 350ms;
+}
+
+#section-all-posts:hover, 
+#section-login:hover {
+    font-size: 1.2em;
+    background: -webkit-linear-gradient(left, rgb(161,180,46) , rgb(120,153,71));
+    background: -o-linear-gradient(right, rgb(161,180,46), rgb(120,153,71));
+    background: -moz-linear-gradient(right, rgb(161,180,46), rgb(120,153,71));
+    background: linear-gradient(to right, rgb(161,180,46) , rgb(120,153,71)); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#section-following:hover,
+#section-register:hover {
+    font-size: 1.2em;
+    background: -webkit-linear-gradient(left, rgb(120,153,71) , rgb(72,119,100));
+    background: -o-linear-gradient(right, rgb(120,153,71), rgb(72,119,100));
+    background: -moz-linear-gradient(right, rgb(120,153,71), rgb(72,119,100));
+    background: linear-gradient(to right, rgb(120,153,71) , rgb(72,119,100)); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+}
+
+#section-profile:hover,
+#section-all-posts-2:hover {
+    font-size: 1.2em;
+    background: -webkit-linear-gradient(left, rgb(72,119,100) , rgb(38,96,120));
+    background: -o-linear-gradient(right, rgb(72,119,100), rgb(38,96,120));
+    background: -moz-linear-gradient(right, rgb(72,119,100), rgb(38,96,120));
+    background: linear-gradient(to right, rgb(72,119,100) , rgb(38,96,120)); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;     
+}
+
+#section-github-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+#github-text {
+    font-size: 0.8em;
+    opacity: 0;
+    transition-duration: 350ms;
+}
+#section-github-icon:hover #github-text {
+    opacity: 1;
+}
+#github-icon {
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    transition-duration: 250ms;
+}
+
+#section-github-icon:hover #github-icon {
+    height: 56px;
+    width: 56px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.349);
+    transition-duration: 350ms;
+}
+#section-github-icon:hover #github-icon>path {
+    transition-duration: 350ms;
+    fill: rgb(161,180,46);
+}
 
 
 
