@@ -305,9 +305,25 @@ h1 {
     align-items: center;
     gap: 10px;
 }
+
+
+
 .card-body {
     width: 600px;
+    transition-duration: 350ms;
 }
+.card-body:hover {
+    width: 620px;
+}
+.card-body-reply {
+    width: 540px;
+    transition-duration: 350ms;
+}
+.card-body-reply:hover {
+    width: 560px;
+}
+
+
 
 .card-title {
     font-size: 0.9em;
@@ -663,17 +679,24 @@ form label {
     font-size: 1.3em;
 }
 
+#post-page-back-div {
+    height: 40px;
+}
+
 
 #back-arrow {
-    color: rgb(193, 193, 193);
-    font-size: 3.5em;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     transition-duration: 250ms;
 }
 #back-arrow:hover {
-    color: rgb(16, 55, 74);
-    font-size: 3.8em;
+    width: 36px;
+    height: 36px;
+}
+#back-arrow:hover path {
     transition-duration: 250ms;
+    fill: rgb(161,180,46);
 }
 
 
