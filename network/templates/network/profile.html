@@ -65,11 +65,7 @@
 <div class="all-posts">
     {% for post in user_posts %}
         <div class="card">
-            {% if post.reply_to %}
-                <div class="card-body card-body-reply">
-            {% else %}
-                <div class="card-body">
-            {% endif %}
+            <div class="card-body">
                 <div class="post-id-div hidden">{{ post.id }}</div>
                 <div class="card-top-div">
                     <div class="northwest-arrow">&#8689;</div>

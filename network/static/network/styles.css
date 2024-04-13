@@ -316,14 +316,6 @@ h1 {
     padding: 24px;
     width: 610px;
 }
-.card-body-reply {
-    width: 540px;
-    transition-duration: 350ms;
-}
-.card-body-reply:hover {
-    padding: 24px;
-    width: 550px;
-}
 
 
 

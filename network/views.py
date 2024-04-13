@@ -16,7 +16,7 @@ def landing(request):
     return render(request, "network/landing.html")
 
 def index(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.all().filter(reply_to=None)
     p = Paginator(post_list, PAGINATOR_RANGE)
     page_number = request.GET.get('page')
     posts = p.get_page(page_number)
