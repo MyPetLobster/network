@@ -10,21 +10,11 @@ from django.urls import reverse
 
 from .models import User, Post
 
+
 PAGINATOR_RANGE = 10
 
-def landing(request):
-    return render(request, "network/landing.html")
 
-def index(request):
-    post_list = Post.objects.all().filter(reply_to=None)
-    p = Paginator(post_list, PAGINATOR_RANGE)
-    page_number = request.GET.get('page')
-    posts = p.get_page(page_number)
-    return render(request, "network/index.html", {
-        "posts": posts,
-    })
-
-
+# Views - Authentication
 def login_view(request):
     if request.method == "POST":
 
@@ -77,16 +67,22 @@ def register(request):
         return render(request, "network/register.html")
 
 
-@login_required
-def create_post(request):
-    if request.method == "POST":
-        content = request.POST["post-content"]
-        user = request.user
-        post = Post(user=user, content=content)
-        post.save()
 
-        return HttpResponseRedirect(reverse("all_posts"))
-    
+
+# Views - Login Not Required
+def landing(request):
+    return render(request, "network/landing.html")
+
+
+def index(request):
+    post_list = Post.objects.all().filter(reply_to=None)
+    p = Paginator(post_list, PAGINATOR_RANGE)
+    page_number = request.GET.get('page')
+    posts = p.get_page(page_number)
+    return render(request, "network/index.html", {
+        "posts": posts,
+    })
+
 
 def profile(request, user_id):
     profile_user = User.objects.get(pk=user_id)
@@ -112,6 +108,73 @@ def profile(request, user_id):
     })
 
 
+def follower_list(request, user_id):
+    user = User.objects.get(pk=user_id)
+    followers = user.followers.all()
+    return render(request, "network/follower_list.html", {
+        "followers": followers,
+        "user": user,
+        "current_user": request.user,
+    })
+
+
+def following_list(request, user_id):
+    user = User.objects.get(pk=user_id)
+    following = user.following.all()
+    return render(request, "network/following_list.html", {
+        "following": following,
+        "user": user,
+        "current_user": request.user,
+    })
+
+
+def post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+
+    # If the post is a reply, get the original post
+    if post.reply_to:
+        post = Post.objects.get(pk=post.reply_to.id)
+
+    if request.method == "DELETE":
+        post.delete()
+        return JsonResponse({"message": "Post deleted."})
+    
+    post_replies = Post.objects.filter(reply_to=post)
+    post_reply_count = post_replies.count()
+
+    return render(request, "network/post.html", {
+        "og_post": post,
+        "post_replies": post_replies,
+        "post_reply_count": post_reply_count
+    })
+
+
+
+
+# Views & Actions - Login Required
+@login_required
+def following(request):
+    followed_posts = Post.objects.filter(user__in=request.user.following.all())
+    p = Paginator(followed_posts, PAGINATOR_RANGE)
+    page_number = request.GET.get('page')
+    followed_posts = p.get_page(page_number)
+    return render(request, "network/following.html", {
+        "followed_posts": followed_posts,
+        "page_number": page_number
+    })
+
+
+@login_required
+def create_post(request):
+    if request.method == "POST":
+        content = request.POST["post-content"]
+        user = request.user
+        post = Post(user=user, content=content)
+        post.save()
+
+        return HttpResponseRedirect(reverse("all_posts"))
+    
+
 @login_required
 def edit_profile(request, user_id):
     user = User.objects.get(pk=user_id)
@@ -129,19 +192,6 @@ def edit_profile(request, user_id):
             'username': user.username
         })
         
-
-
-@login_required
-def following(request):
-    followed_posts = Post.objects.filter(user__in=request.user.following.all())
-    p = Paginator(followed_posts, PAGINATOR_RANGE)
-    page_number = request.GET.get('page')
-    followed_posts = p.get_page(page_number)
-    return render(request, "network/following.html", {
-        "followed_posts": followed_posts,
-        "page_number": page_number
-    })
-
 
 @login_required
 def edit_post(request, post_id):
@@ -166,47 +216,6 @@ def like_post(request, post_id):
         'likes': post.likes.count(),
         'liked': user in post.likes.all()
         })
-
-
-def follower_list(request, user_id):
-    user = User.objects.get(pk=user_id)
-    followers = user.followers.all()
-    return render(request, "network/follower_list.html", {
-        "followers": followers,
-        "user": user,
-        "current_user": request.user,
-    })
-
-
-def following_list(request, user_id):
-    user = User.objects.get(pk=user_id)
-    following = user.following.all()
-    return render(request, "network/following_list.html", {
-        "following": following,
-        "user": user,
-        "current_user": request.user,
-    })
-
-
-def post(request, post_id):
-
-    post = Post.objects.get(pk=post_id)
-
-    if post.reply_to:
-        post = Post.objects.get(pk=post.reply_to.id)
-
-    if request.method == "DELETE":
-        post.delete()
-        return JsonResponse({"message": "Post deleted."})
-    
-    post_replies = Post.objects.filter(reply_to=post)
-    post_reply_count = post_replies.count()
-
-    return render(request, "network/post.html", {
-        "og_post": post,
-        "post_replies": post_replies,
-        "post_reply_count": post_reply_count
-    })
 
 
 @login_required
