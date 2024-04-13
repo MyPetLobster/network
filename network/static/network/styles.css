@@ -655,7 +655,7 @@ form label {
 
 
 .northwest-arrow {
-    font-size: 1.2em;
+    font-size: 1.3em;
     position: relative;
     color: rgb(193, 193, 193);
     bottom: 22px;
@@ -664,7 +664,6 @@ form label {
     transition-duration: 250ms;
 }
 .northwest-arrow:hover {
-    font-size: 1.3em;
     color: rgb(16, 55, 74);
 }
 .close-x {
