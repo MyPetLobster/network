@@ -146,8 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const profilePicture = document.getElementById('profile-picture');
-    const editProfilePicture = document.getElementById('edit-only-profile-picture');
-    const editProfilePicSaveBtn = document.getElementById('edit-prof-pic-save-btn');
     const editProfilePicCancelBtn = document.getElementById('edit-prof-pic-cancel-btn');
     const editProfilePicForm = document.getElementById('edit-profile-picture-form');
 
@@ -164,6 +162,26 @@ document.addEventListener('DOMContentLoaded', () => {
         fadedBackground.classList.add('hidden');
     });
 
+    editProfilePicForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const userId = document.querySelector("#profile-id").textContent;
+        const formData = new FormData(editProfilePicForm);
+        fetch(`/edit_profile_picture/${userId}`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            document.querySelector('#profile-picture').src = result.profile_picture;
+            editProfilePicForm.classList.add('hidden');
+            fadedBackground.classList.add('hidden');
+        });
+        
+    });
 
 
 

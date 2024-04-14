@@ -9,9 +9,15 @@
 <div class="top-content-div">
     <h1 id="h1-name">@{{ profile_user.username }}</h1>
     <div class="follow-div">
+        {% if user.is_authenticated and user == profile_user %}
         <div id="profile-profile-picture-div" class="profile-picture-div">
-            <img id="profile-picture" class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{{ '../../../../../media/profile_pictures/default.jpg' }}{% endif %}" alt="Profile Picture">
+            <img id="profile-picture" class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{% url 'media' 'profile_pictures/default.jpg' %}{% endif %}" alt="Profile Picture">
         </div>
+        {% else %}
+        <div id="other-user-profile-picture-div" class="profile-picture-div">
+            <img class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{% url 'media' 'profile_pictures/default.jpg' %}{% endif %}" alt="Profile Picture">
+        </div>
+        {% endif %}
         {% if user.is_authenticated %}
             {% if profile_user != user %}
                 {% if profile_user in user.following.all %} 
@@ -54,6 +60,7 @@
 </form>
 
 <div id="profile-id" class="hidden">{{ user.id }}</div>
+
 <form id="edit-profile-form" class="hidden" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
@@ -74,7 +81,7 @@
             <input type="text" class="form-control" id="edit-username" name="edit-username" value="{{ profile_user.username }}">
         </div>
         <div>
-            <label for="edit-profile-pic">Profile Picture</label>
+            <label for="edit-profile-picture">Profile Picture</label>
             <input type="file" class="form-control-file" id="edit-profile-picture" name="edit-profile-picture">
         </div>
     </div>

@@ -183,9 +183,9 @@ def edit_profile(request, user_id):
         user.last_name = request.POST.get("edit-last-name", "")
         user.email = request.POST.get("edit-email", "")
         user.username = request.POST.get("edit-username", "")
-
-        if "profile_picture" in request.FILES:
-            user.profile_picture = request.FILES["profile_picture"]
+            
+        if "edit-profile-picture" in request.FILES:
+            user.profile_picture = request.FILES["edit-profile-picture"]
 
         user.save()
 
@@ -193,9 +193,21 @@ def edit_profile(request, user_id):
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email,
-            'username': user.username
+            'username': user.username,
+            'profile_picture': user.profile_picture.url
         })
-        
+
+
+@login_required
+def edit_profile_picture(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if request.method == "POST":
+        user.profile_picture = request.FILES["edit-only-profile-picture"]
+        user.save()
+        return JsonResponse({
+            'profile_picture': user.profile_picture.url
+        })
+    
 
 @login_required
 def edit_post(request, post_id):
