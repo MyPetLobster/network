@@ -818,5 +818,8 @@ textarea:focus {
     width: 250px;
 }
 
-
-
+#edit-profile-picture {
+    width: auto;
+    height: 24px !important;
+    font-size: 12px !important;
+}
