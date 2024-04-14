@@ -4,6 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
     profile_picture = models.ImageField(upload_to="profile_pictures", default="profile_pictures/default.jpg")
+    bio = models.TextField(blank=True, null=True, max_length=250)
     following = models.ManyToManyField("self", symmetrical=False, blank=True, related_name="followers")
 
     class Meta:
