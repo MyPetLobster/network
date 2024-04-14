@@ -620,18 +620,21 @@ textarea:focus {
 }
 .follow-div {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
     margin-bottom: 24px;
 }
 #hey-thats-you-div {
     color: rgb(36,94,122);
-    margin-bottom: 48px;
+    margin: 24px 0;
 }
 #hey-thats-you {
-    font-size: 1em;
+    font-size: 0.9em;
 }
 #edit-profile {
+    margin-bottom: 8px;
     font-size: 0.8em;
 }
 #edit-profile:hover {
@@ -795,3 +798,25 @@ textarea:focus {
     background-color: var(--primary-green);
     color: white;
 }
+
+
+/* PROFILE PICTURES */
+
+.profile-picture-div {
+    border-radius: 50%;
+    overflow: hidden;
+    transition-duration: 250ms;
+}
+.profile-picture {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#profile-profile-picture-div {
+    height: 250px;
+    width: 250px;
+}
+
+
+

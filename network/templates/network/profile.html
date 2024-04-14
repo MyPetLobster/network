@@ -9,6 +9,9 @@
 <div class="top-content-div">
     <h1 id="h1-name">@{{ profile_user.username }}</h1>
     <div class="follow-div">
+        <div id="profile-profile-picture-div" class="profile-picture-div">
+            <img id="profile-picture" class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{{ '../../../../../media/profile_pictures/default.jpg' }}{% endif %}" alt="Profile Picture">
+        </div>
         {% if user.is_authenticated %}
             {% if profile_user != user %}
                 {% if profile_user in user.following.all %} 
@@ -19,8 +22,12 @@
                     <button id="follow-button" class="follow-button btn btn-primary" data-profile-id="{{ profile_user.id }}">Follow</button>               
                 {% endif %}
             {% else %}
-                <div id="hey-thats-you-div">↑ <span id="hey-thats-you">Hey, that's you!</span> ↑</div>
-                <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
+                {% if profile_user.profile_picture %}
+                    <div id="hey-thats-you-div">↑ <span id="hey-thats-you">Hey, that's you!</span> ↑</div>
+                    <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
+                {% else %}
+                    <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
+                {% endif %}
             {% endif %}
         {% endif %}
     </div>
@@ -55,7 +62,7 @@
             <input type="text" class="form-control" id="edit-username" name="edit-username" value="{{ profile_user.username }}">
         </div>
         <div>
-            <label for="profile-pic">Profile Picture</label>
+            <label for="edit-profile-pic">Profile Picture</label>
             <input type="file" class="form-control-file" id="edit-profile-picture" name="edit-profile-picture">
         </div>
     </div>
