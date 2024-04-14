@@ -1,6 +1,6 @@
 {% extends "network/layout.html" %}
 
-
+{% load static %}
 
 {% block body %}
 <div class="post-page-div">
@@ -15,16 +15,19 @@
     <div id="main-post" class="card">
         <div class="card-body">
             <div class="card-top-div">
-                <h5 class="card-title">
-                    <span>
-                    {% if og_post.user.first_name %}
-                        {{ og_post.user.first_name }}.{{ og_post.user.last_name }}
-                    {% else %}
-                        {{ og_post.user.username }}
-                    {% endif %}
-                    </span>&nbsp;→&nbsp;
-                    <a class="handle-link" href="{% url 'profile' og_post.user.id %}">@{{ og_post.user }}</a>
-                </h5>
+                    <h5 class="card-title">
+                        <span class="card-pic-name-span">
+                            <div class="card-profile-picture-div">
+                                <img class="profile-picture" src="{% if og_post.user.profile_picture %}{{ og_post.user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
+                            </div>
+                            {% if og_post.user.first_name %}
+                                {{ og_post.user.first_name }}.{{ og_post.user.last_name }}
+                            {% else %}
+                                {{ og_post.user.username }}
+                            {% endif %}
+                        </span>&nbsp;→&nbsp;
+                        <a class="handle-link" href="{% url 'profile' og_post.user.id %}">@{{ og_post.user }}</a>
+                    </h5>
                 <span class="card-text post-timestamp">{{ og_post.timestamp }}</span>
             </div>
             <p class="card-text post-content" id="post-content-{{ og_post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#8674;</span> {{ og_post.content }}</p>
