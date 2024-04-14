@@ -842,6 +842,10 @@ textarea:focus {
     overflow: hidden;
     transition: 300ms;
 }
+.short-card-pic-div {
+    height: 22px;
+    width: 22px;
+}
 
  
 #profile-profile-picture-div,
