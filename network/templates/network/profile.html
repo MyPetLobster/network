@@ -99,7 +99,7 @@
             <div class="card-body">
                 <div class="post-id-div hidden">{{ post.id }}</div>
                 <div class="card-top-div">
-                    {% if post.replies.count > 0 %}
+                    {% if post.replies.count > 0 or post.reply_to %}
                         <div class="northwest-arrow">&#8689;</div>
                     {% endif %}
 
