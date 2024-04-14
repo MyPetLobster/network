@@ -826,13 +826,23 @@ textarea:focus {
 .profile-picture-div {
     border-radius: 50%;
     overflow: hidden;
-    transition: 250ms;
+    transition: 300ms;
 }
 .profile-picture {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transition: 300ms;
 }
+
+.card-profile-picture-div {
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: 300ms;
+}
+
  
 #profile-profile-picture-div,
 #other-user-profile-picture-div {
@@ -852,4 +862,11 @@ textarea:focus {
     width: auto;
     height: 24px !important;
     font-size: 12px !important;
+}
+
+.card-pic-name-span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
 }

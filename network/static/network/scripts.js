@@ -149,39 +149,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const editProfilePicCancelBtn = document.getElementById('edit-prof-pic-cancel-btn');
     const editProfilePicForm = document.getElementById('edit-profile-picture-form');
 
-    profilePicture.addEventListener('click', () => {
-        editProfilePicForm.classList.remove('hidden');
-        fadedBackground.classList.remove('hidden');
-        fadedBackground.addEventListener('click', () => {
+    if (profilePicture) {
+        profilePicture.addEventListener('click', () => {
+            editProfilePicForm.classList.remove('hidden');
+            fadedBackground.classList.remove('hidden');
+            fadedBackground.addEventListener('click', () => {
+                editProfilePicForm.classList.add('hidden');
+                fadedBackground.classList.add('hidden');
+            });
+        });
+        editProfilePicCancelBtn.addEventListener('click', () => {
             editProfilePicForm.classList.add('hidden');
             fadedBackground.classList.add('hidden');
         });
-    });
-    editProfilePicCancelBtn.addEventListener('click', () => {
-        editProfilePicForm.classList.add('hidden');
-        fadedBackground.classList.add('hidden');
-    });
 
-    editProfilePicForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const userId = document.querySelector("#profile-id").textContent;
-        const formData = new FormData(editProfilePicForm);
-        fetch(`/edit_profile_picture/${userId}`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            }
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-            document.querySelector('#profile-picture').src = result.profile_picture;
-            editProfilePicForm.classList.add('hidden');
-            fadedBackground.classList.add('hidden');
+        editProfilePicForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const userId = document.querySelector("#profile-id").textContent;
+            const formData = new FormData(editProfilePicForm);
+            fetch(`/edit_profile_picture/${userId}`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                document.querySelector('#profile-picture').src = result.profile_picture;
+                editProfilePicForm.classList.add('hidden');
+                fadedBackground.classList.add('hidden');
+            });
+            
         });
-        
-    });
+    }
 
 
 
@@ -293,13 +295,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleLinks = document.querySelectorAll('.handle-link');
     handleLinks.forEach(link => {
         link.addEventListener('mouseover', () => {
-            link.previousElementSibling.style.transitionDuration = '0.25s';
+            link.previousElementSibling.style.transition = '0.3s';
             link.previousElementSibling.style.fontSize = '0.7em';
+            link.previousElementSibling.firstElementChild.transition = '0.3s';
+            link.previousElementSibling.firstElementChild.firstElementChild.transition = '0.3s';
+            link.previousElementSibling.firstElementChild.style.width = '20px';
+            link.previousElementSibling.firstElementChild.style.height = '20px';
         })
     })
     handleLinks.forEach(link => {
         link.addEventListener('mouseout', () => {
             link.previousElementSibling.style.fontSize = '1em';
+            link.previousElementSibling.firstElementChild.style.width = '30px';
+            link.previousElementSibling.firstElementChild.style.height = '30px';
         })
     })
 
