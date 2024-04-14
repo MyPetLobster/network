@@ -1,7 +1,10 @@
 
+from django.conf import settings
 from django.urls import path
+from django.conf.urls.static import static
 
 from . import views
+
 
 urlpatterns = [
     path("", views.landing, name="landing"),
@@ -25,3 +28,6 @@ urlpatterns = [
     path("following_list/<int:user_id>", views.following_list, name="following_list"),
     path("post/<int:post_id>", views.post, name="post"),
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

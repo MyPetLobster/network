@@ -168,10 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const userId = document.querySelector("#profile-id").textContent;
             const formData = new FormData(editProfileForm);
 
-            const profilePictureInput = document.querySelector("#edit_profile_picture");
-            const profilePictureFile = profilePictureInput.files[0];
-            formData.append("profile_picture", profilePictureFile);
-
             fetch(`/edit_profile/${userId}`, {
                 method: "POST",
                 body: formData,
