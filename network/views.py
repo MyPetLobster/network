@@ -185,8 +185,6 @@ def edit_profile(request, user_id):
         user.username = request.POST.get("edit-username", "")
 
         if "profile_picture" in request.FILES:
-            print("Profile Picture Found")
-            print(f"Profile Picture: {request.FILES['profile_picture']}")
             user.profile_picture = request.FILES["profile_picture"]
 
         user.save()

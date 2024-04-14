@@ -143,6 +143,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+
+
+    const profilePicture = document.getElementById('profile-picture');
+    const editProfilePicture = document.getElementById('edit-only-profile-picture');
+    const editProfilePicSaveBtn = document.getElementById('edit-prof-pic-save-btn');
+    const editProfilePicCancelBtn = document.getElementById('edit-prof-pic-cancel-btn');
+    const editProfilePicForm = document.getElementById('edit-profile-picture-form');
+
+    profilePicture.addEventListener('click', () => {
+        editProfilePicForm.classList.remove('hidden');
+        fadedBackground.classList.remove('hidden');
+        fadedBackground.addEventListener('click', () => {
+            editProfilePicForm.classList.add('hidden');
+            fadedBackground.classList.add('hidden');
+        });
+    });
+    editProfilePicCancelBtn.addEventListener('click', () => {
+        editProfilePicForm.classList.add('hidden');
+        fadedBackground.classList.add('hidden');
+    });
+
+
+
+
     const editProfileLink = document.querySelector("#edit-profile");
     const editProfileForm = document.querySelector("#edit-profile-form");
 

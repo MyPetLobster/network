@@ -41,6 +41,18 @@
     
 </div>
 
+
+<form id="edit-profile-picture-form" class="hidden" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="edit-only-profile-picture-input" class="form-group">
+        <input type="file" class="form-control-file" id="edit-only-profile-picture" name="edit-only-profile-picture">
+    </div>
+    <div class="btn-box">
+        <button id="edit-prof-pic-save-btn" type="submit" class="btn btn-primary">Save</button>
+        <button id="edit-prof-pic-cancel-btn" type="button" class="cancel-btn btn btn-secondary">Cancel</button>
+    </div>
+</form>
+
 <div id="profile-id" class="hidden">{{ user.id }}</div>
 <form id="edit-profile-form" class="hidden" enctype="multipart/form-data">
     {% csrf_token %}
@@ -191,8 +203,4 @@
     {% endif %}
 </div>
 
-
-<script>
-
-</script>
 {% endblock %}
