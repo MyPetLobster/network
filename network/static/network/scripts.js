@@ -164,12 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         editProfileForm.addEventListener("submit", (event) => {
-            console.log("Submitting form...");
             event.preventDefault();
             const userId = document.querySelector("#profile-id").textContent;
-            console.log(userId);
             const formData = new FormData(editProfileForm);
-            console.log(formData);
+
+            const profilePictureInput = document.querySelector("#edit_profile_picture");
+            const profilePictureFile = profilePictureInput.files[0];
+            formData.append("profile_picture", profilePictureFile);
+
             fetch(`/edit_profile/${userId}`, {
                 method: "POST",
                 body: formData,

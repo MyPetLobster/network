@@ -183,6 +183,10 @@ def edit_profile(request, user_id):
         user.last_name = request.POST.get("edit-last-name", "")
         user.email = request.POST.get("edit-email", "")
         user.username = request.POST.get("edit-username", "")
+
+        if "profile_picture" in request.FILES:
+            user.profile_picture = request.FILES["profile_picture"]
+            
         user.save()
 
         return JsonResponse({

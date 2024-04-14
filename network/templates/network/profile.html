@@ -35,7 +35,7 @@
 </div>
 
 <div id="profile-id" class="hidden">{{ user.id }}</div>
-<form id="edit-profile-form" class="hidden">
+<form id="edit-profile-form" class="hidden" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
         <div>
@@ -53,6 +53,10 @@
         <div>
             <label for="username">Username</label>
             <input type="text" class="form-control" id="edit-username" name="edit-username" value="{{ profile_user.username }}">
+        </div>
+        <div>
+            <label for="profile-pic">Profile Picture</label>
+            <input type="file" class="form-control-file" id="edit-profile-picture" name="edit-profile-picture">
         </div>
     </div>
     <div class="btn-box">
