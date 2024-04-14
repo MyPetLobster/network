@@ -20,7 +20,7 @@ h1 {
 a {
     color: rgb(150, 158, 162);
     text-decoration: none;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 a:hover {
     font-size: 1em;
@@ -174,7 +174,7 @@ form label {
     outline: none !important;
     box-shadow: none;
     cursor: pointer;
-    transition-duration: 300ms;
+    transition: 300ms;
 }
 .btn:focus {
     outline: none !important;
@@ -266,7 +266,7 @@ form label {
 .page-link {
     font-size: 0.7em;
     color: rgb(150, 158, 162);
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 .page-link:hover {
     color: rgb(150, 158, 162);
@@ -290,11 +290,11 @@ form label {
     height: 64px;
 }
 #expand-top-pagination:hover .tp-bar {
-    transition-duration: 300ms;
+    transition: 300ms;
     stroke:var(--primary-green);
 }
 #expand-top-pagination:hover .tp-arrow {
-    transition-duration: 300ms;
+    transition: 300ms;
     stroke:rgb(16, 55, 74)
 }
 #collapse-top-pagination {
@@ -316,7 +316,7 @@ form label {
     justify-content: space-between;
     padding: 0px 16px;
     background-color: rgb(255, 255, 255) !important;
-    transition-duration: 600ms;
+    transition: 600ms;
     height: 54px;
 }
 .vert-bar-space{
@@ -336,7 +336,7 @@ form label {
 .nav-link {
     font-size: 0.9em;
     color: white !important;
-    transition-duration: 600ms;
+    transition: 600ms;
 }
 .navbar:hover .nav-link:hover {
     color: rgb(36,94,122) !important;
@@ -350,7 +350,7 @@ form label {
     top: 2px;
     left: 50%;
     transform: translateX(-50%);
-    transition-duration: 350ms;
+    transition: 350ms;
     z-index: 998;
 }
 .navbar:hover .hero-div {
@@ -398,7 +398,7 @@ form label {
 }
 .card {
     border-radius: 16px;
-    transition-duration: 500ms;
+    transition: 500ms;
 }
 .card:hover {
     background-color: rgb(243, 243, 243);;
@@ -407,7 +407,7 @@ form label {
 }
 .card-body {
     width: 600px;
-    transition-duration: 350ms;
+    transition: 350ms;
 }
 .card-body:hover {
     padding: 24px;
@@ -469,7 +469,7 @@ textarea:focus {
 }
 .heart-icon {
     cursor: pointer;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 .heart-icon:hover {
     transform: scale(1.4);
@@ -477,7 +477,7 @@ textarea:focus {
 .reply-to-link {
     font-size: 0.7em;
     color: rgb(150, 158, 162);
-    transition-duration: 250ms;
+    transition: 250ms;
     cursor: pointer;
 }
 .reply-to-link:hover {
@@ -491,7 +491,7 @@ textarea:focus {
     bottom: 22px;
     right: 12px;
     cursor: pointer;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 .northwest-arrow:hover {
     color: rgb(16, 55, 74);
@@ -503,7 +503,7 @@ textarea:focus {
     left: 11px;
     font-size: 1.2em;
     cursor: pointer;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 .close-x:hover {
     color: rgb(16, 55, 74);
@@ -562,7 +562,7 @@ textarea:focus {
 }
 .landing-link {
     font-size: 1em;
-    transition-duration: 350ms;
+    transition: 350ms;
 }
 #section-all-posts:hover, 
 #section-login:hover {
@@ -607,7 +607,7 @@ textarea:focus {
 #github-text {
     font-size: 0.8em;
     opacity: 0;
-    transition-duration: 350ms;
+    transition: 350ms;
 }
 #section-github-icon:hover #github-text {
     opacity: 1;
@@ -616,16 +616,16 @@ textarea:focus {
     border-radius: 50%;
     height: 36px;
     width: 36px;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 #section-github-icon:hover #github-icon {
     height: 56px;
     width: 56px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.349);
-    transition-duration: 350ms;
+    transition: 350ms;
 }
 #section-github-icon:hover #github-icon>path {
-    transition-duration: 350ms;
+    transition: 350ms;
     fill: var(--primary-green);
 }
 
@@ -692,12 +692,12 @@ textarea:focus {
     cursor: pointer;
 }
 #follow-back-icon:hover {
-    transition-duration: 250ms;
+    transition: 250ms;
     width: 32px;
     height: 32px;
 }
 #follow-back-icon:hover path {
-    transition-duration: 250ms;
+    transition: 250ms;
     fill: var(--primary-green);
 }
 
@@ -712,14 +712,14 @@ textarea:focus {
     width: 30px;
     height: 30px;
     cursor: pointer;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 #back-arrow:hover {
     width: 36px;
     height: 36px;
 }
 #back-arrow:hover path {
-    transition-duration: 250ms;
+    transition: 250ms;
     fill: var(--primary-green);
 }
 .post-page-div {
@@ -826,7 +826,7 @@ textarea:focus {
 .profile-picture-div {
     border-radius: 50%;
     overflow: hidden;
-    transition-duration: 250ms;
+    transition: 250ms;
 }
 .profile-picture {
     height: 100%;
