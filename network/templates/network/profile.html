@@ -1,6 +1,7 @@
 {% extends "network/layout.html" %}
 
-{% load custom_filters %}
+{% load static %}
+{% load custom_filters %}R
 
 {% block body %}
 
@@ -101,18 +102,25 @@
                     {% if post.replies.count > 0 %}
                         <div class="northwest-arrow">&#8689;</div>
                     {% endif %}
+
                     <h5 class="card-title">
-                        {% if post.user.first_name %}
-                            <div class="card-full-name">
-                                {{ post.user.first_name }}.{{ post.user.last_name }}&nbsp;→
+                        <span class="card-pic-name-span">
+                            <div class="card-profile-picture-div">
+                                <img class="profile-picture" src="{% if post.user.profile_picture %}{{ post.user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
                             </div>
-                        {% else %}
-                            <div class="card-username">
-                                {{ post.user.username }}&nbsp;→&nbsp;
-                            </div>
-                        {% endif %}
+                            {% if post.user.first_name %}
+                                <div class="card-full-name">
+                                    {{ post.user.first_name }}.{{ post.user.last_name }}
+                                </div>
+                            {% else %}
+                                <div class="card-username">
+                                    {{ post.user.username }}
+                                </div>
+                            {% endif %}
+                        </span>&nbsp;→&nbsp;
                         <a class="handle-link" href="{% url 'profile' post.user.id %}">&nbsp;@{{ post.user }}</a>
                     </h5>
+                    
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                 </div>
                 <p class="card-text post-content" id="post-content-{{ post.id }}">

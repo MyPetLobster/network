@@ -68,14 +68,14 @@
                     {% endif %}
                     <h5 class="card-title">
                         <span class="card-pic-name-span">
-                        <div class="card-profile-picture-div">
-                            <img class="profile-picture" src="{% if post.user.profile_picture %}{{ post.user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
-                        </div>
-                        {% if post.user.first_name %}
-                            {{ post.user.first_name }}.{{ post.user.last_name }}
-                        {% else %}
-                            {{ post.user.username }}
-                        {% endif %}
+                            <div class="card-profile-picture-div">
+                                <img class="profile-picture" src="{% if post.user.profile_picture %}{{ post.user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
+                            </div>
+                            {% if post.user.first_name %}
+                                {{ post.user.first_name }}.{{ post.user.last_name }}
+                            {% else %}
+                                {{ post.user.username }}
+                            {% endif %}
                         </span>&nbsp;→&nbsp;
                         <a class="handle-link" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
                     </h5>
