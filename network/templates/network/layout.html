@@ -37,7 +37,14 @@
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li><span class="vert-bar-space">
                     <li class="nav-item">
-                        <a id="profile-link" class="nav-link" href="{% url 'profile' user.id %}"><strong>{{ user.username }}</strong></a>
+                        <a id="profile-link" class="nav-link" href="{% url 'profile' user.id %}">
+                            <div id="card-pic-name-span-navbar" class="card-pic-name-span">
+                                <strong>{{ user.username }}</strong>
+                                <div id="nav-profile-picture-div" class="profile-picture-div">
+                                    <img class="profile-picture" src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
+                                </div>
+                            </div>
+                        </a>
                     </li>
                 {% else %}
                     <li class="nav-item">

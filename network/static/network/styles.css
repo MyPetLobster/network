@@ -835,6 +835,13 @@ textarea:focus {
     transition: 300ms;
 }
 
+#nav-profile-picture-div {
+    opacity: 0;
+    width: 1px;
+    height: 32px;
+    transition: 300ms;
+}
+
 .card-profile-picture-div {
     height: 28px;
     width: 28px;
@@ -868,6 +875,14 @@ textarea:focus {
     font-size: 12px !important;
 }
 
+#card-pic-name-span-navbar {
+    position: relative;
+    bottom: 6px;
+}
+#card-pic-name-span-navbar:hover #nav-profile-picture-div {
+    opacity: 1;
+    width: 32px;
+}
 .card-pic-name-span {
     display: flex;
     align-items: center;
