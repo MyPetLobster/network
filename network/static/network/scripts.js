@@ -225,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("#profile-name").textContent = `Name: ${result.first_name} ${result.last_name}`;
                 document.querySelector("#profile-email").textContent = `Email: ${result.email}`;
                 document.querySelector("#profile-username").textContent =`Username: ${result.username}`;
+                document.querySelector("#profile-bio").textContent = `Bio: ${result.bio}`;
                 document.querySelector("#h1-name").textContent = `${result.username}'s Profile`;
                 if (result.first_name === "" && result.last_name === "") {
                     document.querySelectorAll(".card-username").forEach(name => {

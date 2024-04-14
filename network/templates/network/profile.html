@@ -42,6 +42,13 @@
         <p id="profile-name" class="info-text"><span class="bold">Name:</span> {{ profile_user.first_name }} {{ profile_user.last_name }}</p>
         <p id="profile-email" class="info-text"><span class="bold">Email:</span> {{ profile_user.email }}</p>
         <p id="profile-username" class="info-text"><span class="bold">Username:</span> {{ profile_user.username }}</p>
+        <p id="profile-bio" class="info-text"><span class="bold">Bio:</span> 
+            {% if profile_user.bio == None %}
+                &nbsp;
+            {% else %}
+                {{ profile_user.bio }} 
+            {% endif %}
+        </p>
     </div>
         <p class="info-text follow-count-text"><a href="{% url 'follower_list' profile_user.id %}">Followers</a> → <span id="followers-count">{{ profile_user.followers.count }}</span></p>
         <p class="info-text follow-count-text">{{ profile_user.following.count }} ← <a href="{% url 'following_list' profile_user.id %}">Following</a></p>
@@ -80,6 +87,10 @@
         <div>
             <label for="username">Username</label>
             <input type="text" class="form-control" id="edit-username" name="edit-username" value="{{ profile_user.username }}">
+        </div>
+        <div>
+            <label for="bio">Bio</label>
+            <textarea name="edit-bio" id="edit-bio" class="edit-textarea form-control edit-post-content" rows="3">{% if profile_user.bio %}{{ profile_user.bio }}{% else %}{% endif %}</textarea>
         </div>
         <div>
             <label for="edit-profile-picture">Profile Picture</label>

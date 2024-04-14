@@ -183,6 +183,7 @@ def edit_profile(request, user_id):
         user.last_name = request.POST.get("edit-last-name", "")
         user.email = request.POST.get("edit-email", "")
         user.username = request.POST.get("edit-username", "")
+        user.bio = request.POST.get("edit-bio", "")
             
         if "edit-profile-picture" in request.FILES:
             user.profile_picture = request.FILES["edit-profile-picture"]
@@ -194,7 +195,8 @@ def edit_profile(request, user_id):
             'last_name': user.last_name,
             'email': user.email,
             'username': user.username,
-            'profile_picture': user.profile_picture.url
+            'profile_picture': user.profile_picture.url,
+            'bio': user.bio
         })
 
 
