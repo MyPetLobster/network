@@ -282,6 +282,9 @@ form label {
     color: white !important;
     font-weight: bold;
 }
+.pagination-nav-container {
+    height: 54px;
+}
 
 /* Top Pagination controls */
 #expand-top-pagination,
@@ -665,6 +668,7 @@ textarea:focus {
     font-size: 0.9em;
 }
 #profile-info-div {
+    max-width: 450px;
     margin-bottom: 16px;    
 }
 .info-text {
