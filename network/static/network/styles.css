@@ -379,6 +379,20 @@ form label {
     bottom: 6px;
     margin-left: 256px;
 }
+#card-pic-name-span-navbar {
+    position: relative;
+    bottom: 6px;
+}
+#card-pic-name-span-navbar:hover #nav-profile-picture-div {
+    opacity: 1;
+    width: 32px;
+}
+.card-pic-name-span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
 
 
 
@@ -882,17 +896,3 @@ textarea:focus {
     font-size: 12px !important;
 }
 
-#card-pic-name-span-navbar {
-    position: relative;
-    bottom: 6px;
-}
-#card-pic-name-span-navbar:hover #nav-profile-picture-div {
-    opacity: 1;
-    width: 32px;
-}
-.card-pic-name-span {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-}
