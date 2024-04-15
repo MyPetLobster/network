@@ -94,6 +94,7 @@ form label {
 #reply-form,
 #edit-profile-form, 
 #edit-profile-picture-form,
+#edit-password-form,
 .edit-post-form {
     border: 1px solid rgb(222, 222, 222);
     border-radius: 12px;
@@ -119,11 +120,19 @@ form label {
 #edit-only-profile-picture-input {
     font-size: 11px;
 }
+#edit-password-form,
 #reply-form {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+#edit-password-form {
+    font-size: 0.9em;
+    min-width: 300px;
+}
+#edit-password-form div input {
+    margin-bottom: 12px;
 }
 .edit-post-form {
     position: fixed;
@@ -674,11 +683,13 @@ textarea:focus {
 #hey-thats-you {
     font-size: 0.9em;
 }
-#edit-profile {
+#edit-profile,
+#edit-password {
     margin-bottom: 8px;
     font-size: 0.8em;
 }
-#edit-profile:hover {
+#edit-profile:hover,
+#edit-password:hover {
     font-size: 0.9em;
 }
 #profile-info-div {
@@ -896,3 +907,23 @@ textarea:focus {
     font-size: 12px !important;
 }
 
+
+
+#change-password-message-div {
+    position: fixed;
+    top: 64px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 9999;
+    width: 300px;
+    padding: 12px;
+    border-radius: 12px;
+    background-color: rgb(91, 121, 45);
+    color: rgb(209, 202, 202);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.454);
+    text-align: center;
+    font-size: 0.9em;
+}
+.error {
+    background-color: rgb(121, 41, 25) !important;
+}

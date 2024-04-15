@@ -20,6 +20,7 @@ urlpatterns = [
     path("profile/<int:user_id>", views.profile, name="profile"),
     path("edit_profile/<int:user_id>", views.edit_profile, name="edit_profile"),
     path("edit_profile_picture/<int:user_id>", views.edit_profile_picture, name="edit_profile_picture"),
+    path("edit_password/<int:user_id>", views.edit_password, name="edit_password"),
     path("following", views.following, name="following"),
     path("like_post/<int:post_id>", views.like_post, name="like_post"),
     path("post/like_post/<int:post_id>", views.like_post, name="like_post"),

@@ -242,6 +242,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const editPasswordLink = document.querySelector("#edit-password");
+    const editPasswordForm = document.querySelector("#edit-password-form");
+
+    if (editPasswordLink) {
+        editPasswordLink.addEventListener("click", () => {
+            editPasswordForm.classList.toggle("hidden");
+            fadedBackground.classList.toggle("hidden");
+            if (!fadedBackground.classList.contains("hidden")) {
+                fadedBackground.addEventListener("click", () => {
+                    editPasswordForm.classList.add("hidden");
+                    fadedBackground.classList.add("hidden");
+                });
+            }
+            editPasswordForm.querySelector("#edit-pass-cancel-btn").addEventListener("click", () => {
+                editPasswordForm.classList.add("hidden");
+                fadedBackground.classList.add("hidden");
+            });
+        });
+
+        editPasswordForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const userId = document.querySelector("#profile-id").textContent;
+            const formData = new FormData(editPasswordForm);
+            editPasswordForm.classList.add("hidden");
+            fadedBackground.classList.add("hidden");
+            fetch(`/edit_password/${userId}`, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": document.querySelector("input[name='csrfmiddlewaretoken']").value
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                document.querySelector("#edit-password-form").reset();
+                if (result.message) {
+                    const changePasswordMessageDiv = document.querySelector("#change-password-message-div");
+                    changePasswordMessageDiv.classList.remove("hidden");
+                    if (result.message === "Incorrect password." || result.message === "Passwords do not match.") {
+                        changePasswordMessageDiv.classList.add("error");
+                    } else {
+                        changePasswordMessageDiv.classList.remove("error");
+                    }
+                    changePasswordMessageDiv.textContent = result.message;
+                    setTimeout(() => {
+                        changePasswordMessageDiv.textContent = "";
+                        changePasswordMessageDiv.classList.add("hidden");
+                    }, 3000);
+                }
+            });
+        });
+    }
+
+
+
     const expandTopPagination = document.getElementById('expand-top-pagination');
     const topPagination = document.getElementById('top-pagination');
     const collapseTopPagination = document.getElementById('collapse-top-pagination');

@@ -212,6 +212,22 @@ def edit_profile_picture(request, user_id):
     
 
 @login_required
+def edit_password(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if request.method == "POST":
+        old_password = request.POST["old-password"]
+        if not user.check_password(old_password):
+            return JsonResponse({"message": "Incorrect password."})
+        new_password = request.POST["new-password"]
+        confirm_password = request.POST["confirm-password"]
+        if new_password != confirm_password:
+            return JsonResponse({"message": "Passwords must match."})
+        user.set_password(new_password)
+        user.save()
+        return JsonResponse({"message": "Password changed."})
+    
+
+@login_required
 def edit_post(request, post_id):
     post = Post.objects.get(pk=post_id)
     if request.method == "PUT":

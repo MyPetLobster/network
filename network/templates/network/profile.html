@@ -5,6 +5,10 @@
 
 {% block body %}
 
+<div id="change-password-message-div" class="hidden">
+    
+</div>
+
 
 
 <div class="top-content-div">
@@ -32,8 +36,10 @@
                 {% if profile_user.profile_picture %}
                     <div id="hey-thats-you-div">↑ <span id="hey-thats-you">Hey, that's you!</span> ↑</div>
                     <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
+                    <a id="edit-password" href="#">→ <span id="edit-your-password">Change Password</span> ←</a>
                 {% else %}
                     <a id="edit-profile" href="#">→ <span id="edit-your-info">Edit Your Info</span> ←</a>
+                    <a id="edit-password" href="#">→ <span id="edit-your-password">Change Password</span> ←</a>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -101,7 +107,28 @@
         <button id="edit-prof-save-btn" type="submit" class="btn btn-primary">Save</button>
         <button id="edit-prof-cancel-btn" type="button" class="cancel-btn btn btn-secondary">Cancel</button>
     </div>
+</form>
 
+<form id="edit-password-form" class="hidden" action="edit_password/{{ user.id }}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <div>
+            <label for="old-password">Old Password</label>
+            <input type="password" class="form-control" id="old-password" name="old-password">
+        </div>
+        <div>
+            <label for="new-password">New Password</label>
+            <input type="password" class="form-control" id="new-password" name="new-password">
+        </div>
+        <div>
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm-password" name="confirm-password">
+        </div>
+    </div>
+    <div class="btn-box">
+        <button id="edit-pass-save-btn" type="submit" class="btn btn-primary">Save</button>
+        <button id="edit-pass-cancel-btn" type="button" class="cancel-btn btn btn-secondary">Cancel</button>
+    </div>
 </form>
 
 <div class="all-posts">
