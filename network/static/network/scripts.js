@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 } else {
                     document.querySelectorAll(".card-full-name").forEach(name => {
-                        name.textContent = `${result.first_name}.${result.last_name} →`;
+                        name.textContent = `${result.first_name}.${result.last_name}`;
                     });
                 }
                 editProfileForm.classList.add("hidden");
