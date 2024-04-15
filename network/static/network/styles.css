@@ -101,14 +101,16 @@ form label {
     background-color: rgba(201, 228, 51, 0.626);
     padding: 12px;
     position: fixed;
-    top: 50vh;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 9999;
+    z-index: 9999 !important;
     min-width: 600px;
 }
 
 #edit-profile-picture-form {
+    top: 50%;
+    transform: translate(-50%, -50%);
     padding: 24px;
     min-width: 350px !important;
     display: flex;
@@ -134,13 +136,8 @@ form label {
 #edit-password-form div input {
     margin-bottom: 12px;
 }
-.edit-post-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 #edit-profile-form {
+    top: 50%;
     transform: translate(-50%, -50%);
 }
 #edit-profile-form .form-group {
@@ -503,7 +500,9 @@ textarea:focus {
 .heart-icon:hover {
     transform: scale(1.4);
 }
-.reply-to-link {
+.reply-to-link,
+.edit-post-link-1,
+.edit-post-link-2 {
     font-size: 0.7em;
     color: rgb(150, 158, 162);
     transition: 250ms;
@@ -529,7 +528,7 @@ textarea:focus {
     color: rgb(193, 193, 193);
     position: relative;
     bottom: 22px;
-    left: 11px;
+    left: 650px;
     font-size: 1.2em;
     cursor: pointer;
     transition: 250ms;
