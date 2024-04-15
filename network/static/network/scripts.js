@@ -222,10 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(result => {
                 console.log(result);
-                document.querySelector("#profile-name").textContent = `Name: ${result.first_name} ${result.last_name}`;
-                document.querySelector("#profile-email").textContent = `Email: ${result.email}`;
-                document.querySelector("#profile-username").textContent =`Username: ${result.username}`;
-                document.querySelector("#profile-bio").textContent = `Bio: ${result.bio}`;
+                document.querySelector("#profile-name").innerHTML = `<span class="bold">Name:</span> ${result.first_name} ${result.last_name}`;
+                document.querySelector("#profile-email").innerHTML = `<span class="bold">Email:</span> ${result.email}`;
+                document.querySelector("#profile-username").innerHTML =`<span class="bold">Username:</span> ${result.username}`;
+                document.querySelector("#profile-bio").innerHTML = `<span class="bold">Bio:</span> ${result.bio}`;
                 document.querySelector("#h1-name").textContent = `${result.username}'s Profile`;
                 if (result.first_name === "" && result.last_name === "") {
                     document.querySelectorAll(".card-username").forEach(name => {
