@@ -1,13 +1,15 @@
 # CS50W - Project 4 - Network 
-### By Cory Suzuki - April 2024
 
-https://github.com/MyPetLobster/network
+### Echo - A Social Media Site Inspired by Twitter
+#### By Cory Suzuki - April 2024
+
+#### Quick Links
+- Project Repo: https://github.com/MyPetLobster/network
+- Demo Video: https://youtu.be/
+- Course Website: https://cs50.harvard.edu/web/2020/projects/4/network/
 
 
-
-
-
-## Video and Screenshots
+## Video Demo, Screenshots, and Gifs
 
 **Submission Youtube Video**
 
@@ -16,16 +18,14 @@ https://github.com/MyPetLobster/network
 
 **Site Screenshots**
 
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
-<img src="" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-01.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-02.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-03.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-04.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-05.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-06.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-07.png" height="300px">
+<img src="media/demo_media/screenshots/echo-screenshot-08.png" height="300px">
 
 **Site Gifs**
  
@@ -33,6 +33,50 @@ https://github.com/MyPetLobster/network
 <img src="" height="300px">
 <img src="" height="300px">
 <img src="" height="300px">
+
+
+## Other Project Media
+### Decided to design a logo for my site, Echo. Here are a few iterations and the final design.
+#### Prototype/Planning - started with an 'E' and did some rearranging 
+
+<img src="media/demo_media/echo-logo-1.png" height="200px">
+<img src="media/demo_media/echo-logo-2.png" height="200px"> 
+
+#### Final Logo Evolution
+<img src="media/demo_media/echo-logo-3.png" height="200px">
+<img src="media/demo_media/echo-logo-4.png" height="200px">
+<img src="media/demo_media/echo-logo-5.png" height="200px">
+<img src="media/demo_media/echo-logo-final.png" height="200px"> 
+
+
+#### Default profile picture I "designed" this, aka realized default profile pics are often just two circles.
+<img src="media/demo_media/default-prof-pic.png" height="300px">
+
+### Demo Database - User Profile Pictures
+#### I used DeepAi.org to generate some user profile pictures, here are the prompts and images:
+##### "A politician who was just informed he accidentally tweeted what was supposed to be a private google search." 
+
+<img src="media/profile_pictures/senhumphries.jpg" height="150px"> 
+
+
+##### "Profile picture for a conspiracy theorist's twitter account"
+
+<img src="media/profile_pictures/illuminatiinsider.jpg" height="150px">  
+
+
+##### "Profile picture of a snarky man who runs a parody twitter account called 'RealFakeFacts'"
+
+<img src="media/profile_pictures/realfakefacts.jpg" height="150px"> 
+
+##### "Picture of a blonde woman used by scammers running a fake Taylor Swift twitter account"
+
+<img src="media/profile_pictures/therealtaylorswift2.jpg" height="150px">
+
+
+##### I made this one in Gimp. It's the logo for a news company called "The Source News". In this fictional world, they were sued by Coke AND Pepsi and won both lawsuits. 
+
+<img src="media/profile_pictures/the-source-news-2.jpg" height="150px"> 
+
 
 
 ## Project Specifications

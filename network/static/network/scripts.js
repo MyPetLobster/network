@@ -236,6 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         name.textContent = `${result.first_name}.${result.last_name}`;
                     });
                 }
+                document.querySelector("#profile-picture").src = result.profile_picture;
+                document.querySelector("#edit-profile-form").reset();
                 editProfileForm.classList.add("hidden");
                 fadedBackground.classList.add("hidden");
             });
