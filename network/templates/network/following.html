@@ -73,6 +73,7 @@
                             <form class="edit-post-form hidden">
                                 {% csrf_token %}
                                 <div class="post-id hidden">{{ post.id }}</div>
+                                <label for="edit-post-content">Edit Post:</label>
                                 <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
                                 <div class="btn-box">
                                     <button type="submit" class="btn btn-primary">Save</button>
