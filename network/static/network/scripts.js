@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     editPostLinks.forEach(link => {
         link.addEventListener('click', () => {
             fadedBackground.classList.toggle('hidden');
-            const editPostForm = link.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
+            const editPostForm = link.nextElementSibling
             editPostForm.classList.toggle('hidden');
             editPostForm.querySelector('.cancel-edit').addEventListener('click', () => {
                 editPostForm.classList.add('hidden');
