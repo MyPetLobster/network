@@ -460,7 +460,11 @@ form label {
 .post-likes,
 .edit-post-link,
 .reply-post-link {
-    font-size: 0.8em;
+    font-size: 0.7em;
+}
+.reply-post-link:hover,
+.edit-post-link:hover {
+    font-size: 0.9em;
 }
 .post-timestamp {
     width: 100%;

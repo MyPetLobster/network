@@ -242,6 +242,17 @@
                             {% else %}
                                 people/bots liked this post
                             {% endif %}
+                            {% if post.replies.count != 0 %}
+                                &nbsp; // &nbsp;
+                                <a href="{% url 'post' post.id %}">
+                                    {{ post.replies.count }}
+                                    {% if post.replies.count == 1 %}
+                                        reply
+                                    {% else %}
+                                        replies
+                                    {% endif %}
+                                </a>
+                            {% endif %}
                         </div>
                         <div>
                         {% if user == post.user %}
