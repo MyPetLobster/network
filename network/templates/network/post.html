@@ -59,7 +59,7 @@
                         <a id="edit-post-link-1" href="#">Edit</a>
                     {% else %}
                         {% if user.is_authenticated %}
-                            <a id="post-page-reply" class="reply-post-link" href="#">Reply</a><div class="reply-id hidden">{{ og_post.id }}</div>
+                            <a class="reply-post-link" href="#">Reply</a><div class="reply-id hidden">{{ og_post.id }}</div>
                         {% endif %}
                     {% endif %}
                     </div>
