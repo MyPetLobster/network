@@ -49,11 +49,20 @@ a:hover {
     gap: 10px;
     justify-content: center;
 }
-.small-grey-text {
+.small-grey-text,
+.reply-count-text,
+.slant-divider {
     position: relative;
     top: 4px;
     font-size: 0.7em;
     color: rgb(113, 111, 111);
+}
+.reply-count-text {
+    cursor: pointer;
+    transition: 250ms;
+}
+.reply-count-text:hover {
+    color: var(--primary-green);
 }
 #faded-background-layout,
 #faded-background {
@@ -409,6 +418,12 @@ form label {
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
+}
+.card-bottom-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
 }
 
 .middot-1,

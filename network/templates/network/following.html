@@ -100,23 +100,28 @@
                         {% endif %}
                     {% endif %}
                     <div class="card-bottom-div">
-                        <div class="card-text small-grey-text">
-                            {{ post.likes.count }} 
-                            {% if post.likes.count == 1 %}
-                                person/bot liked this post
-                            {% else %}
-                                people/bots liked this post
-                            {% endif %}
+                        <div class="card-bottom-left">
+                            <div class="card-text small-grey-text">
+                                {{ post.likes.count }} 
+                                {% if post.likes.count == 1 %}
+                                    person/bot liked this post
+                                {% else %}
+                                    people/bots liked this post
+                                {% endif %}
+                            </div>
                             {% if post.replies.count != 0 %}
-                                &nbsp; // &nbsp;
-                                <a href="{% url 'post' post.id %}">
-                                    {{ post.replies.count }}
-                                    {% if post.replies.count == 1 %}
-                                        reply
-                                    {% else %}
-                                        replies
-                                    {% endif %}
-                                </a>
+                                <span class="slant-divider">//</span>
+                                <div class="reply-count-text">
+                                    
+                                        <a href="{% url 'post' post.id %}">
+                                            {{ post.replies.count }}
+                                            {% if post.replies.count == 1 %}
+                                                reply
+                                            {% else %}
+                                                replies
+                                            {% endif %}
+                                        </a>
+                                </div>
                             {% endif %}
                         </div>
                         <div>
