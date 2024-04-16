@@ -204,11 +204,39 @@ def edit_profile(request, user_id):
 @login_required
 def edit_profile_picture(request, user_id):
     user = User.objects.get(pk=user_id)
+    current_user = request.user
+    
+    if current_user != user:
+        return HttpResponseRedirect(reverse("profile", args=(user_id,)))
+    
     if request.method == "POST":
         old_profile_pic_url = user.profile_picture.url
         user.profile_picture = request.FILES["edit-only-profile-picture"]
         user.save()
-        
+
+        # Delete old profile picture
+        if old_profile_pic_url != "/media/profile_pictures/default.jpg":
+            old_profile_pic_path = old_profile_pic_url[1:]
+            os.remove(old_profile_pic_path)
+
+        return JsonResponse({
+            'profile_picture': user.profile_picture.url
+        })
+    
+
+@login_required
+def delete_profile_picture(request, user_id):
+    current_user = request.user
+    user = User.objects.get(pk=user_id)
+
+    if current_user != user:
+        return HttpResponseRedirect(reverse("profile", args=(user_id,)))
+    
+    if request.method == "POST":
+        old_profile_pic_url = user.profile_picture.url
+        user.profile_picture = "profile_pictures/default.jpg"
+        user.save()
+
         # Delete old profile picture
         if old_profile_pic_url != "/media/profile_pictures/default.jpg":
             old_profile_pic_path = old_profile_pic_url[1:]

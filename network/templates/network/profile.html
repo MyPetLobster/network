@@ -76,6 +76,11 @@
         <button id="edit-prof-pic-save-btn" type="submit" class="btn btn-primary">Save</button>
         <button id="edit-prof-pic-cancel-btn" type="button" class="cancel-btn btn btn-secondary">Cancel</button>
     </div>
+    {% if profile_user.profile_picture and profile_user.profile_picture != "profile_pictures/default.jpg" %}
+        <div id="delete-prof-pic-btn-div" class="btn-box">
+            <button id="delete-prof-pic-btn" type="button" class="cancel-btn btn btn-danger">Remove Picture</button>
+        </div>
+    {% endif %}
 </form>
 
 <div id="profile-id" class="hidden">{{ user.id }}</div>
@@ -300,5 +305,4 @@
     </nav>
     {% endif %}
 </div>
-
 {% endblock %}

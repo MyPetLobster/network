@@ -177,14 +177,44 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(result => {
                 console.log(result);
+                console.log(`result.profile_picture: ${result.profile_picture}`);
                 document.querySelector('#profile-picture').src = result.profile_picture;
                 editProfilePicForm.classList.add('hidden');
-                fadedBackground.classList.add('hidden');
+                fadedBackground.classList.add('hidden');    
+                const deleteProfPicBtnDiv = document.querySelector('#delete-prof-pic-btn-div');
+                if (deleteProfPicBtnDiv) {
+                    deleteProfPicBtnDiv.classList.remove('hidden');
+                }
             });
             
         });
     }
 
+
+    const deleteProfilePictureButton = document.getElementById('delete-prof-pic-btn');
+    if (deleteProfilePictureButton) {
+        deleteProfilePictureButton.addEventListener('click', () => {
+            const profileId = document.getElementById('profile-id').innerText;
+            fetch(`delete_profile_picture/${profileId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(result => { 
+                console.log(result);
+                document.querySelector('#profile-picture').src = result.profile_picture;
+                console.log(`result.profile_picture: ${result.profile_picture}`);
+                editProfilePicForm.classList.add('hidden');
+                fadedBackground.classList.add('hidden');
+
+                if (result.profile_picture === '/media/profile_pictures/default.jpg') {
+                    document.querySelector('#delete-prof-pic-btn-div').classList.add('hidden');
+                }
+            })
+        });
+    }
 
 
     const editProfileLink = document.querySelector("#edit-profile");

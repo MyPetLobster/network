@@ -1000,3 +1000,10 @@ textarea:focus {
     opacity: 1;
     transition: 300ms;
 }
+
+
+#delete-prof-pic-btn {
+    width: auto !important;
+    font-size: 0.7em;
+    padding: 2px 8px !important;
+}
