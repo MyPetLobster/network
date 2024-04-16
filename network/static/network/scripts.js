@@ -65,6 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const deleteReplyPostButtons = document.querySelectorAll('.delete-reply-post-btn');
+    deleteReplyPostButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const postId = button.nextElementSibling.textContent;
+            alert(postId);
+            const shortCard = document.querySelector(`#short-card-${postId}`);
+            const fullCard = document.querySelector(`#card-${postId}`);
+
+            const response = await fetch(`/post/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            });
+            if (response.ok) {
+                shortCard.remove();
+                fullCard.remove();
+                fadedBackground.classList.add('hidden');
+            }
+        });
+    });
+
+
+
 
     heartIcons = document.querySelectorAll('.heart-icon');
     heartIcons.forEach(icon => {

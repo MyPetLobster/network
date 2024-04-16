@@ -133,7 +133,7 @@ def post(request, post_id):
     post = Post.objects.get(pk=post_id)
 
     # If the post is a reply, get the original post
-    if post.reply_to:
+    if post.reply_to and request.method != "DELETE":
         post = Post.objects.get(pk=post.reply_to.id)
 
     if request.method == "DELETE":
