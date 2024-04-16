@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const fadedBackground = document.querySelector("#faded-background")
     const editPostLinks = document.querySelectorAll('.edit-post-link');
