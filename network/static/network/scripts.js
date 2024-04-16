@@ -60,7 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             if (response.ok) {
+                // remove the <br> tag after the post and the post itself from DOM
+                const brTag = document.querySelector(`#br-${postId}`);
+                brTag.remove()
                 post.remove();
+
                 fadedBackground.classList.add('hidden');
             }
         });

@@ -148,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <br>
+        <br id="br-{{ post.id }}">
     {% endfor %}
     {% if posts.paginator.num_pages <= 1 %}
     {% else %}
@@ -188,20 +188,21 @@
     const newPostButton = document.getElementById('new-post-button');
     const newPostForm = document.getElementById('new-post-form');
     const fadedBackground = document.getElementById('faded-background');
-
-    newPostButton.addEventListener('click', () => {
-        newPostForm.classList.toggle('hidden');
-        fadedBackground.classList.toggle('hidden');
-        newPostForm.querySelector('textarea').focus();  
-        newPostForm.querySelector('.cancel-btn').addEventListener('click', () => {
-            newPostForm.classList.add('hidden');
-            fadedBackground.classList.add('hidden');
+    if (newPostButton) {
+        newPostButton.addEventListener('click', () => {
+            newPostForm.classList.toggle('hidden');
+            fadedBackground.classList.toggle('hidden');
+            newPostForm.querySelector('textarea').focus();  
+            newPostForm.querySelector('.cancel-btn').addEventListener('click', () => {
+                newPostForm.classList.add('hidden');
+                fadedBackground.classList.add('hidden');
+            });
+            fadedBackground.addEventListener('click', () => {
+                newPostForm.classList.add('hidden');
+                fadedBackground.classList.add('hidden');
+            });
         });
-        fadedBackground.addEventListener('click', () => {
-            newPostForm.classList.add('hidden');
-            fadedBackground.classList.add('hidden');
-        });
-    });
+    }
 
 
 
