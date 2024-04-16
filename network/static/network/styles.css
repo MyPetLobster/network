@@ -428,6 +428,9 @@ form label {
     align-items: center;
     margin-bottom: 24px;
 }
+#index-top-content-div {
+    margin-bottom: 0px;
+}
 
 /* Post Cards */
 .all-posts {
