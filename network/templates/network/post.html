@@ -30,7 +30,10 @@
                     </h5>
                 <span class="card-text post-timestamp">{{ og_post.timestamp }}</span>
             </div>
-            <p class="card-text post-content" id="post-content-{{ og_post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#8674;</span> {{ og_post.content }}</p>
+            <p class="card-text post-content">&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="tab-fwd">&#8674;</span> 
+                <span id="og-post-text-content">{{ og_post.content }}</span>
+            </p>
             <div class="likes-div">
                 {% if user.is_authenticated %}
                     {% if user in og_post.likes.all %}
@@ -109,7 +112,7 @@
                             </h5>
                             <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                         </div>
-                        <p class="card-text post-content" id="post-content-{{ post.id }}">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#8618;</span> {{ post.content }}</p>
+                        <p class="card-text post-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab-fwd">&#8618;</span> <span id="post-content-{{ post.id }}">{{ post.content }}</span></p>
                         <div class="likes-div">
                             {% if user.is_authenticated %}
                                 {% if user in post.likes.all %}
@@ -144,7 +147,7 @@
                     </div>
                 </div>
 
-                <form id="edit-post-form-2" class="edit-post-form hidden">
+                <form class="edit-post-form-2 edit-post-form hidden">
                     {% csrf_token %}
                     <div class="post-id hidden">{{ post.id }}</div>
                     <textarea name="edit-post-content" class="edit-textarea form-control edit-post-content">{{ post.content }}</textarea>
@@ -214,9 +217,9 @@
 
 
     const editPostLinkOne = document.querySelector("#edit-post-link-1");
-    const editPostLinkTwos = document.querySelectorAll(".edit-post-link-2");
     const editPostFormOne = document.querySelector("#edit-post-form-1");
-    const editPostFormTwo = document.querySelector("#edit-post-form-2");
+    const editPostLinkTwos = document.querySelectorAll(".edit-post-link-2");
+    const editPostFormTwos = document.querySelectorAll(".edit-post-form-2");
     const fadedBackground = document.querySelector("#faded-background");
 
     if (editPostLinkOne) {
@@ -234,25 +237,79 @@
                 editPostFormOne.querySelector(".edit-post-content").value = "";
             });
         });
+
+        editPostFormOne.onsubmit = (event) => {
+            event.preventDefault();
+            const csrf_token = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+            const postContent = editPostFormOne.querySelector(".edit-post-content").value;
+            const postId = editPostFormOne.querySelector(".post-id").textContent;
+
+            fetch(`/edit_post/${postId}`, {
+                method: "PUT",
+                body: JSON.stringify({
+                    content: postContent
+                }),
+                headers: {
+                    "X-CSRFToken": csrf_token
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.querySelector("#og-post-text-content").textContent = result.content;
+                editPostFormOne.classList.add("hidden");
+                fadedBackground.classList.add("hidden");
+                editPostFormOne.querySelector(".edit-post-content").value = result.content;
+            });
+        }
+        
     }
 
     if (editPostLinkTwos) {
         editPostLinkTwos.forEach((editPostLinkTwo) => {
             editPostLinkTwo.addEventListener("click", () => {
-                editPostFormTwo.classList.remove("hidden");
+                const thisLinkEditForm = editPostLinkTwo.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
+                thisLinkEditForm.classList.remove("hidden");
                 fadedBackground.classList.remove("hidden");
-                const cancelButton = editPostFormTwo.querySelector(".cancel-edit");
+                const cancelButton = thisLinkEditForm.querySelector(".cancel-edit");
                 cancelButton.addEventListener("click", () => {
-                    editPostFormTwo.classList.add("hidden");
+                    thisLinkEditForm.classList.add("hidden");
                     fadedBackground.classList.add("hidden");
                 });
                 fadedBackground.addEventListener("click", () => {
-                    editPostFormTwo.classList.add("hidden");
+                    thisLinkEditForm.classList.add("hidden");
                     fadedBackground.classList.add("hidden");
-                    editPostFormTwo.querySelector(".edit-post-content").value = "";
+                    thisLinkEditForm.querySelector(".edit-post-content").value = "";
                 });
             });
         });
+
+        editPostFormTwos.forEach((editPostFormTwo) => {
+            editPostFormTwo.onsubmit = (event) => {
+                event.preventDefault();
+                const csrf_token = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+                const postContent = editPostFormTwo.querySelector(".edit-post-content").value;
+                const postId = editPostFormTwo.querySelector(".post-id").textContent;
+
+                fetch(`/edit_post/${postId}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        content: postContent
+                    }),
+                    headers: {
+                        "X-CSRFToken": csrf_token
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    const postContentSpan = document.querySelector(`#post-content-${postId}`);
+                    postContentSpan.textContent = result.content;
+                    editPostFormTwo.classList.add("hidden");
+                    fadedBackground.classList.add("hidden");
+                    editPostFormTwo.querySelector(".edit-post-content").value = result.content;
+                });
+            }
+        });
+        
     }
 
 

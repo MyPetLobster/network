@@ -81,15 +81,10 @@
                     </h5>
                     <span class="card-text post-timestamp">{{ post.timestamp }}</span>
                 </div>
-                <p class="card-text post-content" id="post-content-{{ post.id }}">
+                <p class="card-text post-content">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    {% if post.reply_to %}
-                    <span class="tab-fwd">&#8618; <a href="{% url 'profile' post.reply_to.user.id %}"class="reply-to-link">@{{ post.reply_to.user.username }}</a></span>
-                    {{ post.content }}
-                    {% else %}
                     <span class="tab-fwd">&#8674;</span>
-                    {{ post.content }}
-                    {% endif %} 
+                    <span id="post-content-{{ post.id }}">{{ post.content }}</span>
                 </p>
                 <div class="likes-div">
                     {% if user.is_authenticated %}

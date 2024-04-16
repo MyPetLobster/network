@@ -205,7 +205,7 @@ def edit_profile(request, user_id):
 def edit_profile_picture(request, user_id):
     user = User.objects.get(pk=user_id)
     current_user = request.user
-    
+
     if current_user != user:
         return HttpResponseRedirect(reverse("profile", args=(user_id,)))
     

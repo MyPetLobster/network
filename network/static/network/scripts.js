@@ -25,9 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.preventDefault(); 
                 // Retrieve the CSRF token from Django hidden input field
                 const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-                const formData = new FormData();
-                formData.append('content', editPostContent.value);
-                console.log('Submitting edit post form...');
                 fetch(`edit_post/${editPostForm.querySelector('.post-id').textContent}`, {
                     method: 'PUT',
                     body: JSON.stringify({

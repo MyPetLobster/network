@@ -509,7 +509,7 @@ textarea:focus {
 }
 .reply-to-link,
 #edit-post-link-1,
-#edit-post-link-2 {
+.edit-post-link-2 {
     font-size: 0.7em !important;
     color: rgb(150, 158, 162);
     transition: 250ms;
