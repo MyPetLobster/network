@@ -908,7 +908,8 @@ textarea:focus {
 
 
 
-#change-password-message-div {
+#change-password-message-div,
+.auth-message-div {
     position: fixed;
     top: 64px;
     left: 50%;
@@ -923,6 +924,7 @@ textarea:focus {
     text-align: center;
     font-size: 0.9em;
 }
-.error {
+.error,
+.auth-message-div {
     background-color: rgb(121, 41, 25) !important;
 }
