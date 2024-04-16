@@ -351,6 +351,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    let currentPageNumber = document.getElementById('current_page').textContent;
+    let currentPageLinks = document.querySelectorAll('.page-link-' + currentPageNumber);
+    currentPageLinks.forEach(link => {
+        link.classList.add('active-page-link');
+    });
+
+
+
     const handleLinks = document.querySelectorAll('.handle-link');
     handleLinks.forEach(link => {
         link.addEventListener('mouseover', () => {

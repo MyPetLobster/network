@@ -27,6 +27,13 @@ a:hover {
     color: var(--primary-green);
     text-decoration: none;
 }
+.full-center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .bold {
     font-weight: bold;
 }
@@ -968,4 +975,27 @@ textarea:focus {
 .error,
 .auth-message-div {
     background-color: rgb(121, 41, 25) !important;
+}
+
+
+
+#edit-links-div {
+    height: 0px;
+    opacity: 0;
+    transition: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8em;
+}
+#hey-you-full-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#hey-you-full-container:hover #edit-links-div {
+    height: auto;
+    opacity: 1;
+    transition: 300ms;
 }
