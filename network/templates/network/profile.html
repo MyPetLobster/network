@@ -101,11 +101,11 @@
             <input type="email" class="form-control" id="edit-email" name="edit-email" value="{{ profile_user.email }}">
         </div>
         <div>
-            <label for="username">Username</label>
+            <label for="edit-username">Username</label>
             <input type="text" class="form-control" id="edit-username" name="edit-username" value="{{ profile_user.username }}">
         </div>
         <div>
-            <label for="bio">Bio</label>
+            <label for="edit-bio">Bio</label>
             <textarea name="edit-bio" id="edit-bio" class="edit-textarea form-control edit-post-content" rows="3">{% if profile_user.bio %}{{ profile_user.bio }}{% else %}{% endif %}</textarea>
         </div>
         <div>

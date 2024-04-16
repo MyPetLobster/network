@@ -229,6 +229,10 @@ form label {
 }
 
 /* Targeted Button Styles */
+#follow-button,
+#unfollow-button {
+    margin-top: 12px;
+}
 #follow-button {
     color: var(--primary-green);
     transition: 300ms;
@@ -704,6 +708,7 @@ textarea:focus {
 }
 #profile-info-div {
     max-width: 450px;
+    margin-top: 24px;
     margin-bottom: 16px;    
 }
 .info-text {
