@@ -49,7 +49,7 @@
                 {% else %}
                     <li class="nav-item">
                         <a id="login-nav-link" class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li><span class="vert-bar-space">&nbsp;<span class="middot-1">|</span>&nbsp;</span>
+                    </li><span class="vert-bar-space">&nbsp;<span class="middot-2">|</span>&nbsp;</span>
                     <li class="nav-item">
                         <a id="register-nav-link" class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
@@ -81,6 +81,9 @@
             const followingNavLink = document.getElementById("following-nav-link");
             const logoutNavLink = document.getElementById("logout-nav-link");
 
+            const loginNavLink = document.getElementById("login-nav-link");
+            const registerNavLink = document.getElementById("register-nav-link");
+
             const middotOne = document.querySelector(".middot-1");
             const middotTwo = document.querySelector(".middot-2");
 
@@ -91,21 +94,39 @@
                 middotOne.style.color = "white";
             });
 
-            followingNavLink.addEventListener("mouseover", () => {
-                middotOne.style.color = "rgb(36,94,122)";
-                middotTwo.style.color = "rgb(36,94,122)";
-            });
-            followingNavLink.addEventListener("mouseout", () => {
-                middotOne.style.color = "white";
-                middotTwo.style.color = "white";
-            });
+            if (followingNavLink) {
+                followingNavLink.addEventListener("mouseover", () => {
+                    middotOne.style.color = "rgb(36,94,122)";
+                    middotTwo.style.color = "rgb(36,94,122)";
+                });
+                followingNavLink.addEventListener("mouseout", () => {
+                    middotOne.style.color = "white";
+                    middotTwo.style.color = "white";
+                });
 
-            logoutNavLink.addEventListener("mouseover", () => {
-                middotTwo.style.color = "rgb(36,94,122)";
-            });
-            logoutNavLink.addEventListener("mouseout", () => {
-                middotTwo.style.color = "white";
-            });
+                logoutNavLink.addEventListener("mouseover", () => {
+                    middotTwo.style.color = "rgb(36,94,122)";
+                });
+                logoutNavLink.addEventListener("mouseout", () => {
+                    middotTwo.style.color = "white";
+                });
+            } else {
+                loginNavLink.addEventListener("mouseover", () => {
+                    middotOne.style.color = "rgb(36,94,122)";
+                    middotTwo.style.color = "rgb(36,94,122)";
+                });
+                loginNavLink.addEventListener("mouseout", () => {
+                    middotOne.style.color = "white";
+                    middotTwo.style.color = "white";
+                });
+
+                registerNavLink.addEventListener("mouseover", () => {
+                    middotTwo.style.color = "rgb(36,94,122)";
+                });
+                registerNavLink.addEventListener("mouseout", () => {
+                    middotTwo.style.color = "white";
+                });
+            }
         </script>
     </body>
 </html>
