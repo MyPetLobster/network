@@ -471,31 +471,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    replyForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const postId = replyForm.querySelector('#reply-to-id').textContent;
-        const content = replyForm.querySelector('#reply-content').value;
+    if (replyForm) {
+        replyForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const postId = replyForm.querySelector('#reply-to-id').textContent;
+            const content = replyForm.querySelector('#reply-content').value;
 
-        const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+            const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
-        replyForm.classList.add('hidden');
-        fadedBackgroundLayout.classList.add('hidden');
-        
-        fetch(`reply_post/${postId}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                content: content
-            }),
-            headers: {
-                'X-CSRFToken': csrf_token,
-            }
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-            window.location.href = `/post/${postId}`;
-        })
-    });
+            replyForm.classList.add('hidden');
+            fadedBackgroundLayout.classList.add('hidden');
+            
+            fetch(`reply_post/${postId}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    content: content
+                }),
+                headers: {
+                    'X-CSRFToken': csrf_token,
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                window.location.href = `/post/${postId}`;
+            })
+        });
+    }
 });
 
 
