@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     postContentElement.textContent = result.content;
                     editPostForm.classList.add('hidden');
                     fadedBackground.classList.toggle('hidden');
+                    // scroll so postContentElement is center screen
+                    postContentElement.scrollIntoView({behavior: 'smooth', block: 'center'});
                 });
             };
         });
