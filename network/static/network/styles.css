@@ -986,7 +986,8 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.8em;
+    font-size: 0.9em;
+    transition: 500ms;
 }
 #hey-you-full-container {
     display: flex;
@@ -995,7 +996,7 @@ textarea:focus {
     align-items: center;
 }
 #hey-you-full-container:hover #edit-links-div {
-    height: auto;
+    height: 64px;
     opacity: 1;
     transition: 300ms;
 }

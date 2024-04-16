@@ -16,11 +16,11 @@
     <div class="follow-div">
         {% if user.is_authenticated and user == profile_user %}
         <div id="profile-profile-picture-div" class="profile-picture-div">
-            <img id="profile-picture" class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{% url 'media' 'profile_pictures/default.jpg' %}{% endif %}" alt="Profile Picture">
+            <img id="profile-picture" class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
         </div>
         {% else %}
         <div id="other-user-profile-picture-div" class="profile-picture-div">
-            <img class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{% url 'media' 'profile_pictures/default.jpg' %}{% endif %}" alt="Profile Picture">
+            <img class="profile-picture" src="{% if profile_user.profile_picture %}{{ profile_user.profile_picture.url }}{% else %}{% get_media_prefix %}profile_pictures/default.jpg{% endif %}" alt="Profile Picture">
         </div>
         {% endif %}
         {% if user.is_authenticated %}
@@ -37,8 +37,8 @@
                     <div id="hey-you-full-container">
                         <div id="hey-thats-you-div">↑ <span id="hey-thats-you">Hey, that's you!</span> ↑</div>
                         <div id="edit-links-div">
-                            <a href="#">→ <span id="edit-your-info">Edit Info</span> ←</a>
-                            <a href="#">→ <span id="edit-your-password">Change Password</span> ←</a>
+                            <a href="#">→ <span id="edit-profile">Edit Info</span> ←</a>
+                            <a href="#">→ <span id="edit-password">Change Password</span> ←</a>
                         </div>
                     </div>
                 {% else %}
