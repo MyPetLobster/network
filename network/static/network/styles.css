@@ -731,6 +731,47 @@ textarea:focus {
     transition: 250ms;
     fill: var(--primary-green);
 }
+.follow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+
+}
+.follow-item {
+    margin-bottom: 8px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.follow-item:hover {
+    font-weight: bold;
+    color: var(--primary-green);
+    font-size: 1.1em;
+}
+.follow-item:hover .follow-profile-pic-div {
+    height: 64px !important;
+    width: 64px !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.454);
+}
+
+.follow-profile-pic-div {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: 300ms;
+}
+.follow-profile-pic {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+
 
 
 

@@ -20,6 +20,9 @@
             {% else %}
                 {% for follower in followers %}
                     <div class="follow-item">
+                        <div class="follow-profile-pic-div">
+                            <img class="follow-profile-pic profile_pic" src="{{ follower.profile_picture.url }}" alt="profile picture">
+                        </div>
                         <a href="{% url 'profile' follower.id %}">@{{ follower }}</a>
                     </div>
                 {% endfor %}
