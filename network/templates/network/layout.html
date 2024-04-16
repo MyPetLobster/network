@@ -27,14 +27,14 @@
               <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'all_posts' %}">All Posts</a>
-                </li><span class="vert-bar-space">&nbsp;|&nbsp;</span>
+                  <a id="all-posts-nav-link" class="nav-link" href="{% url 'all_posts' %}">All Posts</a>
+                </li><span class="vert-bar-space">&nbsp;<span class="middot-1">|</span>&nbsp;</span>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'following' %}">Following</a>
-                    </li><span class="vert-bar-space">&nbsp;|&nbsp;</span>
+                        <a id="following-nav-link" class="nav-link" href="{% url 'following' %}">Following</a>
+                    </li><span class="vert-bar-space">&nbsp;<span class="middot-2">|</span>&nbsp;</span>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        <a id="logout-nav-link" class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li><span class="vert-bar-space">
                     <li class="nav-item">
                         <a id="profile-link" class="nav-link" href="{% url 'profile' user.id %}">
@@ -48,10 +48,10 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li><span class="vert-bar-space">&nbsp;|&nbsp;</span>
+                        <a id="login-nav-link" class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li><span class="vert-bar-space">&nbsp;<span class="middot-1">|</span>&nbsp;</span>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        <a id="register-nav-link" class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
                 {% endif %}
               </ul>
@@ -75,5 +75,37 @@
             {% block body %}
             {% endblock %}
         </div>
+
+        <script>
+            const allPostsNavLink = document.getElementById("all-posts-nav-link");
+            const followingNavLink = document.getElementById("following-nav-link");
+            const logoutNavLink = document.getElementById("logout-nav-link");
+
+            const middotOne = document.querySelector(".middot-1");
+            const middotTwo = document.querySelector(".middot-2");
+
+            allPostsNavLink.addEventListener("mouseover", () => {
+                middotOne.style.color = "rgb(36,94,122)";
+            });
+            allPostsNavLink.addEventListener("mouseout", () => {
+                middotOne.style.color = "white";
+            });
+
+            followingNavLink.addEventListener("mouseover", () => {
+                middotOne.style.color = "rgb(36,94,122)";
+                middotTwo.style.color = "rgb(36,94,122)";
+            });
+            followingNavLink.addEventListener("mouseout", () => {
+                middotOne.style.color = "white";
+                middotTwo.style.color = "white";
+            });
+
+            logoutNavLink.addEventListener("mouseover", () => {
+                middotTwo.style.color = "rgb(36,94,122)";
+            });
+            logoutNavLink.addEventListener("mouseout", () => {
+                middotTwo.style.color = "white";
+            });
+        </script>
     </body>
 </html>

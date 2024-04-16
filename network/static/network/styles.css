@@ -394,7 +394,7 @@ form label {
 #profile-link {
     position: relative;
     bottom: 6px;
-    margin-left: 366px;
+    margin-left: 48px;
 }
 #card-pic-name-span-navbar {
     position: relative;
@@ -409,6 +409,11 @@ form label {
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
+}
+
+.middot-1,
+.middot-2 {
+    transition: 300ms;
 }
 
 
